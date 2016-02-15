@@ -52,7 +52,9 @@
         <dependency>
             <groupId>edu</groupId>
             <artifactId>madkit</artifactId>
-            <version>5.0.5.2</version>
+	    <scope>system</scope>
+            <version>5.0.5.3</version>
+	    <systemPath>${basedir}/libs/madkit-5.0.5.3.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.jfree</groupId>
@@ -62,7 +64,9 @@
         <dependency>
             <groupId>edu</groupId>
             <artifactId>TurtleKit</artifactId>
-            <version>3.0.0.4</version>
+	    <scope>system</scope>
+            <version>3.0.0.4c</version>
+	    <systemPath>${basedir}/libs/turtlekit-3.0.0.4c.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.jdom</groupId>
