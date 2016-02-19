@@ -12,3 +12,4 @@ AgentsBrainClasses:
     WarKamikaze: WarKamikaze.py
     WarEngineer: WarEngineer.py
     WarTurret: WarTurret.py
+    WarTest: WarTest.py

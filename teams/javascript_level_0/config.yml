@@ -12,3 +12,4 @@ AgentsBrainClasses:
     WarKamikaze: WarKamikaze.js
     WarEngineer: WarEngineer.js
     WarTurret: WarTurret.js
+    WarTest: WarTest.js

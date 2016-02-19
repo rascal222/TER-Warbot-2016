@@ -14,6 +14,7 @@ public enum WarAgentType {
     WarRocketLauncher(WarAgentCategory.Soldier, true),
     WarKamikaze(WarAgentCategory.Soldier, true),
     WarTurret(WarAgentCategory.Soldier, true),
+    WarTest(WarAgentCategory.Soldier, true),
 
     // Bâtiments
     WarBase(WarAgentCategory.Building, true),

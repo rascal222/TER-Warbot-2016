@@ -50,6 +50,7 @@ public class PyScriptInterpreter extends PythonInterpreter implements ScriptInte
             InputStream pyWarKamikaze = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarKamikaze);
             InputStream pyWarRocketLauncher = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarRocketLauncher);
             InputStream pyWarTurret = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarTurret);
+            InputStream pyWarTest = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarTest);
 
             try {
                 pyScriptsFirst.put(FileConfigPython.PyWarAgent.getNameFile(), createScript(pyWarAgent));
@@ -60,6 +61,7 @@ public class PyScriptInterpreter extends PythonInterpreter implements ScriptInte
                 pyScriptsSecond.put(FileConfigPython.PyWarKamikaze.getNameFile(), createScript(pyWarKamikaze));
                 pyScriptsSecond.put(FileConfigPython.PyWarRocketLauncher.getNameFile(), createScript(pyWarRocketLauncher));
                 pyScriptsSecond.put(FileConfigPython.PyWarTurret.getNameFile(), createScript(pyWarTurret));
+                pyScriptsSecond.put(FileConfigPython.PyWarTest.getNameFile(), createScript(pyWarTest));
                 pyWarTools.close();
                 pyWarAgent.close();
                 pyWarBase.close();
@@ -68,6 +70,7 @@ public class PyScriptInterpreter extends PythonInterpreter implements ScriptInte
                 pyWarKamikaze.close();
                 pyWarRocketLauncher.close();
                 pyWarTurret.close();
+                pyWarTest.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -87,6 +90,7 @@ public class PyScriptInterpreter extends PythonInterpreter implements ScriptInte
             InputStream WarKamikaze = getFileTeamPython(defaultSourceFile, FileTeamPython.WarKamikaze);
             InputStream WarRocketLauncher = getFileTeamPython(defaultSourceFile, FileTeamPython.WarRocketLauncher);
             InputStream WarTurret = getFileTeamPython(defaultSourceFile, FileTeamPython.WarTurret);
+            InputStream WarTest = getFileTeamPython(defaultSourceFile, FileTeamPython.WarTest);
 
             try {
                 team.put(FileTeamPython.WarBase.getNameFile(), createScript(WarBase));
@@ -95,12 +99,14 @@ public class PyScriptInterpreter extends PythonInterpreter implements ScriptInte
                 team.put(FileTeamPython.WarKamikaze.getNameFile(), createScript(WarKamikaze));
                 team.put(FileTeamPython.WarRocketLauncher.getNameFile(), createScript(WarRocketLauncher));
                 team.put(FileTeamPython.WarTurret.getNameFile(), createScript(WarTurret));
+                team.put(FileTeamPython.WarTest.getNameFile(), createScript(WarTest));
                 WarBase.close();
                 WarEngineer.close();
                 WarExplorer.close();
                 WarKamikaze.close();
                 WarRocketLauncher.close();
                 WarTurret.close();
+                WarTest.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -130,7 +136,7 @@ public class PyScriptInterpreter extends PythonInterpreter implements ScriptInte
         try {
             //path = getClass().getClassLoader().getResource(pathPython+nameFilePython);
             path = getClass().getClassLoader().getResourceAsStream(pathPython + nameFilePython);
-
+            
             if (path == null)
                 throw new NotFoundConfigurationException(nameFilePython.getNameFile());
 

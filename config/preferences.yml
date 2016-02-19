@@ -14,6 +14,7 @@ NbAgentsAtStart:
     WarKamikaze: 0
     WarEngineer: 0
     WarTurret: 0
+    WarTest: 0
     Wall: 0
 
 # Food appearance rate = ticks amount separating each food appearance

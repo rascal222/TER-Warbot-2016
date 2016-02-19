@@ -11,7 +11,8 @@ public enum FileConfigPython {
     PyWarKamikaze("PyWarKamikaze", ".py"),
     PyWarRocketLauncher("PyWarRocketLauncher", ".py"),
     PyWarTools("PyWarTools", ".py"),
-    PyWarTurret("PyWarTurret", ".py");
+    PyWarTurret("PyWarTurret", ".py"),
+    PyWarTest("PyWarTest", ".py");
 
     private String nameFile = "";
     private String extension = "";

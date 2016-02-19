@@ -71,6 +71,8 @@ public class ScriptedTeam extends JavaTeam {
                     implementationProducer.createWarBrainImplementationClass(ScriptableWarKamikaze.class));
             brains.put(WarAgentType.WarTurret,
                     implementationProducer.createWarBrainImplementationClass(ScriptableWarTurret.class));
+            brains.put(WarAgentType.WarTest,
+                    implementationProducer.createWarBrainImplementationClass(ScriptableWarTest.class));
 
         } catch (NotFoundException e) {
             e.printStackTrace();
