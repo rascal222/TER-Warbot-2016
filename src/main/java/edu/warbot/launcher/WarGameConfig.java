@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+@SuppressWarnings("unchecked")
 public class WarGameConfig {
 
     public static final String AGENT_CONFIG_ANGLE_OF_VIEW = "AngleOfView";
@@ -66,7 +67,7 @@ public class WarGameConfig {
         }
     }
 
-    public static Map<String, Object> getConfigOfWarAgent(WarAgentType agentType) {
+	public static Map<String, Object> getConfigOfWarAgent(WarAgentType agentType) {
         Map<String, Object> warAgentsConfigs = (Map<String, Object>) config.get("WarAgents");
         if (warAgentsConfigs.containsKey(agentType.getCategory().toString())) {
             Map<String, Object> typeWarAgentConfigs = (Map<String, Object>) warAgentsConfigs.get(agentType.getCategory().toString());
@@ -113,7 +114,6 @@ public class WarGameConfig {
             return 5;
     }
 
-    @SuppressWarnings("unchecked")
     public static Class<? extends PerceptsGetter> getDefaultPerception() {
         if (config.containsKey("Perception")) {
             String className = PerceptsGetter.class.getPackage().getName() + "." + config.get("Perception");

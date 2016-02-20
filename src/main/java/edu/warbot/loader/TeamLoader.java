@@ -50,7 +50,8 @@ public class TeamLoader {
 
     public static final String TEAMS_DIRECTORY_NAME = "teams";
 
-    private static final String TMP_BRAINS_OUTPUT_DIRECTORY = "bin";
+    @SuppressWarnings("unused")
+	private static final String TMP_BRAINS_OUTPUT_DIRECTORY = "bin";
 
     private ImplementationProducer implementationProducer;
 
@@ -67,7 +68,6 @@ public class TeamLoader {
     }
 
 
-    @SuppressWarnings("unchecked")
     public Map<String, Team> loadAllAvailableTeams(boolean javaSource) {
         Map<String, Team> loadedTeams = new HashMap<>();
 
@@ -85,7 +85,8 @@ public class TeamLoader {
         return loadAllAvailableTeams(true);
     }
 
-    public Map<String, Team> getTeamsFromJarDirectory(Set<String> excludedTeams, boolean javaSource) {
+    @SuppressWarnings({ "unused", "resource" })
+	public Map<String, Team> getTeamsFromJarDirectory(Set<String> excludedTeams, boolean javaSource) {
         Map<String, Team> teamsLoaded = new HashMap<>();
 
         String jarDirectoryPath = TEAMS_DIRECTORY_NAME + File.separator;
@@ -255,7 +256,8 @@ public class TeamLoader {
     }
 
 
-    private Team loadTeamFromJar(File file, JarFile jarFile, HashMap<String, JarEntry> jarEntries, Set<String> excludedTeams) throws IOException, ClassNotFoundException, NotFoundException, CannotCompileException, TeamAlreadyExistsException {
+    @SuppressWarnings({ "rawtypes", "unused" })
+	private Team loadTeamFromJar(File file, JarFile jarFile, HashMap<String, JarEntry> jarEntries, Set<String> excludedTeams) throws IOException, ClassNotFoundException, NotFoundException, CannotCompileException, TeamAlreadyExistsException {
         Team currentTeam;
 
         // On analyse le fichier YML
@@ -387,7 +389,8 @@ public class TeamLoader {
         return teamsLoaded;
     }
 
-    public Team generateScriptedTeam(final TeamConfigReader teamConfigReader, File teamDirectory) throws
+    @SuppressWarnings("unused")
+	public Team generateScriptedTeam(final TeamConfigReader teamConfigReader, File teamDirectory) throws
             NotFoundScriptLanguageException, UnrecognizedScriptLanguageException, IOException, ClassNotFoundException, DangerousFunctionPythonException {
 
         ScriptedTeam team = new ScriptedTeam(teamConfigReader.getTeamName(),
@@ -429,7 +432,8 @@ public class TeamLoader {
 
     }
 
-    private Team loadTeamFromSources(Map<String, String> teamsSourcesFolders, final TeamConfigReader teamConfigReader) throws ClassNotFoundException, IOException, NotFoundException, CannotCompileException, URISyntaxException {
+    @SuppressWarnings("unused")
+	private Team loadTeamFromSources(Map<String, String> teamsSourcesFolders, final TeamConfigReader teamConfigReader) throws ClassNotFoundException, IOException, NotFoundException, CannotCompileException, URISyntaxException {
         Team currentTeam;
         URL url = getClass().getClassLoader().getResource(teamsSourcesFolders.get(teamConfigReader.getTeamName()));
         System.err.println(url);

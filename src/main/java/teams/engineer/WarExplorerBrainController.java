@@ -11,7 +11,8 @@ import java.util.List;
 
 public abstract class WarExplorerBrainController extends WarExplorerBrain {
 
-    private boolean _starving;
+    @SuppressWarnings("unused")
+	private boolean _starving;
 
     public WarExplorerBrainController() {
         super();

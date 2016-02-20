@@ -10,7 +10,8 @@ import edu.warbot.fsm.editor.views.View;
 
 public class FSMEditor {
 
-    public FSMEditor() {
+    @SuppressWarnings("unused")
+	public FSMEditor() {
         Model model = new Model();
 
         createBasicFSM(model);

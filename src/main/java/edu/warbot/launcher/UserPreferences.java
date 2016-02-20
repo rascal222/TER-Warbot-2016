@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
+@SuppressWarnings("unchecked")
 public class UserPreferences {
 
     static private String userSettingsFilePath = "config" + File.separatorChar + "preferences.yml";
@@ -53,7 +54,7 @@ public class UserPreferences {
             return new HashMap<>();
     }
 
-    public static int getNbAgentsAtStartOfType(String agentType) {
+	public static int getNbAgentsAtStartOfType(String agentType) {
         Map<String, Integer> nbAgentsAtStart = (Map<String, Integer>) settings.get("NbAgentsAtStart");
         if (nbAgentsAtStart.containsKey(agentType))
             return nbAgentsAtStart.get(agentType);

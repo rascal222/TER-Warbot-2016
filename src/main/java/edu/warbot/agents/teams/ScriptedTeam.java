@@ -30,6 +30,7 @@ import java.util.*;
 /**
  * @author BEUGNON Sébastien, LOPEZ Jimmy
  */
+@SuppressWarnings("unused")
 public class ScriptedTeam extends JavaTeam {
 
     private static Map<WarAgentType, Class<? extends WarBrain>> brains;

@@ -3,6 +3,7 @@ package edu.warbot.gui;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("serial")
 public class PaintablePanel extends JPanel {
 
     private Painter painter;

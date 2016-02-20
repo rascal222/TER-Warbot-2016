@@ -32,7 +32,8 @@ public class EditorSettings {
         return ClassFinder.findConcreate(FSM_CLASS_PATH_ACTION);
     }
 
-    public static Vector<String> getPlansClassSimpleName() {
+    @SuppressWarnings("rawtypes")
+	public static Vector<String> getPlansClassSimpleName() {
         Vector<String> res = new Vector<>();
         for (Class c : getPlansClass()) {
             res.add(c.getSimpleName());
@@ -40,7 +41,8 @@ public class EditorSettings {
         return res;
     }
 
-    public static Vector<String> getConditionClassSimpleName() {
+    @SuppressWarnings("rawtypes")
+	public static Vector<String> getConditionClassSimpleName() {
         Vector<String> res = new Vector<>();
         for (Class c : getConditionsClass()) {
             res.add(c.getSimpleName());
@@ -48,7 +50,8 @@ public class EditorSettings {
         return res;
     }
 
-    public static Vector<String> getRefexesClassSimpleName() {
+    @SuppressWarnings("rawtypes")
+	public static Vector<String> getRefexesClassSimpleName() {
         Vector<String> res = new Vector<>();
         for (Class c : getRefelxesClass()) {
             res.add(c.getSimpleName());
@@ -56,7 +59,8 @@ public class EditorSettings {
         return res;
     }
 
-    public static Vector<String> getActionsClassSimpleName() {
+    @SuppressWarnings("rawtypes")
+	public static Vector<String> getActionsClassSimpleName() {
         Vector<String> res = new Vector<>();
         for (Class c : getActionsClass()) {
             res.add(c.getSimpleName());

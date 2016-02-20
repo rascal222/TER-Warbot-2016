@@ -13,6 +13,7 @@ import org.apache.commons.cli.Options;
  * @Version 1.0
  * @since 3.2.3
  */
+@SuppressWarnings("serial")
 public class WarbotOptions extends Options {
 
     public static final String HELP = "help";

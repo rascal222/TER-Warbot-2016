@@ -14,14 +14,17 @@ import java.awt.event.ActionListener;
 import java.util.Set;
 import java.util.Vector;
 
+@SuppressWarnings("serial")
 public class MapSelectionDialog extends JFrame implements ActionListener, ListSelectionListener {
 
     private WarLauncherInterface warLauncherInterface;
     private Vector<MapMiniature> mapMiniaturesList;
-    private JList mapMiniaturesJList;
+    @SuppressWarnings("rawtypes")
+	private JList mapMiniaturesJList;
     private MapMiniaturePanel mapMiniaturePanel;
 
-    public MapSelectionDialog(WarLauncherInterface warLauncherInterface) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public MapSelectionDialog(WarLauncherInterface warLauncherInterface) {
         super("Choix de la carte");
         setLayout(new BorderLayout());
 

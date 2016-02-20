@@ -10,7 +10,8 @@ import java.util.List;
 
 public class NumberAgentEndCondition extends AbstractEndCondition implements TeamListener {
 
-    private List<WarNumberAgent> agents;
+    @SuppressWarnings("unused")
+	private List<WarNumberAgent> agents;
 
     private List<WarCollectionNumberAgentByTeam> collectionAgentByTeam;
 

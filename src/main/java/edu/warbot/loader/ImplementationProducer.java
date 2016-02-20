@@ -24,7 +24,8 @@ public class ImplementationProducer {
     /**
      * logger
      */
-    private Logger logger = Logger.getLogger(ImplementationProducer.class.getCanonicalName());
+    @SuppressWarnings("unused")
+	private Logger logger = Logger.getLogger(ImplementationProducer.class.getCanonicalName());
 
 
 
@@ -45,7 +46,8 @@ public class ImplementationProducer {
      * @throws CannotCompileException
      * @throws IOException
      */
-    public Class<? extends WarBrain> createWarBrainImplementationClass(String brainClassName)
+    @SuppressWarnings("unchecked")
+	public Class<? extends WarBrain> createWarBrainImplementationClass(String brainClassName)
             throws NotFoundException, CannotCompileException, IOException {
 
         //Récupération de l'implémentation de WarBrain commune

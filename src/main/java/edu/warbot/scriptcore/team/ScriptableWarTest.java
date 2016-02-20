@@ -6,6 +6,7 @@ import edu.warbot.scriptcore.scriptagent.ScriptAgent;
 
 import java.awt.*;
 
+@SuppressWarnings("unused")
 public abstract class ScriptableWarTest extends WarTestBrain implements Scriptable {
 
     private ScriptAgent script;

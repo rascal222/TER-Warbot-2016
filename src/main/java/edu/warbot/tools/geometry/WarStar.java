@@ -3,6 +3,7 @@ package edu.warbot.tools.geometry;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 
+@SuppressWarnings("serial")
 public class WarStar extends Path2D.Double {
 
     private Point2D.Double center;

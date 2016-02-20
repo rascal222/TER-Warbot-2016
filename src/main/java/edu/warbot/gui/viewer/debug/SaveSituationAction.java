@@ -25,6 +25,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
+@SuppressWarnings("serial")
 public class SaveSituationAction extends AbstractAction {
 
     private AbstractWarViewer warViewer;

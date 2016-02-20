@@ -21,7 +21,8 @@ public abstract class WarFSMBrain extends WarBrain {
         }
     }
 
-    public WarFSM getFSM() {
+    @SuppressWarnings("rawtypes")
+	public WarFSM getFSM() {
         return fsm;
     }
 

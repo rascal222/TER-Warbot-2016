@@ -6,6 +6,7 @@ import org.python.core.PyObject;
  * @param <T> Une classe java que l'on souhaite accessible dans du code python
  * @author jlopez02
  */
+@SuppressWarnings("serial")
 public class PyWrapper<T extends Object> extends PyObject {
 
     /**

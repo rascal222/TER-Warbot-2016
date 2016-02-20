@@ -8,6 +8,7 @@ import java.util.Random;
  *
  * @since 1.0.0
  */
+@SuppressWarnings("serial")
 public class CartesianCoordinates extends Point2D.Double {
 
     /**

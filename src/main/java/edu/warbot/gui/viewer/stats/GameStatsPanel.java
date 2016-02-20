@@ -8,9 +8,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@SuppressWarnings("serial")
 public class GameStatsPanel extends JPanel {
 
-    private WarGame game;
+    @SuppressWarnings("unused")
+	private WarGame game;
 
     private JToggleButton btnStatsToolBar;
     private TeamsDataTable teamsDataTable;

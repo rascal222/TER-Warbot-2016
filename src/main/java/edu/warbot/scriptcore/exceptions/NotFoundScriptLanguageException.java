@@ -1,5 +1,6 @@
 package edu.warbot.scriptcore.exceptions;
 
+@SuppressWarnings("serial")
 public class NotFoundScriptLanguageException extends Exception {
 
     public NotFoundScriptLanguageException(String teamName) {

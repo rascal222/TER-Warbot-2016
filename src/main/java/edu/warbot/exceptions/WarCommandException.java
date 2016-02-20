@@ -5,6 +5,7 @@ import edu.warbot.launcher.WarMain;
 /**
  * Created by beugnon on 18/06/15.
  */
+@SuppressWarnings("serial")
 public class WarCommandException extends Exception {
 
     public WarCommandException(String message) {

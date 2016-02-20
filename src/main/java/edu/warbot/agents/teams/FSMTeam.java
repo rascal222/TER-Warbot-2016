@@ -35,7 +35,8 @@ public final class FSMTeam extends JavaTeam {
         brains.put(WarAgentType.WarTurret, WarFSMBrain.class);
     }
 
-    private Model fsmModel;
+    @SuppressWarnings("unused")
+	private Model fsmModel;
 
     /**
      * @param teamName    Le nom d'une équipe
@@ -48,7 +49,8 @@ public final class FSMTeam extends JavaTeam {
     }
 
 
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     public ControllableWarAgent instantiateControllableWarAgent(InGameTeam inGameTeam, WarAgentType agentName) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
         ControllableWarAgent a = super.instantiateControllableWarAgent(inGameTeam, agentName);
         //TODO Include specificities for WarFSMBrain

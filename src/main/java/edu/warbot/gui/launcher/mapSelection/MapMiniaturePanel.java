@@ -5,6 +5,7 @@ import edu.warbot.maps.AbstractWarMap;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("serial")
 public class MapMiniaturePanel extends JPanel {
 
     private MapMiniature mapMiniature;

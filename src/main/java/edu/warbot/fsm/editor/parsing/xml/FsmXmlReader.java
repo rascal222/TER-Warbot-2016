@@ -140,7 +140,8 @@ public class FsmXmlReader extends FsmXmlParser {
         modeleBrain.addCondition(modeleCond);
     }
 
-    private AbstractGenericSettings getWarGenericSettings(Class classSetting, Element element) {
+    @SuppressWarnings("rawtypes")
+	private AbstractGenericSettings getWarGenericSettings(Class classSetting, Element element) {
         AbstractGenericSettings settings = null;
         try {
             settings = (AbstractGenericSettings) classSetting.newInstance();

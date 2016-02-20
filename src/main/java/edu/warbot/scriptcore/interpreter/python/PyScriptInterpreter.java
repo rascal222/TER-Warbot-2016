@@ -161,7 +161,8 @@ public class PyScriptInterpreter extends PythonInterpreter implements ScriptInte
         }
     }
 
-    private PyInstance createClass(final String className) {
+    @SuppressWarnings("unused")
+	private PyInstance createClass(final String className) {
         return (PyInstance) eval(className + "()");
     }
 

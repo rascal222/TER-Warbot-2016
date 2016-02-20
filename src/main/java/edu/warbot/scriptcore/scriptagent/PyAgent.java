@@ -4,6 +4,7 @@ import edu.warbot.brains.WarBrain;
 import edu.warbot.scriptcore.wrapper.PyWrapper;
 import org.python.core.PyObject;
 
+@SuppressWarnings("serial")
 public class PyAgent extends PyObject implements ScriptAgent, Action {
 
     private Action action;

@@ -22,7 +22,8 @@ import java.awt.geom.Area;
  */
 public abstract class WarAgent extends Turtle implements CommonCapacities {
 
-    private static final int MAP_MARGINS = 2;
+    @SuppressWarnings("unused")
+	private static final int MAP_MARGINS = 2;
 
     private Hitbox hitbox;
     private InGameTeam inGameTeam;

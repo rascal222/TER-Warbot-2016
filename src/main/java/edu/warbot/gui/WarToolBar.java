@@ -4,6 +4,7 @@ import madkit.kernel.AbstractAgent;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class WarToolBar extends JToolBar {
 
     public WarToolBar(final AbstractAgent agent) {

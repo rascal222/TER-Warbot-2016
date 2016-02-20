@@ -325,7 +325,8 @@ public abstract class AbstractDialogue extends JDialog {
         setField(field, b);
     }
 
-    private void setFieldForAgentType(Field field, JComponent comp) {
+    @SuppressWarnings("unchecked")
+	private void setFieldForAgentType(Field field, JComponent comp) {
         WarAgentType at = null;
         try {
             at = (WarAgentType) ((JComboBox<WarAgentType>) comp).getSelectedItem();
@@ -335,7 +336,8 @@ public abstract class AbstractDialogue extends JDialog {
         setField(field, at);
     }
 
-    private void setFieldForAction(Field field, JComponent comp) {
+    @SuppressWarnings("unchecked")
+	private void setFieldForAction(Field field, JComponent comp) {
         String at = null;
         try {
             at = EditorSettings.getActionFullName(
@@ -346,7 +348,8 @@ public abstract class AbstractDialogue extends JDialog {
         setField(field, at);
     }
 
-    private void setFieldForMethod(Field field, JComponent comp) {
+    @SuppressWarnings("unchecked")
+	private void setFieldForMethod(Field field, JComponent comp) {
         EnumMethod at = null;
         try {
             at = (EnumMethod) ((JComboBox<EnumMethod>) comp).getSelectedItem();
@@ -356,7 +359,8 @@ public abstract class AbstractDialogue extends JDialog {
         setField(field, at);
     }
 
-    private void setFieldForMessage(Field field, JComponent comp) {
+    @SuppressWarnings("unchecked")
+	private void setFieldForMessage(Field field, JComponent comp) {
         EnumMessage at = null;
         try {
             at = (EnumMessage) ((JComboBox<EnumMessage>) comp).getSelectedItem();
@@ -366,7 +370,8 @@ public abstract class AbstractDialogue extends JDialog {
         setField(field, at);
     }
 
-    private void setFieldForOperand(Field field, JComponent comp) {
+    @SuppressWarnings("unchecked")
+	private void setFieldForOperand(Field field, JComponent comp) {
         EnumOperand at = null;
         try {
             at = (EnumOperand) ((JComboBox<EnumOperand>) comp).getSelectedItem();

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 /**
  * @since 3.2.2
  */
+@SuppressWarnings("serial")
 public class MapMiniature extends JPanel {
 
     public static final double SIZE_SMALL = 0.5;

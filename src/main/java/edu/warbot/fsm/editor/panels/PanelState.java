@@ -19,7 +19,8 @@ public class PanelState extends AbstractPanel {
         position = new Point(new Random().nextInt(600), new Random().nextInt(400));
     }
 
-    public void paint(Graphics g) {
+    @SuppressWarnings("unused")
+	public void paint(Graphics g) {
 
         String msgName = this.modeleState.getName();
         String msgPlan = this.modeleState.getPlanSimpleName();

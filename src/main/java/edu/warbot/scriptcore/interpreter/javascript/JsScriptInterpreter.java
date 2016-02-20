@@ -93,7 +93,8 @@ public class JsScriptInterpreter implements ScriptInterpreter {
         return getClass().getClassLoader().getResourceAsStream(pathJavascript);
     }
 
-    private void instanciedJsScript(Map<String, Script> map) {
+    @SuppressWarnings("unused")
+	private void instanciedJsScript(Map<String, Script> map) {
         Iterator<Entry<String, Script>> entries = map.entrySet().iterator();
             while (entries.hasNext()) {
                 Entry<String, Script> thisEntry = entries.next();

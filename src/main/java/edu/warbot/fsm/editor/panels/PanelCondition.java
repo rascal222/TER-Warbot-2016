@@ -81,7 +81,8 @@ public class PanelCondition extends AbstractPanel {
         g.setStroke(new BasicStroke(1));
     }
 
-    private void drawBezier(Graphics2D g, int x, int y, int arrx, int arry) {
+    @SuppressWarnings("unused")
+	private void drawBezier(Graphics2D g, int x, int y, int arrx, int arry) {
         int c1 = ctrlPoint.x + (arrx - x) + x;
         int c2 = ctrlPoint.y + (arry - y) + y;
 
@@ -92,7 +93,8 @@ public class PanelCondition extends AbstractPanel {
 
     }
 
-    private void drawArc(Graphics2D g, int x1, int y1, int x2, int y2) {
+    @SuppressWarnings("unused")
+	private void drawArc(Graphics2D g, int x1, int y1, int x2, int y2) {
         int x0 = x2 - x1 + x1;
         int y0 = y2 - y1 + y1;
 
@@ -108,7 +110,8 @@ public class PanelCondition extends AbstractPanel {
 
     }
 
-    private void drawLine(Graphics2D g, int depx, int depy, int arrx, int arry) {
+    @SuppressWarnings("unused")
+	private void drawLine(Graphics2D g, int depx, int depy, int arrx, int arry) {
         int midX = depx + (arrx - depx) * ctrlPoint.x / 100;
 
         g.drawLine(depx, depy, midX, depy);

@@ -52,7 +52,8 @@ public class FSMInstancier<BrainType extends WarBrain> {
      * @param brain     l'adapteur de l'agent dont on souhaite récupérer le BrainContoleur
      * @return une instance de BrainControleur pour une fsm (semble à un brainController du équipe classique) (sous classe de WarBrain)
      */
-    public WarFSM getBrainControleurForAgent(WarAgentType agentType, WarBrain brain) {
+    @SuppressWarnings("rawtypes")
+	public WarFSM getBrainControleurForAgent(WarAgentType agentType, WarBrain brain) {
         System.out.println("FSMInstancier begining instanciation for " + agentType + "...");
 
         //On recupère le modeleBrain qui correspond à l'agentType
@@ -103,7 +104,8 @@ public class FSMInstancier<BrainType extends WarBrain> {
         return fsm;
     }
 
-    private WarCondition<BrainType> getGeneratedCondition(ModelCondition modelCond,
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	private WarCondition<BrainType> getGeneratedCondition(ModelCondition modelCond,
                                                           WarBrain brain) {
 
         //Instancie le plan
@@ -163,7 +165,8 @@ public class FSMInstancier<BrainType extends WarBrain> {
         return warState;
     }
 
-    private WarPlan<BrainType> getGenerateWarPlan(
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	private WarPlan<BrainType> getGenerateWarPlan(
             ModelState modelState, WarBrain brain) {
 
         //Instancie le plan

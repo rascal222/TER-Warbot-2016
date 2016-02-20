@@ -142,7 +142,8 @@ public abstract class PerceptsGetter {
         return wallsPercepts;
     }
 
-    private Area removeWallsHidedAreasAndGetWallPercepts(Area initialPerceptionArea) {
+    @SuppressWarnings("unused")
+	private Area removeWallsHidedAreasAndGetWallPercepts(Area initialPerceptionArea) {
         Area finalPerceptionArea;
         ArrayList<Line2D.Double> wallSegmentsInPerception = new ArrayList<>();
 
@@ -262,7 +263,8 @@ public abstract class PerceptsGetter {
         return finalPerceptionArea;
     }
 
-    private ArrayList<Path2D.Double> dividePluralPathIntoSingularPathsLined(Path2D.Double path) {
+    @SuppressWarnings("unused")
+	private ArrayList<Path2D.Double> dividePluralPathIntoSingularPathsLined(Path2D.Double path) {
         ArrayList<Path2D.Double> singularPaths = new ArrayList<Path2D.Double>();
 
         PathIterator it = path.getPathIterator(null);
@@ -295,7 +297,8 @@ public abstract class PerceptsGetter {
         return singularPaths;
     }
 
-    private ArrayList<Path2D.Double> dividePluralPathIntoSingularPaths(Path2D.Double path) {
+    @SuppressWarnings("unused")
+	private ArrayList<Path2D.Double> dividePluralPathIntoSingularPaths(Path2D.Double path) {
         ArrayList<Path2D.Double> singularPaths = new ArrayList<Path2D.Double>();
 
         PathIterator it = path.getPathIterator(null);

@@ -22,7 +22,8 @@ public class TeamConfigReader {
     /**
      * Méthode permettant d'ouvrir le fichier YAML et d'obtenir l'élément racine.
      */
-    public void load(InputStream input) {
+    @SuppressWarnings("unchecked")
+	public void load(InputStream input) {
         Yaml yaml = new Yaml();
         config = (Map<String, Object>) yaml.load(input);
     }
@@ -93,7 +94,8 @@ public class TeamConfigReader {
      * @return {@code Map<String, String>} - une Map avec comme clé
      * le type d'agent et comme valeur le nom de la classe correspondante.
      */
-    public Map<String, String> getBrainControllersClassesNameOfEachAgentType() {
+    @SuppressWarnings("unchecked")
+	public Map<String, String> getBrainControllersClassesNameOfEachAgentType() {
         if (config.containsKey("AgentsBrainClasses"))
             return (Map<String, String>) config.get("AgentsBrainClasses");
         else

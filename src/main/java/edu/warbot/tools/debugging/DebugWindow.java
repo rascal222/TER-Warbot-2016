@@ -11,6 +11,7 @@ import java.lang.management.ManagementFactory;
  * <p/>
  * DebugWindow. utilisé quand on a besoin d'avoir de débugguer une partie par processus.
  */
+@SuppressWarnings("serial")
 public class DebugWindow extends JFrame {
 
 

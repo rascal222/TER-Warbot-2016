@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+@SuppressWarnings("serial")
 public class MapKeyItem extends JPanel implements PaintablePanel.Painter {
 
     public static final int ID_KEY_TEAMS_POSITIONS = 0;
