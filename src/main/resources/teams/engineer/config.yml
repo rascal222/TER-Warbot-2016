@@ -7,6 +7,8 @@ BrainsPackage: teams.engineer
 AgentsBrainClasses:
     WarBase: WarBaseBrainController
     WarExplorer: WarExplorerBrainController
+    WarLight: WarLightBrainController
+    WarHeavy: WarHeavyBrainController
     WarRocketLauncher: WarRocketLauncherBrainController
     WarKamikaze: WarKamikazeBrainController
     WarEngineer: WarEngineerBrainController

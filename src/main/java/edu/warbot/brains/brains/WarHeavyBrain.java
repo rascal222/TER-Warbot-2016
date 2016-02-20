@@ -8,7 +8,7 @@ import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Agressive;
 import edu.warbot.brains.capacities.Movable;
 
-public abstract class WarTestBrain extends WarBrain implements AgressiveActionsMethods, AgressiveActions, Agressive,
+public abstract class WarHeavyBrain extends WarBrain implements AgressiveActionsMethods, AgressiveActions, Agressive,
         MovableActionsMethods, MovableActions, Movable {
 
     @Override
@@ -32,3 +32,4 @@ public abstract class WarTestBrain extends WarBrain implements AgressiveActionsM
     }
 
 }
+

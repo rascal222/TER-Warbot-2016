@@ -62,6 +62,10 @@ public class ScriptedTeam extends JavaTeam {
             //Implémentation standard
             brains.put(WarAgentType.WarExplorer,
                     implementationProducer.createWarBrainImplementationClass(ScriptableWarExplorer.class));
+            brains.put(WarAgentType.WarLight,
+                    implementationProducer.createWarBrainImplementationClass(ScriptableWarLight.class));
+            brains.put(WarAgentType.WarHeavy,
+                    implementationProducer.createWarBrainImplementationClass(ScriptableWarHeavy.class));
             brains.put(WarAgentType.WarRocketLauncher,
                     implementationProducer.createWarBrainImplementationClass(ScriptableWarRocketLauncher.class));
             brains.put(WarAgentType.WarEngineer,
@@ -72,8 +76,7 @@ public class ScriptedTeam extends JavaTeam {
                     implementationProducer.createWarBrainImplementationClass(ScriptableWarKamikaze.class));
             brains.put(WarAgentType.WarTurret,
                     implementationProducer.createWarBrainImplementationClass(ScriptableWarTurret.class));
-            brains.put(WarAgentType.WarTest,
-                    implementationProducer.createWarBrainImplementationClass(ScriptableWarTest.class));
+            
 
         } catch (NotFoundException e) {
             e.printStackTrace();

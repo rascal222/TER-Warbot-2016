@@ -48,9 +48,10 @@ public class PyScriptInterpreter extends PythonInterpreter implements ScriptInte
             InputStream pyWarEngineer = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarEngineer);
             InputStream pyWarExplorer = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarExplorer);
             InputStream pyWarKamikaze = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarKamikaze);
+            InputStream pyWarLight = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarLight);
+            InputStream pyWarHeavy = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarHeavy);
             InputStream pyWarRocketLauncher = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarRocketLauncher);
             InputStream pyWarTurret = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarTurret);
-            InputStream pyWarTest = getFileConfigPython(defaultSourceFile, FileConfigPython.PyWarTest);
 
             try {
                 pyScriptsFirst.put(FileConfigPython.PyWarAgent.getNameFile(), createScript(pyWarAgent));
@@ -59,18 +60,20 @@ public class PyScriptInterpreter extends PythonInterpreter implements ScriptInte
                 pyScriptsSecond.put(FileConfigPython.PyWarEngineer.getNameFile(), createScript(pyWarEngineer));
                 pyScriptsSecond.put(FileConfigPython.PyWarExplorer.getNameFile(), createScript(pyWarExplorer));
                 pyScriptsSecond.put(FileConfigPython.PyWarKamikaze.getNameFile(), createScript(pyWarKamikaze));
+                pyScriptsSecond.put(FileConfigPython.PyWarLight.getNameFile(), createScript(pyWarLight));
+                pyScriptsSecond.put(FileConfigPython.PyWarHeavy.getNameFile(), createScript(pyWarHeavy));
                 pyScriptsSecond.put(FileConfigPython.PyWarRocketLauncher.getNameFile(), createScript(pyWarRocketLauncher));
                 pyScriptsSecond.put(FileConfigPython.PyWarTurret.getNameFile(), createScript(pyWarTurret));
-                pyScriptsSecond.put(FileConfigPython.PyWarTest.getNameFile(), createScript(pyWarTest));
                 pyWarTools.close();
                 pyWarAgent.close();
                 pyWarBase.close();
                 pyWarEngineer.close();
                 pyWarExplorer.close();
                 pyWarKamikaze.close();
+                pyWarLight.close();
+                pyWarHeavy.close();
                 pyWarRocketLauncher.close();
                 pyWarTurret.close();
-                pyWarTest.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -88,25 +91,28 @@ public class PyScriptInterpreter extends PythonInterpreter implements ScriptInte
             InputStream WarEngineer = getFileTeamPython(defaultSourceFile, FileTeamPython.WarEngineer);
             InputStream WarExplorer = getFileTeamPython(defaultSourceFile, FileTeamPython.WarExplorer);
             InputStream WarKamikaze = getFileTeamPython(defaultSourceFile, FileTeamPython.WarKamikaze);
+            InputStream WarLight = getFileTeamPython(defaultSourceFile, FileTeamPython.WarLight);
+            InputStream WarHeavy = getFileTeamPython(defaultSourceFile, FileTeamPython.WarHeavy);
             InputStream WarRocketLauncher = getFileTeamPython(defaultSourceFile, FileTeamPython.WarRocketLauncher);
-            InputStream WarTurret = getFileTeamPython(defaultSourceFile, FileTeamPython.WarTurret);
-            InputStream WarTest = getFileTeamPython(defaultSourceFile, FileTeamPython.WarTest);
+            InputStream WarTurret = getFileTeamPython(defaultSourceFile, FileTeamPython.WarTurret);            
 
             try {
                 team.put(FileTeamPython.WarBase.getNameFile(), createScript(WarBase));
                 team.put(FileTeamPython.WarEngineer.getNameFile(), createScript(WarEngineer));
                 team.put(FileTeamPython.WarExplorer.getNameFile(), createScript(WarExplorer));
                 team.put(FileTeamPython.WarKamikaze.getNameFile(), createScript(WarKamikaze));
+                team.put(FileTeamPython.WarLight.getNameFile(), createScript(WarLight));
+                team.put(FileTeamPython.WarHeavy.getNameFile(), createScript(WarHeavy));
                 team.put(FileTeamPython.WarRocketLauncher.getNameFile(), createScript(WarRocketLauncher));
                 team.put(FileTeamPython.WarTurret.getNameFile(), createScript(WarTurret));
-                team.put(FileTeamPython.WarTest.getNameFile(), createScript(WarTest));
                 WarBase.close();
                 WarEngineer.close();
                 WarExplorer.close();
                 WarKamikaze.close();
+                WarLight.close();
+                WarHeavy.close();
                 WarRocketLauncher.close();
-                WarTurret.close();
-                WarTest.close();
+                WarTurret.close();                
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -12,7 +12,7 @@ import edu.warbot.launcher.WarGameConfig;
 import java.util.Map;
 import java.util.logging.Level;
 
-public class WarTest extends MovableWarAgent implements AgressiveActionsMethods, Agressive {
+public class WarLight extends MovableWarAgent implements AgressiveActionsMethods, Agressive {
 
     public static final double ANGLE_OF_VIEW;
     public static final double DISTANCE_OF_VIEW;
@@ -23,7 +23,7 @@ public class WarTest extends MovableWarAgent implements AgressiveActionsMethods,
     public static final int TICKS_TO_RELOAD;
 
     static {
-        Map<String, Object> data = WarGameConfig.getConfigOfWarAgent(WarAgentType.WarTest);
+        Map<String, Object> data = WarGameConfig.getConfigOfWarAgent(WarAgentType.WarLight);
         ANGLE_OF_VIEW = (double) data.get(WarGameConfig.AGENT_CONFIG_ANGLE_OF_VIEW);
         DISTANCE_OF_VIEW = (double) data.get(WarGameConfig.AGENT_CONFIG_DISTANCE_OF_VIEW);
         COST = (int) data.get(WarGameConfig.AGENT_CONFIG_COST);
@@ -37,8 +37,8 @@ public class WarTest extends MovableWarAgent implements AgressiveActionsMethods,
     private boolean _reloading;
     private int _tickLeftBeforeReloaded; // Retient le tick global quand le reload a commencé
 
-    public WarTest(InGameTeam inGameTeam, WarBrain brain) {
-        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarTest), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, SPEED);
+    public WarLight(InGameTeam inGameTeam, WarBrain brain) {
+        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarLight), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, SPEED);
 
 //		brain.setAgentAdapter(new WarRocketLauncherBrain(this));
         _tickLeftBeforeReloaded = TICKS_TO_RELOAD;
@@ -88,6 +88,6 @@ public class WarTest extends MovableWarAgent implements AgressiveActionsMethods,
     }
 
     public WarAgentType getType() {
-        return WarAgentType.WarTest;
+        return WarAgentType.WarLight;
     }
 }

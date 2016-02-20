@@ -55,6 +55,24 @@ WarAgents:
             MaxRepairsPerTick: 500
             Hitbox: { Shape: Triangle, Radius: 2.0 }
     Soldier:
+        WarLight:
+            AngleOfView: 120.0
+            DistanceOfView: 20.0
+            Cost: 8000
+            MaxHealth: 8000
+            BagSize: 4
+            Speed: 0.8
+            TicksToReload: 50
+            Hitbox: { Shape: Square, SideLength: 5.0 }
+        WarHeavy:
+            AngleOfView: 120.0
+            DistanceOfView: 20.0
+            Cost: 8000
+            MaxHealth: 8000
+            BagSize: 4
+            Speed: 0.8
+            TicksToReload: 50
+            Hitbox: { Shape: Square, SideLength: 5.0 }
         WarRocketLauncher:
             AngleOfView: 120.0
             DistanceOfView: 20.0
@@ -80,15 +98,6 @@ WarAgents:
             BagSize: 10
             TicksToReload: 30
             Hitbox: { Shape: Arrow, Radius: 3.0 }
-        WarTest:
-            AngleOfView: 120.0
-            DistanceOfView: 20.0
-            Cost: 8000
-            MaxHealth: 8000
-            BagSize: 4
-            Speed: 0.8
-            TicksToReload: 50
-            Hitbox: { Shape: Square, SideLength: 5.0 }
     Projectile:
         WarRocket:
             Speed: 3.0

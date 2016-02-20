@@ -9,10 +9,11 @@ public enum FileTeamPython {
     WarEngineer("WarEngineer", ".py"),
     WarExplorer("WarExplorer", ".py"),
     WarKamikaze("WarKamikaze", ".py"),
+    WarLight("WarLight", ".py"),
+    WarHeavy("WarHeavy", ".py"),
     WarRocketLauncher("WarRocketLauncher", ".py"),
     WarTools("WarTools", ".py"),
-    WarTurret("WarTurret", ".py"),
-    WarTest("WarTest", ".py");
+    WarTurret("WarTurret", ".py");
 
     private String nameFile = "";
     private String extension = "";

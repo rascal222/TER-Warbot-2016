@@ -1,17 +1,17 @@
 package edu.warbot.scriptcore.team;
 
-import edu.warbot.brains.brains.WarTestBrain;
+import edu.warbot.brains.brains.WarHeavyBrain;
 import edu.warbot.brains.brains.WarTurretBrain;
 import edu.warbot.scriptcore.scriptagent.ScriptAgent;
 
 import java.awt.*;
 
 @SuppressWarnings("unused")
-public abstract class ScriptableWarTest extends WarTestBrain implements Scriptable {
+public abstract class ScriptableWarHeavy extends WarHeavyBrain implements Scriptable {
 
     private ScriptAgent script;
 
-    public ScriptableWarTest() {
+    public ScriptableWarHeavy() {
         super();
     }
 

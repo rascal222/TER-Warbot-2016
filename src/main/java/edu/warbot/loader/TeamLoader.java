@@ -181,7 +181,7 @@ public class TeamLoader {
                 e.printStackTrace();
             }
         }
-
+        
         return teamsLoaded;
     }
 
@@ -347,7 +347,7 @@ public class TeamLoader {
 
                 // On analyse le fichier YML
                 InputStream input = getClass().getClassLoader().getResourceAsStream(currentFolder + "/" + TeamConfigReader.FILE_NAME);
-                System.out.println(currentFolder + "/" + TeamConfigReader.FILE_NAME);
+                //System.out.println(currentFolder + "/" + TeamConfigReader.FILE_NAME);
                 TeamConfigReader teamConfigReader = new TeamConfigReader();
                 teamConfigReader.load(input);
                 input.close();
@@ -436,7 +436,7 @@ public class TeamLoader {
 	private Team loadTeamFromSources(Map<String, String> teamsSourcesFolders, final TeamConfigReader teamConfigReader) throws ClassNotFoundException, IOException, NotFoundException, CannotCompileException, URISyntaxException {
         Team currentTeam;
         URL url = getClass().getClassLoader().getResource(teamsSourcesFolders.get(teamConfigReader.getTeamName()));
-        System.err.println(url);
+        //System.err.println(url);
         if(url== null) {
             throw new IOException("Error when we try to access to value");
         }

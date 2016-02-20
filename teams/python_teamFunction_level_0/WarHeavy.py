@@ -1,9 +1,9 @@
-def actionWarTest():
+def actionWarHeavy():
 
 	percepts = getPercepts();
 
 	for percept in percepts:
-		if (percept.getType().equals(WarAgentType.WarRocketLauncher) or percept.getType().equals(WarAgentType.WarTest)):
+		if (percept.getType().equals(WarAgentType.WarRocketLauncher) or percept.getType().equals(WarAgentType.WarLight)):
 			if (isEnemy(percept)):
 				setDebugString("Mode hunter")
 				setHeading(percept.getAngle())

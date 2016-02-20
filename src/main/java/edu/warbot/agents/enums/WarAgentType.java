@@ -11,10 +11,11 @@ public enum WarAgentType {
     WarEngineer(WarAgentCategory.Worker, true),
 
     // Unités agressives
+    WarLight(WarAgentCategory.Soldier, true),
+    WarHeavy(WarAgentCategory.Soldier, true),
     WarRocketLauncher(WarAgentCategory.Soldier, true),
     WarKamikaze(WarAgentCategory.Soldier, true),
-    WarTurret(WarAgentCategory.Soldier, true),
-    WarTest(WarAgentCategory.Soldier, true),
+    WarTurret(WarAgentCategory.Soldier, true),    
 
     // Bâtiments
     WarBase(WarAgentCategory.Building, true),

@@ -47,7 +47,7 @@ public class WarMain implements WarGameListener {
         loadDial.setVisible(true);
 
         TeamLoader tl = new TeamLoader();
-
+        
         // On initialise la liste des équipes existantes dans le dossier "teams"
         availableTeams = tl.loadAllAvailableTeams(true);
         // On vérifie qu'au moins une équipe a été chargée

@@ -10,6 +10,8 @@ teamsSourcesFolders:
 NbAgentsAtStart:
     WarBase: 1
     WarExplorer: 5
+    WarLight: 1
+    WarHeavy: 1
     WarRocketLauncher: 5
     WarKamikaze: 0
     WarEngineer: 0

@@ -10,11 +10,12 @@ teamsSourcesFolders:
 NbAgentsAtStart:
     WarBase: 1
     WarExplorer: 5
+    WarLight: 5
+    WarHeavy: 5
     WarRocketLauncher: 5
     WarKamikaze: 0
     WarEngineer: 0
     WarTurret: 0
-    WarTest: 0
     Wall: 0
 
 # Food appearance rate = ticks amount separating each food appearance

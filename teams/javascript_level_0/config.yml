@@ -8,8 +8,9 @@ ScriptImplementation: javascript
 AgentsBrainClasses:
     WarBase: WarBase.js
     WarExplorer: WarExplorer.js
+    WarLight: WarLight.js
+    WarHeavy: WarHeavy.js
     WarRocketLauncher: WarRocketLauncher.js
     WarKamikaze: WarKamikaze.js
     WarEngineer: WarEngineer.js
     WarTurret: WarTurret.js
-    WarTest: WarTest.js
