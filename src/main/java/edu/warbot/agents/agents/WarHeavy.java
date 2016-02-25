@@ -3,7 +3,7 @@ package edu.warbot.agents.agents;
 import edu.warbot.agents.MovableWarAgent;
 import edu.warbot.agents.actions.AgressiveActionsMethods;
 import edu.warbot.agents.enums.WarAgentType;
-import edu.warbot.agents.projectiles.WarRocket;
+import edu.warbot.agents.projectiles.WarShell;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Agressive;
 import edu.warbot.game.InGameTeam;
@@ -61,7 +61,7 @@ public class WarHeavy extends MovableWarAgent implements AgressiveActionsMethods
         logger.log(Level.FINEST, this.toString() + " firing...");
         if (isReloaded()) {
             logger.log(Level.FINER, this.toString() + " fired.");
-            launchAgent(new WarRocket(getTeam(), this));
+            launchAgent(new WarShell(getTeam(), this));
             _reloaded = false;
         }
         return getBrain().action();

@@ -23,6 +23,8 @@ public enum WarAgentType {
 
     // Projectiles
     WarRocket(WarAgentCategory.Projectile, false),
+    WarShell(WarAgentCategory.Projectile, false),
+    WarBullet(WarAgentCategory.Projectile, false),
     WarBomb(WarAgentCategory.Projectile, false),
     WarDeathRocket(WarAgentCategory.Projectile, false),
 

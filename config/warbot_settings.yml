@@ -62,7 +62,7 @@ WarAgents:
             MaxHealth: 8000
             BagSize: 4
             Speed: 0.8
-            TicksToReload: 50
+            TicksToReload: 1
             Hitbox: { Shape: Square, SideLength: 5.0 }
         WarHeavy:
             AngleOfView: 120.0
@@ -71,7 +71,7 @@ WarAgents:
             MaxHealth: 8000
             BagSize: 4
             Speed: 0.8
-            TicksToReload: 50
+            TicksToReload: 5
             Hitbox: { Shape: Square, SideLength: 5.0 }
         WarRocketLauncher:
             AngleOfView: 120.0
@@ -105,6 +105,18 @@ WarAgents:
             Autonomy: 20
             Damage: 200
             Hitbox: { Shape: Circle, Radius: 1.0 }
+        WarShell:
+            Speed: 6.0
+            ExplosionRadius: 1.0
+            Autonomy: 8
+            Damage: 50
+            Hitbox: { Shape: Arrow, Radius: 1.0 }
+        WarBullet:
+            Speed: 10.0
+            ExplosionRadius: 0.5
+            Autonomy: 3
+            Damage: 10
+            Hitbox: { Shape: Triangle, Radius: 0.5 }
         WarBomb:
             Speed: 0.0
             ExplosionRadius: 40.0

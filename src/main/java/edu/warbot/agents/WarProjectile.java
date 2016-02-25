@@ -19,7 +19,7 @@ public abstract class WarProjectile extends WarAgent implements MovableActionsMe
     private double explosionRadius;
     private int damage;
     private int autonomy;
-    private WarAgent sender;
+    protected WarAgent sender;
     private int currentAutonomy;
 
     public WarProjectile(String firstActionToDo, InGameTeam inGameTeam, Hitbox hitbox, WarAgent sender, double speed, double explosionRadius, int damage, int autonomy) {
@@ -59,7 +59,7 @@ public abstract class WarProjectile extends WarAgent implements MovableActionsMe
         return ACTION_MOVE;
     }
 
-    private void explode() {
+    protected void explode() {
         if (isAlive()) {
 //			killAgent(this);
             kill();

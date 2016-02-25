@@ -9,10 +9,10 @@ teamsSourcesFolders:
 # Number of agents of each type to deploy at game start
 NbAgentsAtStart:
     WarBase: 1
-    WarExplorer: 5
-    WarLight: 5
-    WarHeavy: 5
-    WarRocketLauncher: 5
+    WarExplorer: 0
+    WarLight: 0
+    WarHeavy: 0
+    WarRocketLauncher: 0
     WarKamikaze: 0
     WarEngineer: 0
     WarTurret: 0
