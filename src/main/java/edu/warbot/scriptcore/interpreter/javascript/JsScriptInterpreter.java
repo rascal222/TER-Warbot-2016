@@ -59,6 +59,8 @@ public class JsScriptInterpreter implements ScriptInterpreter {
             InputStream jsWarExplorer = getFileJavascript("scripts/javascript/JsWarExplorer.js");
             InputStream jsWarKamikaze = getFileJavascript("scripts/javascript/JsWarKamikaze.js");
             InputStream jsWarRocketLauncher = getFileJavascript("scripts/javascript/JsWarRocketLauncher.js");
+            InputStream jsWarLight = getFileJavascript("scripts/javascript/JsWarLight.js");
+            InputStream jsWarHeavy = getFileJavascript("scripts/javascript/JsWarHeavy.js");
             InputStream jsWarTurret = getFileJavascript("scripts/javascript/JsWarTurret.js");
             try {
                 jsScriptsFirst.put("ClassExtend", createScript(jsClassExtend));
@@ -70,6 +72,8 @@ public class JsScriptInterpreter implements ScriptInterpreter {
                 jsScriptsThird.put("JsWarExplorer", createScript(jsWarExplorer));
                 jsScriptsThird.put("JsWarKamikaze", createScript(jsWarKamikaze));
                 jsScriptsThird.put("JsWarRocketLauncher", createScript(jsWarRocketLauncher));
+                jsScriptsThird.put("JsWarLight", createScript(jsWarLight));
+                jsScriptsThird.put("JsWarHeavy", createScript(jsWarHeavy));
                 jsScriptsThird.put("JsWarTurret", createScript(jsWarTurret));
                 jsClassExtend.close();
                 jsWarAgent.close();
@@ -77,6 +81,8 @@ public class JsScriptInterpreter implements ScriptInterpreter {
                 jsWarExplorer.close();
                 jsWarKamikaze.close();
                 jsWarRocketLauncher.close();
+                jsWarLight.close();
+                jsWarHeavy.close();
                 jsWarTurret.close();
             } catch (IOException e) {
                 e.printStackTrace();
