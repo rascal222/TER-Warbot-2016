@@ -114,11 +114,11 @@ public class InGameTeam {
         WarAgentType type = WarAgentType.valueOf(agent.getClass().getSimpleName());
         nbUnitsLeft.put(type, nbUnitsLeft.get(type) - 1);
 
-        if (agent.getType().getCategory().equals(WarAgentCategory.Projectile))
+        if (agent instanceof WarProjectile)
             projectiles.remove(agent);
-        else if (agent.getType().getCategory().equals(WarAgentCategory.Building))
+        else if (agent instanceof WarBuilding)
             buildings.remove(agent);
-        else
+        else if (agent instanceof ControllableWarAgent)
             controllableAgents.remove(agent);
 
         for (TeamListener listener : getListeners())
