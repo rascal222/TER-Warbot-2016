@@ -1,5 +1,5 @@
 from java.lang import String
-from edu.warbot.agents.agents import WarHeavy as LightAction
+from edu.warbot.agents.agents import WarLight as LightAction
 
 class PyWarLight(PyWarAgent):
 	
