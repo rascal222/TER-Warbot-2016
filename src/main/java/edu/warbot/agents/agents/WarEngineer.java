@@ -23,6 +23,7 @@ public class WarEngineer extends MovableWarAgent implements CreatorActionsMethod
     public static final int BAG_SIZE;
     public static final double SPEED;
     public static final int MAX_REPAIRS_PER_TICK;
+    public static final int ARMOR;
 
     static {
         Map<String, Object> data = WarGameConfig.getConfigOfWarAgent(WarAgentType.WarEngineer);
@@ -33,6 +34,7 @@ public class WarEngineer extends MovableWarAgent implements CreatorActionsMethod
         BAG_SIZE = (int) data.get(WarGameConfig.AGENT_CONFIG_BAG_SIZE);
         SPEED = (double) data.get(WarGameConfig.AGENT_CONFIG_SPEED);
         MAX_REPAIRS_PER_TICK = (int) data.get(WarGameConfig.AGENT_CONFIG_MAX_REPAIRS_PER_TICK);
+        ARMOR = (int) data.get(WarGameConfig.AGENT_CONFIG_ARMOR);
     }
 
     private WarAgentType nextAgentToCreate;
@@ -40,7 +42,7 @@ public class WarEngineer extends MovableWarAgent implements CreatorActionsMethod
     private int idNextBuildingToRepair;
 
     public WarEngineer(InGameTeam inGameTeam, WarBrain brain) {
-        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarEngineer), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, SPEED);
+        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarEngineer), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, SPEED, ARMOR);
         nextAgentToCreate = WarAgentType.WarTurret;
         nextBuildingToBuild = WarAgentType.Wall;
     }

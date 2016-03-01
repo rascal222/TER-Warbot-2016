@@ -23,6 +23,12 @@ public abstract class AliveWarAgent extends WarAgent implements Alive, IdlerActi
      * Niveau de santé maximum
      */
     private int _maxHealth;
+    /**
+    * Armure de l'agent
+    */
+   private int _armor;
+    
+    
 
     /**
      * @param firstActionToDo l'action à réaliser au démarrage
@@ -31,11 +37,12 @@ public abstract class AliveWarAgent extends WarAgent implements Alive, IdlerActi
      * @param cost            le coût de l'agent
      * @param maxHealth       la vie maximum d'un agent
      */
-    public AliveWarAgent(String firstActionToDo, InGameTeam inGameTeam, Hitbox hitbox, int cost, int maxHealth) {
+    public AliveWarAgent(String firstActionToDo, InGameTeam inGameTeam, Hitbox hitbox, int cost, int maxHealth, int armor) {
         super(firstActionToDo, inGameTeam, hitbox);
         _cost = cost;
         _maxHealth = maxHealth;
         _health = _maxHealth;
+        _armor = armor;
     }
 
     /**
@@ -81,8 +88,8 @@ public abstract class AliveWarAgent extends WarAgent implements Alive, IdlerActi
      * @param quantity quantité de dégâts infligés
      */
     public void damage(int quantity) {
-        logger.finest(this.toString() + "damaged of " + quantity + "life points.");
-        _health -= quantity;
+        logger.finest(this.toString() + "damaged of " + (quantity - _armor) + "life points.");
+        _health -= (quantity - _armor);
         if (_health <= 0) {
             logger.finer(this.toString() + "killed.");
 //            System.out.println(killAgent(this));

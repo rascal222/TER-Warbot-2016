@@ -8,8 +8,8 @@ public abstract class WarBuilding extends AliveWarAgent {
     public static final double MAX_DISTANCE_BUILD = WarGameConfig.getMaxDistanceBuild();
     public static final double REPAIRS_MULTIPLIER = WarGameConfig.getRepairsMultiplier();
 
-    public WarBuilding(InGameTeam inGameTeam, Hitbox hitbox, int cost, int maxHealth) {
-        super(ACTION_IDLE, inGameTeam, hitbox, cost, maxHealth);
+    public WarBuilding(InGameTeam inGameTeam, Hitbox hitbox, int cost, int maxHealth, int armor) {
+        super(ACTION_IDLE, inGameTeam, hitbox, cost, maxHealth, armor);
         init(getRepairsAmountWithCost(cost));
     }
 

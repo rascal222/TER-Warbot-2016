@@ -21,6 +21,7 @@ public class WarTurret extends ControllableWarAgent implements AgressiveActionsM
     public static final int MAX_HEALTH;
     public static final int BAG_SIZE;
     public static final int TICKS_TO_RELOAD;
+    public static final int ARMOR;
 
     static {
         Map<String, Object> data = WarGameConfig.getConfigOfWarAgent(WarAgentType.WarTurret);
@@ -30,6 +31,7 @@ public class WarTurret extends ControllableWarAgent implements AgressiveActionsM
         MAX_HEALTH = (int) data.get(WarGameConfig.AGENT_CONFIG_MAX_HEALTH);
         BAG_SIZE = (int) data.get(WarGameConfig.AGENT_CONFIG_BAG_SIZE);
         TICKS_TO_RELOAD = (int) data.get(WarGameConfig.AGENT_CONFIG_TICKS_TO_RELOAD);
+        ARMOR = (int) data.get(WarGameConfig.AGENT_CONFIG_ARMOR);
     }
 
     private boolean _reloaded;
@@ -37,7 +39,7 @@ public class WarTurret extends ControllableWarAgent implements AgressiveActionsM
     private int _tickLeftBeforeReloaded;
 
     public WarTurret(InGameTeam inGameTeam, WarBrain brain) {
-        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarTurret), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE);
+        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarTurret), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, ARMOR);
 
         _tickLeftBeforeReloaded = TICKS_TO_RELOAD;
         _reloaded = false;

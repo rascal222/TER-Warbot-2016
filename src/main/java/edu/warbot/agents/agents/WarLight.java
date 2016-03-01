@@ -21,6 +21,7 @@ public class WarLight extends MovableWarAgent implements AgressiveActionsMethods
     public static final int BAG_SIZE;
     public static final double SPEED;
     public static final int TICKS_TO_RELOAD;
+    public static final int ARMOR;
 
     static {
         Map<String, Object> data = WarGameConfig.getConfigOfWarAgent(WarAgentType.WarLight);
@@ -31,6 +32,7 @@ public class WarLight extends MovableWarAgent implements AgressiveActionsMethods
         BAG_SIZE = (int) data.get(WarGameConfig.AGENT_CONFIG_BAG_SIZE);
         SPEED = (double) data.get(WarGameConfig.AGENT_CONFIG_SPEED);
         TICKS_TO_RELOAD = (int) data.get(WarGameConfig.AGENT_CONFIG_TICKS_TO_RELOAD);
+        ARMOR = (int) data.get(WarGameConfig.AGENT_CONFIG_ARMOR);
     }
 
     private boolean _reloaded;
@@ -38,7 +40,7 @@ public class WarLight extends MovableWarAgent implements AgressiveActionsMethods
     private int _tickLeftBeforeReloaded; // Retient le tick global quand le reload a commencé
 
     public WarLight(InGameTeam inGameTeam, WarBrain brain) {
-        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarLight), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, SPEED);
+        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarLight), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, SPEED, ARMOR);
 
 //		brain.setAgentAdapter(new WarRocketLauncherBrain(this));
         _tickLeftBeforeReloaded = TICKS_TO_RELOAD;

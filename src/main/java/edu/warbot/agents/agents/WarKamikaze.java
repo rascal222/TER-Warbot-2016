@@ -20,6 +20,7 @@ public class WarKamikaze extends MovableWarAgent implements AgressiveActionsMeth
     public static final int MAX_HEALTH;
     public static final int BAG_SIZE;
     public static final double SPEED;
+    public static final int ARMOR;
 
     static {
         Map<String, Object> data = WarGameConfig.getConfigOfWarAgent(WarAgentType.WarKamikaze);
@@ -29,10 +30,11 @@ public class WarKamikaze extends MovableWarAgent implements AgressiveActionsMeth
         MAX_HEALTH = (int) data.get(WarGameConfig.AGENT_CONFIG_MAX_HEALTH);
         BAG_SIZE = (int) data.get(WarGameConfig.AGENT_CONFIG_BAG_SIZE);
         SPEED = (double) data.get(WarGameConfig.AGENT_CONFIG_SPEED);
+        ARMOR = (int) data.get(WarGameConfig.AGENT_CONFIG_ARMOR);
     }
 
     public WarKamikaze(InGameTeam inGameTeam, WarBrain brain) {
-        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarKamikaze), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, SPEED);
+        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarKamikaze), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, SPEED, ARMOR);
 
 //		brain.setAgentAdapter(new WarKamikazeBrain(this));
     }

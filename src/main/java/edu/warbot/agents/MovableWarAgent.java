@@ -14,8 +14,8 @@ public abstract class MovableWarAgent extends ControllableWarAgent implements Pi
 
     private double _speed;
 
-    public MovableWarAgent(String firstActionToDo, InGameTeam inGameTeam, Hitbox hitbox, WarBrain brain, double distanceOfView, double angleOfView, int cost, int maxHealth, int bagSize, double speed) {
-        super(firstActionToDo, inGameTeam, hitbox, brain, distanceOfView, angleOfView, cost, maxHealth, bagSize);
+    public MovableWarAgent(String firstActionToDo, InGameTeam inGameTeam, Hitbox hitbox, WarBrain brain, double distanceOfView, double angleOfView, int cost, int maxHealth, int bagSize, double speed, int armor) {
+        super(firstActionToDo, inGameTeam, hitbox, brain, distanceOfView, angleOfView, cost, maxHealth, bagSize, armor);
 
         this._speed = speed;
     }

@@ -42,8 +42,8 @@ public abstract class ControllableWarAgent extends AliveWarAgent implements Cont
     private Shape debugShape;
     private List<WarMessage> thisTickMessages;
 
-    public ControllableWarAgent(String firstActionToDo, InGameTeam inGameTeam, Hitbox hitbox, WarBrain brain, double distanceOfView, double angleOfView, int cost, int maxHealth, int bagSize) {
-        super(firstActionToDo, inGameTeam, hitbox, cost, maxHealth);
+    public ControllableWarAgent(String firstActionToDo, InGameTeam inGameTeam, Hitbox hitbox, WarBrain brain, double distanceOfView, double angleOfView, int cost, int maxHealth, int bagSize, int armor) {
+        super(firstActionToDo, inGameTeam, hitbox, cost, maxHealth, armor);
 
         _distanceOfView = distanceOfView;
         _angleOfView = angleOfView;

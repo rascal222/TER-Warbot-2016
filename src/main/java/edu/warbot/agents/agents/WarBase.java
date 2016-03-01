@@ -15,6 +15,7 @@ public class WarBase extends CreatorWarAgent {
     public static final int COST;
     public static final int MAX_HEALTH;
     public static final int BAG_SIZE;
+    public static final int ARMOR;
 
     static {
         Map<String, Object> data = WarGameConfig.getConfigOfWarAgent(WarAgentType.WarBase);
@@ -23,10 +24,11 @@ public class WarBase extends CreatorWarAgent {
         COST = (int) data.get(WarGameConfig.AGENT_CONFIG_COST);
         MAX_HEALTH = (int) data.get(WarGameConfig.AGENT_CONFIG_MAX_HEALTH);
         BAG_SIZE = (int) data.get(WarGameConfig.AGENT_CONFIG_BAG_SIZE);
+        ARMOR = (int) data.get(WarGameConfig.AGENT_CONFIG_ARMOR);
     }
 
     public WarBase(InGameTeam inGameTeam, WarBrain brain) {
-        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarBase), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE);
+        super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarBase), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, ARMOR);
     }
 
     @Override

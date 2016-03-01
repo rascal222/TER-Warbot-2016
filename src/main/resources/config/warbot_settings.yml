@@ -31,10 +31,12 @@ WarAgents:
             Cost: 12000
             MaxHealth: 12000
             BagSize: 1000000
+            Armor: 10
             Hitbox: { Shape: Square, SideLength: 4.0 }
         Wall:
             Cost: 500
             MaxHealth: 15000
+            Armor: 0
             Hitbox: { Shape: Rectangle, Width: 5.0, Height: 20.0 }
     Worker:
         WarExplorer:
@@ -44,6 +46,7 @@ WarAgents:
             MaxHealth: 3000
             BagSize: 4
             Speed: 1.2
+            Armor: 0
             Hitbox: { Shape: Circle, Radius: 2.0 }
         WarEngineer:
             AngleOfView: 150.0
@@ -53,6 +56,7 @@ WarAgents:
             BagSize: 4
             Speed: 1.0
             MaxRepairsPerTick: 500
+            Armor: 0
             Hitbox: { Shape: Triangle, Radius: 2.0 }
     Soldier:
         WarLight:
@@ -62,8 +66,9 @@ WarAgents:
             MaxHealth: 8000
             BagSize: 4
             Speed: 0.8
-            TicksToReload: 50
-            Hitbox: { Shape: Square, SideLength: 3.0 }
+            TicksToReload: 1
+            Armor: 1
+            Hitbox: { Shape: Square, SideLength: 5.0 }
         WarHeavy:
             AngleOfView: 120.0
             DistanceOfView: 20.0
@@ -71,8 +76,9 @@ WarAgents:
             MaxHealth: 8000
             BagSize: 4
             Speed: 0.8
-            TicksToReload: 50
-            Hitbox: { Shape: Square, SideLength: 3.0 }
+            TicksToReload: 5
+            Armor: 7
+            Hitbox: { Shape: Square, SideLength: 5.0 }
         WarRocketLauncher:
             AngleOfView: 120.0
             DistanceOfView: 20.0
@@ -81,6 +87,7 @@ WarAgents:
             BagSize: 4
             Speed: 0.8
             TicksToReload: 50
+            Armor: 3
             Hitbox: { Shape: Square, SideLength: 3.0 }
         WarKamikaze:
             AngleOfView: 150.0
@@ -89,6 +96,7 @@ WarAgents:
             MaxHealth: 3000
             BagSize: 4
             Speed: 1.0
+            Armor: 0
             Hitbox: { Shape: Diamond, Radius: 2.0 }
         WarTurret:
             AngleOfView: 180.0
@@ -97,6 +105,7 @@ WarAgents:
             MaxHealth: 4000
             BagSize: 10
             TicksToReload: 30
+            Armor: 10
             Hitbox: { Shape: Arrow, Radius: 3.0 }
     Projectile:
         WarRocket:
@@ -105,6 +114,18 @@ WarAgents:
             Autonomy: 20
             Damage: 200
             Hitbox: { Shape: Circle, Radius: 1.0 }
+        WarShell:
+            Speed: 6.0
+            ExplosionRadius: 1.0
+            Autonomy: 8
+            Damage: 50
+            Hitbox: { Shape: Arrow, Radius: 1.0 }
+        WarBullet:
+            Speed: 10.0
+            ExplosionRadius: 0.5
+            Autonomy: 3
+            Damage: 10
+            Hitbox: { Shape: Triangle, Radius: 0.5 }
         WarBomb:
             Speed: 0.0
             ExplosionRadius: 40.0

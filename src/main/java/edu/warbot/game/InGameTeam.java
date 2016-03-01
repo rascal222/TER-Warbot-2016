@@ -4,7 +4,6 @@ import edu.warbot.agents.ControllableWarAgent;
 import edu.warbot.agents.WarAgent;
 import edu.warbot.agents.WarBuilding;
 import edu.warbot.agents.WarProjectile;
-import edu.warbot.agents.enums.WarAgentCategory;
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.agents.teams.Team;
 import edu.warbot.brains.capacities.Builder;

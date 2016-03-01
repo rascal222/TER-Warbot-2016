@@ -29,6 +29,7 @@ public class WarGameConfig {
     public static final String AGENT_CONFIG_SPEED = "Speed";
     public static final String AGENT_CONFIG_TICKS_TO_RELOAD = "TicksToReload";
     public static final String AGENT_CONFIG_MAX_REPAIRS_PER_TICK = "MaxRepairsPerTick";
+    public static final String AGENT_CONFIG_ARMOR = "Armor";
 
     public static final String PROJECTILE_CONFIG_EXPLOSION_RADIUS = "ExplosionRadius";
     public static final String PROJECTILE_CONFIG_DAMAGE = "Damage";

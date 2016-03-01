@@ -10,8 +10,8 @@ public abstract class CreatorWarAgent extends ControllableWarAgent implements Cr
 
     private WarAgentType _nextAgentToCreate;
 
-    public CreatorWarAgent(String firstActionToDo, InGameTeam inGameTeam, Hitbox hitbox, WarBrain brain, double distanceOfView, double angleOfView, int cost, int maxHealth, int bagSize) {
-        super(firstActionToDo, inGameTeam, hitbox, brain, distanceOfView, angleOfView, cost, maxHealth, bagSize);
+    public CreatorWarAgent(String firstActionToDo, InGameTeam inGameTeam, Hitbox hitbox, WarBrain brain, double distanceOfView, double angleOfView, int cost, int maxHealth, int bagSize, int armor) {
+        super(firstActionToDo, inGameTeam, hitbox, brain, distanceOfView, angleOfView, cost, maxHealth, bagSize, armor);
 
         _nextAgentToCreate = WarAgentType.WarExplorer;
     }
