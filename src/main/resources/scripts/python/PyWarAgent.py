@@ -548,6 +548,9 @@ class PyWarAgent(ScriptAgent):
 			return : int nombre de points de vie restauré
 			"""
 			return WarFood.HEALTH_GIVEN
+		
+		def setTargetDistance(self, targetDistance):
+			self.getRetAgent().setTargetDistance(targetDistance)
 
 # === FONCTIONS ===
 
@@ -1004,3 +1007,6 @@ def myGroups():
 
 def myRolesIn(group):
 	return WA.myROlesIn(group)
+
+def setTargetDistance(targetDistance):
+	WA.setTargetDistance(targetDistance)

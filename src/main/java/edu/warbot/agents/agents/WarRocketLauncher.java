@@ -6,13 +6,14 @@ import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.agents.projectiles.WarRocket;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Agressive;
+import edu.warbot.brains.capacities.Targeter;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.launcher.WarGameConfig;
 
 import java.util.Map;
 import java.util.logging.Level;
 
-public class WarRocketLauncher extends MovableWarAgent implements AgressiveActionsMethods, Agressive {
+public class WarRocketLauncher extends MovableWarAgent implements AgressiveActionsMethods, Agressive, Targeter {
 
     public static final double ANGLE_OF_VIEW;
     public static final double DISTANCE_OF_VIEW;
@@ -38,6 +39,8 @@ public class WarRocketLauncher extends MovableWarAgent implements AgressiveActio
     private boolean _reloaded;
     private boolean _reloading;
     private int _tickLeftBeforeReloaded; // Retient le tick global quand le reload a commencé
+    
+    private double _targetDistance;
 
     public WarRocketLauncher(InGameTeam inGameTeam, WarBrain brain) {
         super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarRocketLauncher), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, SPEED, ARMOR);
@@ -46,6 +49,7 @@ public class WarRocketLauncher extends MovableWarAgent implements AgressiveActio
         _tickLeftBeforeReloaded = TICKS_TO_RELOAD;
         _reloaded = false;
         _reloading = true;
+        _targetDistance = WarRocket.SPEED*WarRocket.AUTONOMY; // Init au max
     }
 
     @Override
@@ -63,7 +67,7 @@ public class WarRocketLauncher extends MovableWarAgent implements AgressiveActio
         logger.log(Level.FINEST, this.toString() + " firing...");
         if (isReloaded()) {
             logger.log(Level.FINER, this.toString() + " fired.");
-            launchAgent(new WarRocket(getTeam(), this));
+            launchAgent(new WarRocket(getTeam(), this, _targetDistance));
             _reloaded = false;
         }
         return getBrain().action();
@@ -91,5 +95,10 @@ public class WarRocketLauncher extends MovableWarAgent implements AgressiveActio
 
     public WarAgentType getType() {
         return WarAgentType.WarRocketLauncher;
+    }
+    
+    public void setTargetDistance(double targetDistance)
+    {
+    	_targetDistance = Math.abs(targetDistance);
     }
 }

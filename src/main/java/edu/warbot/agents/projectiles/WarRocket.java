@@ -24,14 +24,28 @@ public class WarRocket extends WarProjectile {
         DAMAGE = (int) data.get(WarGameConfig.PROJECTILE_CONFIG_DAMAGE);
         RANGE = SPEED * AUTONOMY;
     }
+    
+    private double _targetDistance;
 
-
-    public WarRocket(InGameTeam inGameTeam, WarAgent sender) {
+    public WarRocket(InGameTeam inGameTeam, WarAgent sender, double targetDistance) {
         super(ACTION_MOVE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarRocket), sender, SPEED, EXPLOSION_RADIUS, DAMAGE, AUTONOMY);
+        _targetDistance = targetDistance + SPEED;
     }
 
     public WarAgentType getType() {
         return WarAgentType.WarRocket;
     }
-
+    
+    @Override
+    protected void doBeforeEachTick() {
+        super.doBeforeEachTick();
+        _targetDistance -= SPEED;
+        if(_targetDistance >= (-SPEED/2.) && _targetDistance <= (SPEED/2.))
+        	explode();
+    }
+    
+    protected boolean isGoingToCrossAnOtherAgent() {
+    	return false;
+    }
+    
 }

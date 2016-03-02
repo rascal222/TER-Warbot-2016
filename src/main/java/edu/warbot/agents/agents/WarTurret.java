@@ -61,7 +61,8 @@ public class WarTurret extends ControllableWarAgent implements AgressiveActionsM
         logger.log(Level.FINEST, this.toString() + " firing...");
         if (isReloaded()) {
             logger.log(Level.FINER, this.toString() + " fired.");
-            WarProjectile wp = new WarRocket(getTeam(), this);
+            // TODO Décider du type de projectile pour les tourelles et compléter en conséquence
+            WarProjectile wp = new WarRocket(getTeam(), this, 50);
             launchAgent(wp);
             _reloaded = false;
         }

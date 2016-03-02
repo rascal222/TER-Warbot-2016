@@ -71,6 +71,10 @@ var JsWarRocketLauncher = JsWarAgent.extend({
 
 	isReloading : function () {
 		return this.getRockLaunch().isReloading();
+	},
+	
+	setTargetDistance : function (targetDistance) {
+		this.getRockLaunch().setTargetDistance(targetDistance);
 	}
 
 	

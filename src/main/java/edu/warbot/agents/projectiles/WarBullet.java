@@ -40,7 +40,6 @@ public class WarBullet extends WarProjectile {
     
     @Override
     public void explode() {
-    	System.out.println("test explosion WarBullet");
     	if (isAlive()) {
     		kill();
     		for (WarAgent a : getTeam().getGame().getAllAgentsInRadiusOf(this, getHitboxMaxRadius() + getSpeed())) {

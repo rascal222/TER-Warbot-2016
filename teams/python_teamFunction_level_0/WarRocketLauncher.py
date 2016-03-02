@@ -1,15 +1,15 @@
-
 def actionWarRocketLauncher():
 
 	percepts = getPercepts();
 
 	for percept in percepts:
-		if (percept.getType().equals(WarAgentType.WarRocketLauncher)):
+		if (percept.getType().equals(WarAgentType.WarRocketLauncher) or percept.getType().equals(WarAgentType.WarLight) or percept.getType().equals(WarAgentType.WarHeavy)):
 			if (isEnemy(percept)):
 				setDebugString("Mode hunter")
 				setHeading(percept.getAngle())
 
 				if (isReloaded()):
+					setTargetDistance(percept.getDistance())
 					return fire()
 				else :
 					return reloadWeapon()
@@ -22,6 +22,7 @@ def actionWarRocketLauncher():
 					setHeading(percept.getAngle())
 
 					if (isReloaded()):
+						setTargetDistance(percept.getDistance())
 						return fire()
 					else :
 						return reloadWeapon()

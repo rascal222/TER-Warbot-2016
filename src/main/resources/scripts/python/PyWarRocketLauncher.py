@@ -83,3 +83,12 @@ class PyWarRocketLauncher(PyWarAgent):
 		"""
 
 		return self.getRetAgent().isReloading();
+
+	def setTargetDistance(self, targetDistance):
+		"""
+		Permet de viser une zone
+
+		return : void
+		"""
+
+		self.getRetAgent().setTargetDistance(targetDistance);

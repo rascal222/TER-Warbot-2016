@@ -111,7 +111,7 @@ WarAgents:
         WarRocket:
             Speed: 3.0
             ExplosionRadius: 10.0
-            Autonomy: 20
+            Autonomy: 30
             Damage: 200
             Hitbox: { Shape: Circle, Radius: 1.0 }
         WarShell:

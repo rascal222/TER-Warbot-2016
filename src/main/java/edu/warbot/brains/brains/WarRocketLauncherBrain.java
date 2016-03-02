@@ -7,9 +7,10 @@ import edu.warbot.agents.actions.constants.MovableActions;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Agressive;
 import edu.warbot.brains.capacities.Movable;
+import edu.warbot.brains.capacities.Targeter;
 
 public abstract class WarRocketLauncherBrain extends WarBrain implements AgressiveActionsMethods, AgressiveActions, Agressive,
-        MovableActionsMethods, MovableActions, Movable {
+        MovableActionsMethods, MovableActions, Movable, Targeter {
 
     @Override
     public String action() {
