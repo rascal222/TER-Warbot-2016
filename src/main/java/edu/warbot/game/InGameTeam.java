@@ -26,7 +26,6 @@ import java.util.logging.Level;
 public class InGameTeam {
 
     public static final String DEFAULT_GROUP_NAME = "defaultGroup-Warbot";
-    public static final String ID_GROUP_NAME = "ids";
 
     public static int MAX_DYING_STEP = 5;
 

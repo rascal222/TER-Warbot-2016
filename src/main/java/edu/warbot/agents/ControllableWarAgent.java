@@ -126,7 +126,7 @@ public abstract class ControllableWarAgent extends AliveWarAgent implements Cont
     public ReturnCode sendMessage(int idAgent, String message, String... content) {
         logger.fine(this.toString() + " send message to id " + idAgent);
         logger.finer("This message is : [" + message + "] " + content);
-        return sendMessage(getTeamName(), InGameTeam.ID_GROUP_NAME, "" + idAgent,
+        return sendMessage(getTeamName(), InGameTeam.DEFAULT_GROUP_NAME, "" + idAgent,
                 new WarKernelMessage(this, message, content));
 //        WarAgent agent = getTeam().getAgentWithID(idAgent);
 //

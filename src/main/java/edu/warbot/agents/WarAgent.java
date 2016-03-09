@@ -43,14 +43,11 @@ public abstract class WarAgent extends Turtle implements CommonCapacities {
         boolean created = createGroupIfAbsent(getTeamName(), InGameTeam.DEFAULT_GROUP_NAME);
         logger.fine("CreateGroupIfAbsent: <" + getTeamName() + "," + InGameTeam.DEFAULT_GROUP_NAME + "> -> " + (created));
 
-        created = createGroupIfAbsent(getTeamName(), InGameTeam.ID_GROUP_NAME);
-        logger.fine("CreateGroupIfAbsent: <" + getTeamName() + "," + InGameTeam.ID_GROUP_NAME + "> -> " + (created));
+        ReturnCode rc = requestRole(getTeamName(), InGameTeam.DEFAULT_GROUP_NAME, "" + getID());
+        logger.fine("RequestRole:<" + getTeamName()+ "," + InGameTeam.DEFAULT_GROUP_NAME + "," + getID() + "> -> " + (rc.toString()));
 
-        ReturnCode rc = requestRole(InGameTeam.ID_GROUP_NAME, "" + getID());
-        logger.fine("RequestRole:<" + InGameTeam.ID_GROUP_NAME + "," + getID() + "> -> " + (rc.toString()));
-
-        rc = requestRole(InGameTeam.DEFAULT_GROUP_NAME, getType().toString());
-        logger.fine("RequestRole:<" + InGameTeam.DEFAULT_GROUP_NAME + "," + getType().toString() + "> -> " + (rc.toString()));
+        rc = requestRole(getTeamName(), InGameTeam.DEFAULT_GROUP_NAME, getType().toString());
+        logger.fine("RequestRole:<" + getTeamName()+ "," + InGameTeam.DEFAULT_GROUP_NAME + "," + getType().toString() + "> -> " + (rc.toString()));
 
     }
 
@@ -62,7 +59,7 @@ public abstract class WarAgent extends Turtle implements CommonCapacities {
 
     @Override
     public AbstractAgent.ReturnCode requestRole(String group, String role) {
-        if (InGameTeam.DEFAULT_GROUP_NAME.equals(group) || InGameTeam.ID_GROUP_NAME.equals(group))
+        if (InGameTeam.DEFAULT_GROUP_NAME.equals(group))
             return ReturnCode.ACCESS_DENIED;
         createGroupIfAbsent(getTeamName(), group);
         return requestRole(getTeamName(), group, role);
@@ -70,14 +67,14 @@ public abstract class WarAgent extends Turtle implements CommonCapacities {
 
     @Override
     public AbstractAgent.ReturnCode leaveRole(String group, String role) {
-        if (InGameTeam.DEFAULT_GROUP_NAME.equals(group) || InGameTeam.ID_GROUP_NAME.equals(group))
+        if (InGameTeam.DEFAULT_GROUP_NAME.equals(group))
             return ReturnCode.ACCESS_DENIED;
         return super.leaveRole(getTeamName(), group, role);
     }
 
     @Override
     public AbstractAgent.ReturnCode leaveGroup(String group) {
-        if (InGameTeam.DEFAULT_GROUP_NAME.equals(group) || InGameTeam.ID_GROUP_NAME.equals(group))
+        if (InGameTeam.DEFAULT_GROUP_NAME.equals(group))
             return ReturnCode.ACCESS_DENIED;
         return super.leaveGroup(getTeamName(), group);
     }
