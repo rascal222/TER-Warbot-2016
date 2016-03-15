@@ -1,8 +1,9 @@
 package edu.warbot.game;
 
+import edu.warbot.agents.AliveWarAgent;
 import edu.warbot.agents.ControllableWarAgent;
 import edu.warbot.agents.WarAgent;
-import edu.warbot.agents.WarBuilding;
+import edu.warbot.brains.capacities.Building;
 import edu.warbot.agents.WarProjectile;
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.agents.teams.Team;
@@ -37,7 +38,7 @@ public class InGameTeam {
 
     private List<ControllableWarAgent> controllableAgents;
     private List<WarProjectile> projectiles;
-    private List<WarBuilding> buildings;
+    private List<AliveWarAgent> buildings;
     private Map<WarAgentType, Integer> nbUnitsLeft;
     private List<WarAgent> dyingAgents;
 
@@ -50,7 +51,7 @@ public class InGameTeam {
                 Color.WHITE,
                 new ArrayList<ControllableWarAgent>(),
                 new ArrayList<WarProjectile>(),
-                new ArrayList<WarBuilding>(),
+                new ArrayList<AliveWarAgent>(),
                 new HashMap<WarAgentType, Integer>(),
                 new ArrayList<WarAgent>());
 
@@ -61,7 +62,7 @@ public class InGameTeam {
     public InGameTeam(Team team, Color color,
                       List<ControllableWarAgent> controllableAgents,
                       List<WarProjectile> projectiles,
-                      List<WarBuilding> buildings,
+                      List<AliveWarAgent> buildings,
                       Map<WarAgentType, Integer> nbUnitsLeft, List<WarAgent> dyingAgents) {
 
         this.team = team;
@@ -104,7 +105,7 @@ public class InGameTeam {
         return projectiles;
     }
 
-    public List<WarBuilding> getBuildings() {
+    public List<AliveWarAgent> getBuildings() {
         return buildings;
     }
 
@@ -114,9 +115,9 @@ public class InGameTeam {
 
         if (agent instanceof WarProjectile)
             projectiles.remove(agent);
-        else if (agent instanceof WarBuilding)
+        else if (agent instanceof Building)
             buildings.remove(agent);
-        else if (agent instanceof ControllableWarAgent)
+        if (agent instanceof ControllableWarAgent)
             controllableAgents.remove(agent);
 
         for (TeamListener listener : getListeners())
@@ -197,9 +198,9 @@ public class InGameTeam {
         return toReturn;
     }
 
-    public ArrayList<WarBuilding> getBuildingsInRadiusOf(WarAgent referenceAgent, double radius) {
-        ArrayList<WarBuilding> toReturn = new ArrayList<>();
-        for (WarBuilding building : buildings) {
+    public ArrayList<AliveWarAgent> getBuildingsInRadiusOf(WarAgent referenceAgent, double radius) {
+        ArrayList<AliveWarAgent> toReturn = new ArrayList<>();
+        for (AliveWarAgent building : buildings) {
             if (referenceAgent.getMinDistanceFrom(building) <= radius) {
                 toReturn.add(building);
             }
@@ -282,7 +283,7 @@ public class InGameTeam {
         return team.instantiateControllableWarAgent(this, WarAgentType.valueOf(agentName));
     }
 
-    public WarBuilding instantiateNewBuilding(String buildingName) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+    public AliveWarAgent instantiateNewBuilding(String buildingName) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
         return team.instantiateBuilding(this, WarAgentType.valueOf(buildingName));
     }
 
@@ -319,9 +320,9 @@ public class InGameTeam {
         nbUnitsLeft.put(type, nbUnitsLeft.get(type) + 1);
         if (agent instanceof WarProjectile)
             projectiles.add((WarProjectile) agent);
-        else if (agent instanceof WarBuilding)
-            buildings.add((WarBuilding) agent);
-        else if (agent instanceof ControllableWarAgent)
+        else if (agent instanceof Building)
+            buildings.add((AliveWarAgent) agent);
+        if (agent instanceof ControllableWarAgent)
             controllableAgents.add((ControllableWarAgent) agent);
 
         agent.getLogger().log(Level.FINEST, agent.toString() + " added to team " + this.getName());

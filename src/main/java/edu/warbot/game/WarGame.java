@@ -1,7 +1,7 @@
 package edu.warbot.game;
 
+import edu.warbot.agents.AliveWarAgent;
 import edu.warbot.agents.WarAgent;
-import edu.warbot.agents.WarBuilding;
 import edu.warbot.game.listeners.WarGameListener;
 import edu.warbot.game.modes.AbstractGameMode;
 import edu.warbot.maps.AbstractWarMap;
@@ -125,8 +125,8 @@ public class WarGame {
         return toReturn;
     }
 
-    public ArrayList<WarBuilding> getBuildingsInRadiusOf(WarAgent referenceAgent, double radius) {
-        ArrayList<WarBuilding> toReturn = new ArrayList<>();
+    public ArrayList<AliveWarAgent> getBuildingsInRadiusOf(WarAgent referenceAgent, double radius) {
+        ArrayList<AliveWarAgent> toReturn = new ArrayList<>();
         for (InGameTeam t : getAllTeams()) {
             toReturn.addAll(t.getBuildingsInRadiusOf(referenceAgent, radius));
         }

@@ -1,7 +1,7 @@
 package edu.warbot.agents.teams;
 
+import edu.warbot.agents.AliveWarAgent;
 import edu.warbot.agents.ControllableWarAgent;
-import edu.warbot.agents.WarBuilding;
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Builder;
@@ -109,7 +109,7 @@ public abstract class Team {
      * @throws SecurityException
      * @throws ClassNotFoundException
      */
-    public abstract WarBuilding instantiateBuilding(InGameTeam inGameTeam, WarAgentType buildingName)
+    public abstract AliveWarAgent instantiateBuilding(InGameTeam inGameTeam, WarAgentType buildingName)
             throws InstantiationException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException;
 

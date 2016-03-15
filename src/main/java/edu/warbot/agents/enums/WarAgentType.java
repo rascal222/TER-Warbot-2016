@@ -15,10 +15,10 @@ public enum WarAgentType {
     WarHeavy(WarAgentCategory.Soldier, true),
     WarRocketLauncher(WarAgentCategory.Soldier, true),
     WarKamikaze(WarAgentCategory.Soldier, true),
-    WarTurret(WarAgentCategory.Soldier, true),    
 
     // Bâtiments
     WarBase(WarAgentCategory.Building, true),
+    WarTurret(WarAgentCategory.Building, true),
     Wall(WarAgentCategory.Building, false),
 
     // Projectiles

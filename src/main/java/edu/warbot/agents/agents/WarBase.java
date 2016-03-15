@@ -1,14 +1,16 @@
 package edu.warbot.agents.agents;
 
 import edu.warbot.agents.CreatorWarAgent;
+import edu.warbot.agents.enums.WarAgentCategory;
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.brains.WarBrain;
+import edu.warbot.brains.capacities.Building;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.launcher.WarGameConfig;
 
 import java.util.Map;
 
-public class WarBase extends CreatorWarAgent {
+public class WarBase extends CreatorWarAgent implements Building {
 
     public static final double ANGLE_OF_VIEW;
     public static final double DISTANCE_OF_VIEW;
@@ -30,11 +32,23 @@ public class WarBase extends CreatorWarAgent {
     public WarBase(InGameTeam inGameTeam, WarBrain brain) {
         super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarBase), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, ARMOR);
     }
+    
+    @Override
+	public int getRepairsAmountWithCost(int cost)
+	{
+		return ((Double) (REPAIRS_MULTIPLIER * cost)).intValue();
+		
+	}
 
+	@Override
+	public int getCostToRepair(int repairsAmout)
+	{
+		return ((Double) (repairsAmout / REPAIRS_MULTIPLIER)).intValue();
+	}
+    
     @Override
     public boolean isAbleToCreate(WarAgentType agent) {
-        if (agent == WarAgentType.WarExplorer || agent == WarAgentType.WarEngineer || agent == WarAgentType.WarKamikaze ||
-                agent == WarAgentType.WarRocketLauncher)
+        if (agent.getCategory() == WarAgentCategory.Soldier || agent.getCategory() == WarAgentCategory.Worker)
             return true;
         return false;
     }

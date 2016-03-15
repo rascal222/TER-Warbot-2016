@@ -28,11 +28,20 @@ WarAgents:
         WarBase:
             AngleOfView: 360.0
             DistanceOfView: 80.0
-            Cost: 12000
+            Cost: 2500
             MaxHealth: 12000
             BagSize: 1000000
             Armor: 10
             Hitbox: { Shape: Square, SideLength: 4.0 }
+        WarTurret:
+            AngleOfView: 180.0
+            DistanceOfView: 50.0
+            Cost: 1500
+            MaxHealth: 4000
+            BagSize: 10
+            TicksToReload: 30
+            Armor: 10
+            Hitbox: { Shape: Arrow, Radius: 3.0 }
         Wall:
             Cost: 500
             MaxHealth: 15000
@@ -55,7 +64,7 @@ WarAgents:
             MaxHealth: 3000
             BagSize: 4
             Speed: 1.0
-            MaxRepairsPerTick: 500
+            MaxRepairsPerTick: 20
             Armor: 0
             Hitbox: { Shape: Triangle, Radius: 2.0 }
     Soldier:
@@ -98,15 +107,6 @@ WarAgents:
             Speed: 1.0
             Armor: 0
             Hitbox: { Shape: Diamond, Radius: 2.0 }
-        WarTurret:
-            AngleOfView: 180.0
-            DistanceOfView: 50.0
-            Cost: 1500
-            MaxHealth: 4000
-            BagSize: 10
-            TicksToReload: 30
-            Armor: 10
-            Hitbox: { Shape: Arrow, Radius: 3.0 }
     Projectile:
         WarRocket:
             Speed: 3.0
