@@ -3,19 +3,15 @@ package edu.warbot.agents;
 import edu.warbot.agents.actions.MovableActionsMethods;
 import edu.warbot.brains.capacities.Movable;
 import edu.warbot.game.InGameTeam;
-import edu.warbot.tools.WarMathTools;
-import edu.warbot.tools.geometry.CartesianCoordinates;
-import edu.warbot.tools.geometry.PolarCoordinates;
 
-import java.util.List;
 import java.util.logging.Level;
 
 /**
  * Définition d'un agent Warbot de type projectile (ou explosif)
  */
 public abstract class WarProjectile extends WarAgent implements MovableActionsMethods, Movable {
-
-    private double speed;
+        
+	private double speed;
     private double explosionRadius;
     private int damage;
     private int autonomy;
@@ -45,65 +41,30 @@ public abstract class WarProjectile extends WarAgent implements MovableActionsMe
         super.doBeforeEachTick();
         currentAutonomy--;
         if (currentAutonomy < 0)
-            explode();
+            kill();
     }
 
     @Override
     public String move() {
         logger.log(Level.FINEST, this.toString() + " moving...");
-        if (!isBlocked()) {
+        if (!isBlocked()) { // Vérifie que le projectile ne sort pas de la map
             fd(getSpeed());
         } else {
-            explode();
+        	kill();
         }
         return ACTION_MOVE;
     }
 
-    protected void explode() {
-        if (isAlive()) {
-//			killAgent(this);
-            kill();
-            // On va infliger des dégâts à tous les agents dans le radius de l'explosion
-            List<WarAgent> touchedAgents = getTeam().getGame().getAllAgentsInRadiusOf(this, explosionRadius);
-            for (WarAgent agent : touchedAgents) {
-                if (agent instanceof AliveWarAgent) {
-                    ((AliveWarAgent) agent).damage(damage);
-                } else if (agent instanceof WarProjectile) {
-                    ((WarProjectile) agent).explode();
-                }
-            }
-        }
-    }
-
     @Override
     public void kill() {
-        getTeam().setWarAgentAsDying(this);
-    }
-
-    protected boolean isGoingToCrossAnOtherAgent() {
-        for (WarAgent a : getTeam().getGame().getAllAgentsInRadiusOf(this, getHitboxMaxRadius() + getSpeed())) {
-            if (a.getID() != sender.getID() && a.getID() != getID()) {
-                double currentStep = 0;
-                while (currentStep < getSpeed()) {
-                    if (isInCollisionWithAtPosition(
-                            WarMathTools.addTwoPoints(new CartesianCoordinates(getX(), getY()), new PolarCoordinates(currentStep, getHeading())),
-                            a)) {
-                        return true;
-                    }
-                    currentStep += 1.0;
-                }
-                
-                return isInCollisionWithAtPosition(
-                        WarMathTools.addTwoPoints(new CartesianCoordinates(getX(), getY()), new PolarCoordinates(getSpeed(), getHeading())),
-                        a);
-            }
-        }
-        return false;
+    	if (isAlive()) {
+    		getTeam().setWarAgentAsDying(this);
+    	}        
     }
 
     @Override
     public boolean isBlocked() {
-        return isGoingToBeOutOfMap() || isGoingToCrossAnOtherAgent();
+        return isGoingToBeOutOfMap();
     }
 
     public double getSpeed() {

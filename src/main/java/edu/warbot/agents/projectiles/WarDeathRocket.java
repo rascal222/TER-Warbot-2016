@@ -33,4 +33,18 @@ public class WarDeathRocket extends WarProjectile {
     public WarAgentType getType() {
         return WarAgentType.WarDeathRocket;
     }
+
+//	@Override
+//	protected void explode() {
+//        if (isAlive()) {
+//            kill();
+//            // On va infliger des dégâts à tous les agents dans le radius de l'explosion
+//            List<WarAgent> touchedAgents = getTeam().getGame().getAllAgentsInRadiusOf(this, getExplosionRadius());
+//            for (WarAgent agent : touchedAgents) {
+//                if (agent instanceof AliveWarAgent) {
+//                    ((AliveWarAgent) agent).damage(getDamage());
+//                }
+//            }
+//        }
+//    }
 }
