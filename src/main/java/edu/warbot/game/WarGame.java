@@ -4,6 +4,8 @@ import edu.warbot.agents.AliveWarAgent;
 import edu.warbot.agents.WarAgent;
 import edu.warbot.game.listeners.WarGameListener;
 import edu.warbot.game.modes.AbstractGameMode;
+import edu.warbot.game.modes.DuelGameMode;
+import edu.warbot.launcher.WarLauncher;
 import edu.warbot.maps.AbstractWarMap;
 
 import java.awt.*;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-public class WarGame {
+public abstract class WarGame {
 
     public static final Color[] TEAM_COLORS = {
             new Color(149, 149, 255), // Blue
@@ -36,6 +38,8 @@ public class WarGame {
     private AbstractWarMap _map;
     private WarGameSettings settings;
     private AbstractGameMode gameMode;
+
+	protected WarLauncher launcher;
 
     public WarGame(WarGameSettings settings) {
         this.settings = settings;
@@ -213,5 +217,27 @@ public class WarGame {
     private List<WarGameListener> getListeners() {
         return new ArrayList<>(listeners);
     }
+
+	public void launchAllAgents(WarLauncher launcher) {
+		if (settings.getSituationLoader() != null) {
+			 settings.getSituationLoader().launchAllAgentsFromSituation(launcher, this);
+		} else {
+			launchAllAgentsForThisGameMode();
+		}
+	}
+	
+	public void setLauncher(WarLauncher launcher) {
+		this.launcher = launcher;
+	}
+	
+	protected abstract void launchAllAgentsForThisGameMode();
+
+	public static WarGame createGameFromSettings(WarGameSettings settings) {
+		// TODO A Implémenter (appelé lors du click sur le bouton valider du GUI de création de la partie).
+		WarGame game = new DuelGameMode(settings, null);
+		return game;
+	}
+
+	
 
 }

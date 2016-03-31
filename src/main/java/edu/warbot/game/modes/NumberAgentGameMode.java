@@ -1,6 +1,7 @@
 package edu.warbot.game.modes;
 
 import edu.warbot.game.WarGame;
+import edu.warbot.game.WarGameSettings;
 import edu.warbot.game.modes.endCondition.NumberAgentEndCondition;
 import edu.warbot.game.modes.endCondition.WarNumberAgent;
 
@@ -9,8 +10,9 @@ import java.util.List;
 
 public class NumberAgentGameMode extends AbstractGameMode {
 
-    public NumberAgentGameMode(WarGame game, Object[] args) {
-        super(new NumberAgentEndCondition(game));
+    public NumberAgentGameMode(WarGameSettings settings, WarGame game, Object[] args) {
+        super(settings);
+        this.setEndCondition(new NumberAgentEndCondition(game));
 
         List<WarNumberAgent> agents = new ArrayList<WarNumberAgent>();
 
@@ -19,5 +21,11 @@ public class NumberAgentGameMode extends AbstractGameMode {
 
         ((NumberAgentEndCondition) this.getEndCondition()).setAgents(agents);
     }
+
+	@Override
+	protected void launchAllAgentsForThisGameMode() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
