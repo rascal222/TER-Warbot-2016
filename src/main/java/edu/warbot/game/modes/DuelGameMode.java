@@ -9,12 +9,13 @@ import edu.warbot.agents.WarAgent;
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.game.MotherNatureTeam;
+import edu.warbot.game.WarGame;
 import edu.warbot.game.WarGameSettings;
 import edu.warbot.game.modes.endCondition.DuelEndCondition;
 import edu.warbot.maps.AbstractWarMap;
 import edu.warbot.tools.geometry.WarCircle;
 
-public class DuelGameMode extends AbstractGameMode {
+public class DuelGameMode extends WarGame {
 
     public DuelGameMode(WarGameSettings settings, Object[] args) {
         super(settings);       
@@ -55,6 +56,13 @@ public class DuelGameMode extends AbstractGameMode {
 		    System.err.println("Erreur lors de l'instanciation des classes à partir des données XML");
 		    e.printStackTrace();
 		}
+	}
+	
+	@Override
+	protected void doAfterEachTickForThisGameMode() {
+		if (scheduler.getGVT() % this.getSettings().getFoodAppearanceRate() == 0) {
+			this.getMotherNatureTeam().createAndLaunchResource(this.getMap(), scheduler, WarAgentType.WarFood);
+        }
 	}
 
 }

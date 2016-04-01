@@ -184,7 +184,6 @@ public class WarMain implements WarGameListener {
         game = WarGame.createGameFromSettings(settings);
         WarLauncher launcher = new WarLauncher(game);
         launcher.executeLauncher();
-        game.setLauncher(launcher);
         game.addWarGameListener(this);
     }
 

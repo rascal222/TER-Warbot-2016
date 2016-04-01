@@ -1,7 +1,6 @@
 package edu.warbot.launcher;
 
 import edu.warbot.agents.WarAgent;
-import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.game.WarGame;
 import edu.warbot.game.listeners.WarGameListener;
@@ -27,6 +26,7 @@ public class WarScheduler extends TKScheduler implements WarGameListener {
 
     public WarScheduler(WarGame warGame) {
         this.game = warGame;
+        warGame.setScheduler(this);
     }
 
     @Override
@@ -60,13 +60,13 @@ public class WarScheduler extends TKScheduler implements WarGameListener {
 
             setGVT(getGVT() + 1.0D);
 
-            // Apparition de WarResource
+            /*// Apparition de WarResource
             //TODO devrait etre dans l'environnement
             if (getGVT() % game.getSettings().getFoodAppearanceRate() == 0) {
                 game.getMotherNatureTeam().createAndLaunchResource(game.getMap(), this, WarAgentType.WarFood);
             }
 
-            //TODO La partie est un agent (?)
+            //TODO La partie est un agent (?)*/
             game.doAfterEachTick();
         }
     }

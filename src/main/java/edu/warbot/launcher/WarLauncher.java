@@ -21,6 +21,7 @@ public class WarLauncher extends TKLauncher {
     public WarLauncher(WarGame warGame) {
         super();
         this.warGame = warGame;
+        warGame.setLauncher(this);
     }
 
     @Override
