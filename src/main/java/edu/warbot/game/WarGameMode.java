@@ -1,12 +1,15 @@
 package edu.warbot.game;
 
 import edu.warbot.game.modes.DuelGameMode;
+import edu.warbot.game.modes.RelicGatheringGameMode;
 import edu.warbot.game.modes.ResourcesRunGameMode;
 import edu.warbot.game.modes.TimerGameMode;
 
 public enum WarGameMode {
 
     Duel(DuelGameMode.class),
+    
+    RelicGathering(RelicGatheringGameMode.class),
 
     ResourcesRun(ResourcesRunGameMode.class),
 

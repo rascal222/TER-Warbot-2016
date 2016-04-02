@@ -34,20 +34,20 @@ public class DuelGameMode extends WarGame {
 		    int compteur;
 		    for (InGameTeam t : playerInGameTeams) {
 		        // On sélectionne aléatoirement la position de l'équipe depuis les différentes possibilités
-		    WarCircle selectedPosition = teamsPositions.get(teamCount).get(new Random().nextInt(teamsPositions.get(teamCount).size()));
-		    for (WarAgentType agentType : WarAgentType.values()) {
-		        for (compteur = 0; compteur < this.getSettings().getNbAgentOfType(agentType); compteur++) {
-		            try {
-		                WarAgent agent = t.instantiateNewControllableWarAgent(agentType.toString());
-		                t.getTeam().associateBrain((ControllableWarAgent) agent);
-		                launcher.launchAgent(agent);
-		                agent.setRandomPositionInCircle(selectedPosition);
-		            } catch (InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
-		                System.err.println("Erreur lors de l'instanciation de l'agent. Type non reconnu : " + agentType);
-		                e.printStackTrace();
-		            }
+			    WarCircle selectedPosition = teamsPositions.get(teamCount).get(new Random().nextInt(teamsPositions.get(teamCount).size()));
+			    for (WarAgentType agentType : WarAgentType.values()) {
+			    	for (compteur = 0; compteur < this.getSettings().getNbAgentOfType(agentType); compteur++) {
+			    		try {
+			                WarAgent agent = t.instantiateNewControllableWarAgent(agentType.toString());
+			                t.getTeam().associateBrain((ControllableWarAgent) agent);
+			                launcher.launchAgent(agent);
+			                agent.setRandomPositionInCircle(selectedPosition);
+			    		} catch (InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
+			    			System.err.println("Erreur lors de l'instanciation de l'agent. Type non reconnu : " + agentType);
+			    			e.printStackTrace();
+			    		}
 		            // On créé autant de WarFood que d'agent au départ
-		                motherNatureTeam.createAndLaunchResource(this.getMap(), launcher, WarAgentType.WarFood);
+		            motherNatureTeam.createAndLaunchResource(this.getMap(), launcher, WarAgentType.WarFood);
 		            }
 		        }
 		        teamCount++;

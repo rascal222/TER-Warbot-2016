@@ -61,7 +61,7 @@ public class WarGameSettings {
 
     public WarGameMode getGameMode() {
         //return _gameMode;
-    	return WarGameMode.Duel;
+    	return WarGameMode.RelicGathering;
     }
 
     public void setGameMode(WarGameMode gameMode) {

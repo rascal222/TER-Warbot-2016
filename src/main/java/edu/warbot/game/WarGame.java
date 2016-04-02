@@ -217,7 +217,7 @@ public abstract class WarGame {
 
 	public void launchAllAgents(WarLauncher launcher) {
 		if (settings.getSituationLoader() != null) {
-			 settings.getSituationLoader().launchAllAgentsFromSituation(launcher, this);
+			settings.getSituationLoader().launchAllAgentsFromSituation(launcher, this);
 		} else {
 			launchAllAgentsForThisGameMode();
 		}
