@@ -24,7 +24,6 @@ public abstract class WarBaseBrainController extends WarBaseBrain {
 
     @Override
     public String action() {
-
         if ((getHealth() < WarBase.MAX_HEALTH) && (!isBagEmpty())) {
             return WarBase.ACTION_EAT;
         }
