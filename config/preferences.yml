@@ -5,6 +5,7 @@ teamsSourcesFolders:
 #    PythonLevel0: "teams/level0"
     Time To Explode: "teams/timetoexplode"
 #    FSM: "teams/fsm"
+    Debug team: "teams/debug_team"
 
 # Number of agents of each type to deploy at game start
 NbAgentsAtStart:

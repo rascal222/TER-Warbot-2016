@@ -25,5 +25,9 @@ public abstract class WarKamikazeBrain extends WarBrain implements AgressiveActi
     public final String beginReloadWeapon() {
         return ACTION_RELOAD;
     }
-
+    
+    @Override
+    public final String move() {
+        return ACTION_MOVE;
+    }
 }
