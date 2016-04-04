@@ -3,6 +3,7 @@ package edu.warbot.game;
 import edu.warbot.game.modes.DuelGameMode;
 import edu.warbot.game.modes.ResourcesRunGameMode;
 import edu.warbot.game.modes.TimerGameMode;
+import edu.warbot.game.modes.NumberAgentGameMode;
 
 public enum WarGameMode {
 
@@ -12,7 +13,7 @@ public enum WarGameMode {
 
     TimerRun(TimerGameMode.class),
 
-    NumberAgentGameMode(edu.warbot.game.modes.NumberAgentGameMode.class);
+    NumberAgentGameMode(NumberAgentGameMode.class);
 
     private Class<? extends WarGame> gameModeClass;
 

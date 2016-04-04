@@ -60,8 +60,7 @@ public class WarGameSettings {
     }
 
     public WarGameMode getGameMode() {
-        //return _gameMode;
-    	return WarGameMode.Duel;
+        return _gameMode;
     }
 
     public void setGameMode(WarGameMode gameMode) {
