@@ -61,7 +61,7 @@ public class WarGameSettings {
 
     public WarGameMode getGameMode() {
         //return _gameMode;
-    	return WarGameMode.RelicGathering;
+    	return WarGameMode.RessourcesAndConstruction;
     }
 
     public void setGameMode(WarGameMode gameMode) {
