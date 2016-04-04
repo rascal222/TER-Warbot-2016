@@ -3,10 +3,13 @@ package edu.warbot.game;
 import edu.warbot.game.modes.DuelGameMode;
 import edu.warbot.game.modes.ResourcesRunGameMode;
 import edu.warbot.game.modes.TimerGameMode;
+import edu.warbot.game.modes.RessourcesAndConstructionMode;
 
 public enum WarGameMode {
 
     Duel(DuelGameMode.class),
+    
+    RessourcesAndConstruction(RessourcesAndConstructionMode.class),
 
     ResourcesRun(ResourcesRunGameMode.class),
 
