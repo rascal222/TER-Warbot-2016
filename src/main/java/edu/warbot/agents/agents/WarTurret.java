@@ -7,13 +7,14 @@ import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.agents.projectiles.WarRocket;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Agressive;
+import edu.warbot.brains.capacities.Building;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.launcher.WarGameConfig;
 
 import java.util.Map;
 import java.util.logging.Level;
 
-public class WarTurret extends ControllableWarAgent implements AgressiveActionsMethods, Agressive {
+public class WarTurret extends ControllableWarAgent implements AgressiveActionsMethods, Agressive, Building {
 
     public static final double ANGLE_OF_VIEW;
     public static final double DISTANCE_OF_VIEW;
@@ -45,7 +46,20 @@ public class WarTurret extends ControllableWarAgent implements AgressiveActionsM
         _reloaded = false;
         _reloading = true;
     }
+    
+    @Override
+	public int getRepairsAmountWithCost(int cost)
+	{
+		return ((Double) (REPAIRS_MULTIPLIER * cost)).intValue();
+		
+	}
 
+	@Override
+	public int getCostToRepair(int repairsAmout)
+	{
+		return ((Double) (repairsAmout / REPAIRS_MULTIPLIER)).intValue();
+	}
+    
     @Override
     protected void doBeforeEachTick() {
         _tickLeftBeforeReloaded--;

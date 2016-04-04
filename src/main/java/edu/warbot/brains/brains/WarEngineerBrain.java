@@ -1,35 +1,21 @@
 package edu.warbot.brains.brains;
 
 import edu.warbot.agents.actions.BuilderActionsMethods;
-import edu.warbot.agents.actions.CreatorActionsMethods;
 import edu.warbot.agents.actions.MovableActionsMethods;
+import edu.warbot.agents.actions.PickerActionsMethods;
 import edu.warbot.agents.actions.constants.BuilderActions;
-import edu.warbot.agents.actions.constants.CreatorActions;
 import edu.warbot.agents.actions.constants.MovableActions;
-import edu.warbot.agents.enums.WarAgentType;
+import edu.warbot.agents.actions.constants.PickerActions;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Builder;
-import edu.warbot.brains.capacities.Creator;
 import edu.warbot.brains.capacities.Movable;
+import edu.warbot.brains.capacities.Picker;
 
-public abstract class WarEngineerBrain extends WarBrain implements CreatorActionsMethods, CreatorActions, Creator,
-        BuilderActionsMethods, BuilderActions, Builder,
-        MovableActionsMethods, MovableActions, Movable {
-
-    @Override
-    public String action() {
-        return ACTION_IDLE;
-    }
-
-    @Override
-    public String create() {
-        return ACTION_CREATE;
-    }
-
-    public String create(WarAgentType warAgentType) {
-        setNextAgentToCreate(warAgentType);
-        return ACTION_CREATE;
-    }
+public abstract class WarEngineerBrain extends WarBrain implements 
+		BuilderActionsMethods, BuilderActions, Builder,
+        MovableActionsMethods, MovableActions, Movable,
+        PickerActionsMethods, PickerActions, Picker
+{
 
     @Override
     public final String move() {
@@ -44,6 +30,11 @@ public abstract class WarEngineerBrain extends WarBrain implements CreatorAction
     @Override
     public final String repair() {
         return ACTION_REPAIR;
+    }
+    
+    @Override
+    public final String take() {
+        return ACTION_TAKE;
     }
 
 }

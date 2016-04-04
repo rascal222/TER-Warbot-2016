@@ -1,6 +1,6 @@
-package teams.timetoexplode;
+package teams.test_team;
 
-import edu.warbot.agents.agents.WarRocketLauncher;
+import edu.warbot.agents.agents.WarHeavy;
 import edu.warbot.agents.percepts.WarAgentPercept;
 import edu.warbot.agents.resources.WarFood;
 import edu.warbot.brains.brains.WarHeavyBrain;
@@ -27,11 +27,11 @@ public abstract class WarHeavyBrainController extends WarHeavyBrain {
     @Override
     public String action() {
 
-        if (_baseId == 0) {
+    	if (_baseId == 0) {
             broadcastMessageToAll("Your ID please", "");
         }
 
-        if (getHealth() <= (WarRocketLauncher.MAX_HEALTH / 5))
+        if (getHealth() <= (WarHeavy.MAX_HEALTH / 5))
             return eat();
 
         List<WarAgentPercept> percepts = getPercepts();
@@ -56,7 +56,7 @@ public abstract class WarHeavyBrainController extends WarHeavyBrain {
                     }
                     break;
                 default:
-                	if (isEnemy(p)) {
+                    if (isEnemy(p)) {
                         setHeading(p.getAngle());
                         if (isReloaded()) {
                             return fire();

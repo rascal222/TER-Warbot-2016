@@ -1,9 +1,11 @@
 package edu.warbot.game;
 
+import edu.warbot.agents.AliveWarAgent;
 import edu.warbot.agents.WarAgent;
-import edu.warbot.agents.WarBuilding;
 import edu.warbot.game.listeners.WarGameListener;
-import edu.warbot.game.modes.AbstractGameMode;
+import edu.warbot.game.modes.endCondition.AbstractEndCondition;
+import edu.warbot.launcher.WarLauncher;
+import edu.warbot.launcher.WarScheduler;
 import edu.warbot.maps.AbstractWarMap;
 
 import java.awt.*;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-public class WarGame {
+public abstract class WarGame {
 
     public static final Color[] TEAM_COLORS = {
             new Color(149, 149, 255), // Blue
@@ -35,7 +37,11 @@ public class WarGame {
     private List<InGameTeam> loserInGameTeams;
     private AbstractWarMap _map;
     private WarGameSettings settings;
-    private AbstractGameMode gameMode;
+    //private AbstractGameMode gameMode;
+    private AbstractEndCondition endCondition;
+
+	protected WarLauncher launcher;
+	protected WarScheduler scheduler;
 
     public WarGame(WarGameSettings settings) {
         this.settings = settings;
@@ -50,11 +56,6 @@ public class WarGame {
             colorCounter++;
         }
         _map = settings.getSelectedMap();
-        try {
-            gameMode = settings.getGameMode().getGameModeClass().getConstructor(WarGame.class, Object[].class).newInstance(this, settings.getGameModeArguments());
-        } catch (InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
-            e.printStackTrace();
-        }
     }
 
     public void setLogLevel(Level l) {
@@ -125,8 +126,8 @@ public class WarGame {
         return toReturn;
     }
 
-    public ArrayList<WarBuilding> getBuildingsInRadiusOf(WarAgent referenceAgent, double radius) {
-        ArrayList<WarBuilding> toReturn = new ArrayList<>();
+    public ArrayList<AliveWarAgent> getBuildingsInRadiusOf(WarAgent referenceAgent, double radius) {
+        ArrayList<AliveWarAgent> toReturn = new ArrayList<>();
         for (InGameTeam t : getAllTeams()) {
             toReturn.addAll(t.getBuildingsInRadiusOf(referenceAgent, radius));
         }
@@ -157,7 +158,9 @@ public class WarGame {
         for (InGameTeam t : playerInGameTeams)
             t.doAfterEachTick();
         _motherNature.doAfterEachTick();
-        gameMode.getEndCondition().doAfterEachTick();
+        this.getEndCondition().doAfterEachTick();
+        
+        doAfterEachTickForThisGameMode();
 
         for (InGameTeam t : loserInGameTeams) {
             if (!t.hasLost()) {
@@ -166,11 +169,13 @@ public class WarGame {
             }
         }
 
-        if (gameMode.getEndCondition().isGameEnded())
+        if (this.getEndCondition().isGameEnded())
             setGameOver();
     }
 
-    public void setGameOver() {
+    protected abstract void doAfterEachTickForThisGameMode();
+
+	public void setGameOver() {
         for (WarGameListener listener : getListeners())
             listener.onGameOver();
     }
@@ -198,10 +203,6 @@ public class WarGame {
         return FPS;
     }
 
-    public AbstractGameMode getGameMode() {
-        return gameMode;
-    }
-
     public void addWarGameListener(WarGameListener warGameListener) {
         listeners.add(warGameListener);
     }
@@ -214,4 +215,39 @@ public class WarGame {
         return new ArrayList<>(listeners);
     }
 
+	public void launchAllAgents(WarLauncher launcher) {
+		if (settings.getSituationLoader() != null) {
+			settings.getSituationLoader().launchAllAgentsFromSituation(launcher, this);
+		} else {
+			launchAllAgentsForThisGameMode();
+		}
+	}
+	
+	public void setLauncher(WarLauncher launcher) {
+		this.launcher = launcher;
+	}
+	
+	protected abstract void launchAllAgentsForThisGameMode();
+	
+	public AbstractEndCondition getEndCondition() {
+        return endCondition;
+    }
+    
+    protected void setEndCondition(AbstractEndCondition endCondition) {
+    	this.endCondition = endCondition;
+    }
+    
+    public static WarGame createGameFromSettings(WarGameSettings settings) {
+    	WarGame game = null;
+    	try {
+    		game = settings.getGameMode().getGameModeClass().getConstructor(WarGameSettings.class, Object[].class).newInstance(settings, settings.getGameModeArguments());
+        } catch (InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+		return game;
+	}
+
+	public void setScheduler(WarScheduler scheduler) {
+		this.scheduler = scheduler;	
+	}
 }

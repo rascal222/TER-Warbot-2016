@@ -1,21 +1,21 @@
-package teams.timetoexplode;
+package teams.test_team;
 
 import edu.warbot.agents.agents.WarRocketLauncher;
 import edu.warbot.agents.percepts.WarAgentPercept;
 import edu.warbot.agents.resources.WarFood;
-import edu.warbot.brains.brains.WarHeavyBrain;
+import edu.warbot.brains.brains.WarRocketLauncherBrain;
 import edu.warbot.communications.WarMessage;
 
 import java.util.List;
 
-public abstract class WarHeavyBrainController extends WarHeavyBrain {
+public abstract class WarRocketLauncherBrainController extends WarRocketLauncherBrain {
 
     private boolean _baseFound;
     private boolean _inDanger;
     private int _baseId;
     private Double _basePosition;
 
-    public WarHeavyBrainController() {
+    public WarRocketLauncherBrainController() {
         super();
 
         _baseFound = false;
@@ -56,7 +56,7 @@ public abstract class WarHeavyBrainController extends WarHeavyBrain {
                     }
                     break;
                 default:
-                	if (isEnemy(p)) {
+                    if (isEnemy(p)) {
                         setHeading(p.getAngle());
                         if (isReloaded()) {
                             return fire();

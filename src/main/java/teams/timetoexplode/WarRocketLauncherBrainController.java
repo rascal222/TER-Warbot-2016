@@ -1,6 +1,5 @@
 package teams.timetoexplode;
 
-import edu.warbot.agents.agents.WarExplorer;
 import edu.warbot.agents.agents.WarRocketLauncher;
 import edu.warbot.agents.percepts.WarAgentPercept;
 import edu.warbot.agents.resources.WarFood;
@@ -41,7 +40,7 @@ public abstract class WarRocketLauncherBrainController extends WarRocketLauncher
                 case WarFood:
                     if (p.getDistance() < WarFood.MAX_DISTANCE_TAKE && !isBagFull()) {
                         setHeading(p.getAngle());
-                        return WarExplorer.ACTION_TAKE;
+                        return take();
                     } else if (!isBagFull()) {
                         setHeading(p.getAngle());
                     }
@@ -56,16 +55,14 @@ public abstract class WarRocketLauncherBrainController extends WarRocketLauncher
                             return WarRocketLauncher.ACTION_RELOAD;
                     }
                     break;
-                case WarRocketLauncher:
-                    if (isEnemy(p)) {
+                default:
+                	if (isEnemy(p)) {
                         setHeading(p.getAngle());
                         if (isReloaded()) {
                             return WarRocketLauncher.ACTION_FIRE;
                         } else
                             return WarRocketLauncher.ACTION_RELOAD;
                     }
-                    break;
-                default:
                     break;
             }
         }

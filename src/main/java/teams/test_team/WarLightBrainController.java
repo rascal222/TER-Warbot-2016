@@ -1,21 +1,22 @@
-package teams.timetoexplode;
+package teams.test_team;
 
+import edu.warbot.agents.agents.WarExplorer;
 import edu.warbot.agents.agents.WarRocketLauncher;
 import edu.warbot.agents.percepts.WarAgentPercept;
 import edu.warbot.agents.resources.WarFood;
-import edu.warbot.brains.brains.WarHeavyBrain;
+import edu.warbot.brains.brains.WarLightBrain;
 import edu.warbot.communications.WarMessage;
 
 import java.util.List;
 
-public abstract class WarHeavyBrainController extends WarHeavyBrain {
+public abstract class WarLightBrainController extends WarLightBrain {
 
     private boolean _baseFound;
     private boolean _inDanger;
     private int _baseId;
     private Double _basePosition;
 
-    public WarHeavyBrainController() {
+    public WarLightBrainController() {
         super();
 
         _baseFound = false;
@@ -32,7 +33,7 @@ public abstract class WarHeavyBrainController extends WarHeavyBrain {
         }
 
         if (getHealth() <= (WarRocketLauncher.MAX_HEALTH / 5))
-            return eat();
+            return WarRocketLauncher.ACTION_EAT;
 
         List<WarAgentPercept> percepts = getPercepts();
         for (WarAgentPercept p : percepts) {
@@ -40,7 +41,7 @@ public abstract class WarHeavyBrainController extends WarHeavyBrain {
                 case WarFood:
                     if (p.getDistance() < WarFood.MAX_DISTANCE_TAKE && !isBagFull()) {
                         setHeading(p.getAngle());
-                        return take();
+                        return WarExplorer.ACTION_TAKE;
                     } else if (!isBagFull()) {
                         setHeading(p.getAngle());
                     }
@@ -50,19 +51,21 @@ public abstract class WarHeavyBrainController extends WarHeavyBrain {
                         _baseFound = true;
                         setHeading(p.getAngle());
                         if (isReloaded()) {
-                            return fire();
+                            return WarRocketLauncher.ACTION_FIRE;
                         } else
-                            return beginReloadWeapon();
+                            return WarRocketLauncher.ACTION_RELOAD;
+                    }
+                    break;
+                case WarRocketLauncher:
+                    if (isEnemy(p)) {
+                        setHeading(p.getAngle());
+                        if (isReloaded()) {
+                            return WarRocketLauncher.ACTION_FIRE;
+                        } else
+                            return WarRocketLauncher.ACTION_RELOAD;
                     }
                     break;
                 default:
-                	if (isEnemy(p)) {
-                        setHeading(p.getAngle());
-                        if (isReloaded()) {
-                            return fire();
-                        } else
-                            return beginReloadWeapon();
-                    }
                     break;
             }
         }
@@ -92,7 +95,7 @@ public abstract class WarHeavyBrainController extends WarHeavyBrain {
 
         if (isBlocked())
             setRandomHeading();
-        return move();
+        return WarRocketLauncher.ACTION_MOVE;
     }
 
 }

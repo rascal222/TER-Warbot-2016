@@ -41,6 +41,8 @@ public class WarLauncherInterface extends JFrame {
     private JComboBox<String> cbLogLevel;
 
     private JCheckBox cbEnhancedGraphismEnabled;
+    
+    private JTabbedPane tabbedPaneMillieu;
 
     private WarMain warMain;
     private WarGameSettings settings;
@@ -149,11 +151,17 @@ public class WarLauncherInterface extends JFrame {
         mainPanel.add(panelBas, BorderLayout.SOUTH);
 
 		/* *** Centre : Choix du mode et sélection des équipes *** */
-        JTabbedPane tabbedPaneMillieu = new JTabbedPane();
+        tabbedPaneMillieu = new JTabbedPane();
         duelTeamsPanel = createPanelModeClassic();
-        tabbedPaneMillieu.add(duelTeamsPanel, "Mode Duel");
+        /*tabbedPaneMillieu.add(duelTeamsPanel, "Mode Duel");
         tabbedPaneMillieu.add(creerPanelModeMulti(), "Mode Tournoi");
-
+        */
+        
+        for(WarGameMode wgm : WarGameMode.values())
+        {
+            tabbedPaneMillieu.add(wgm.toString(), createPanelModeClassic());
+        }
+        
         mainPanel.add(tabbedPaneMillieu, BorderLayout.CENTER);
 
         setVisible(true);
@@ -172,8 +180,9 @@ public class WarLauncherInterface extends JFrame {
         }
         settings.setFoodAppearanceRate(foodCreationRates.get(WarAgentType.WarFood).getSelectedValue());
 
-        settings.setGameMode(WarGameMode.Duel); // TODO varier selon le choix dans l'interface
+        settings.setGameMode(WarGameMode.valueOf(tabbedPaneMillieu.getTitleAt(tabbedPaneMillieu.getSelectedIndex()))); // TODO varier selon le choix dans l'interface
 
+        System.out.println(WarGameMode.valueOf(tabbedPaneMillieu.getTitleAt(tabbedPaneMillieu.getSelectedIndex())));
         settings.setEnabledEnhancedGraphism(cbEnhancedGraphismEnabled.isSelected());
 
         if (settings.getSituationLoader() == null) {
@@ -222,6 +231,7 @@ public class WarLauncherInterface extends JFrame {
     }
 
     public void reloadTeams(boolean dialog) {
+    	/*
         duelTeamsPanel.removeAll();
         duelTeamsPanel.setVisible(true);
         warMain.reloadTeams(dialog);
@@ -230,6 +240,7 @@ public class WarLauncherInterface extends JFrame {
         pnlSelectionTeam2 = new TeamSelectionPanel("Choix de l'équipe 2", warMain.getAvailableTeams());
         duelTeamsPanel.add(new JScrollPane(pnlSelectionTeam2));
         duelTeamsPanel.repaint();
+        */
     }
 
     public JCheckBox getEnableEnhancedGraphism() {

@@ -1,20 +1,20 @@
 package edu.warbot.agents.agents;
 
+import edu.warbot.agents.AliveWarAgent;
 import edu.warbot.agents.MovableWarAgent;
 import edu.warbot.agents.WarAgent;
-import edu.warbot.agents.WarBuilding;
 import edu.warbot.agents.actions.BuilderActionsMethods;
-import edu.warbot.agents.actions.CreatorActionsMethods;
+import edu.warbot.agents.enums.WarAgentCategory;
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Builder;
-import edu.warbot.brains.capacities.Creator;
+import edu.warbot.brains.capacities.Building;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.launcher.WarGameConfig;
 
 import java.util.Map;
 
-public class WarEngineer extends MovableWarAgent implements CreatorActionsMethods, Creator, BuilderActionsMethods, Builder {
+public class WarEngineer extends MovableWarAgent implements BuilderActionsMethods, Builder {
 
     public static final double ANGLE_OF_VIEW;
     public static final double DISTANCE_OF_VIEW;
@@ -37,20 +37,12 @@ public class WarEngineer extends MovableWarAgent implements CreatorActionsMethod
         ARMOR = (int) data.get(WarGameConfig.AGENT_CONFIG_ARMOR);
     }
 
-    private WarAgentType nextAgentToCreate;
     private WarAgentType nextBuildingToBuild;
     private int idNextBuildingToRepair;
 
     public WarEngineer(InGameTeam inGameTeam, WarBrain brain) {
         super(ACTION_IDLE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarEngineer), brain, DISTANCE_OF_VIEW, ANGLE_OF_VIEW, COST, MAX_HEALTH, BAG_SIZE, SPEED, ARMOR);
-        nextAgentToCreate = WarAgentType.WarTurret;
         nextBuildingToBuild = WarAgentType.Wall;
-    }
-
-    @Override
-    public String create() {
-        getTeam().createUnit(this, nextAgentToCreate);
-        return getBrain().action();
     }
 
     @Override
@@ -61,31 +53,15 @@ public class WarEngineer extends MovableWarAgent implements CreatorActionsMethod
 
     @Override
     public String repair() {
-        if (getHealth() > WarBuilding.getCostToRepair(MAX_REPAIRS_PER_TICK)) {
-            WarAgent agentToRepair = getTeam().getAgentWithID(idNextBuildingToRepair);
-            if (agentToRepair != null) {
-                if (agentToRepair instanceof WarBuilding) {
-                    ((WarBuilding) agentToRepair).heal(MAX_REPAIRS_PER_TICK);
-                    damage(WarBuilding.getCostToRepair(MAX_REPAIRS_PER_TICK));
-                }
+        WarAgent agentToRepair = getTeam().getAgentWithID(idNextBuildingToRepair);
+        if (agentToRepair != null) {
+            if ( (agentToRepair instanceof Building) && (getHealth() > ((Building) agentToRepair).getCostToRepair(MAX_REPAIRS_PER_TICK)) )
+            {
+                ((AliveWarAgent) agentToRepair).heal(MAX_REPAIRS_PER_TICK);
+                damage(((Building) agentToRepair).getCostToRepair(MAX_REPAIRS_PER_TICK));
             }
         }
         return getBrain().action();
-    }
-
-    @Override
-    public WarAgentType getNextAgentToCreate() {
-        return nextAgentToCreate;
-    }
-
-    @Override
-    public void setNextAgentToCreate(WarAgentType nextAgentToCreate) {
-        this.nextAgentToCreate = nextAgentToCreate;
-    }
-
-    @Override
-    public boolean isAbleToCreate(WarAgentType agent) {
-        return agent == WarAgentType.WarTurret;
     }
 
     @Override
@@ -100,7 +76,7 @@ public class WarEngineer extends MovableWarAgent implements CreatorActionsMethod
 
     @Override
     public boolean isAbleToBuild(WarAgentType building) {
-        return building == WarAgentType.Wall;
+        return building.getCategory() == WarAgentCategory.Building;
     }
 
     @Override

@@ -3,7 +3,6 @@ package edu.warbot.agents.teams;
 import edu.warbot.agents.AliveWarAgent;
 import edu.warbot.agents.ControllableWarAgent;
 import edu.warbot.agents.WarAgent;
-import edu.warbot.agents.WarBuilding;
 import edu.warbot.agents.agents.WarBase;
 import edu.warbot.agents.buildings.Wall;
 import edu.warbot.agents.enums.WarAgentCategory;
@@ -11,6 +10,7 @@ import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.brains.GhostBrain;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Builder;
+import edu.warbot.brains.capacities.Building;
 import edu.warbot.brains.capacities.Creator;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.tools.WarMathTools;
@@ -63,9 +63,9 @@ public class JavaTeam extends Team {
     }
 
     @Override
-    public WarBuilding instantiateBuilding(InGameTeam inGameTeam, WarAgentType buildingName) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+    public AliveWarAgent instantiateBuilding(InGameTeam inGameTeam, WarAgentType buildingName) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
         String buildingToCreateClassName = Wall.class.getPackage().getName() + "." + buildingName;
-        WarBuilding building = (WarBuilding) Class.forName(buildingToCreateClassName)
+        AliveWarAgent building = (AliveWarAgent) Class.forName(buildingToCreateClassName)
                 .getConstructor(InGameTeam.class)
                 .newInstance(inGameTeam);
         return building;
@@ -116,12 +116,16 @@ public class JavaTeam extends Team {
         try {
             logger.log(Level.FINEST, builderAgent.toString() + " building " + buildingTypeToBuild);
             if (builderAgent.isAbleToBuild(buildingTypeToBuild)) {
-                WarBuilding building = instantiateBuilding(inGameTeam, buildingTypeToBuild);
+            	AliveWarAgent building;
+            	if(buildingTypeToBuild.isControllable())
+            		building = instantiateControllableWarAgent(inGameTeam, buildingTypeToBuild);
+            	else
+            		building = instantiateBuilding(inGameTeam, buildingTypeToBuild);
                 if (building.getCost() < ((AliveWarAgent) builderAgent).getHealth()) {
                     ((AliveWarAgent) builderAgent).launchAgent(building);
 
                     // Position
-                    CartesianCoordinates newBuildingPosition = WarMathTools.addTwoPoints(((AliveWarAgent) builderAgent).getPosition(), new PolarCoordinates(WarBuilding.MAX_DISTANCE_BUILD, ((AliveWarAgent) builderAgent).getHeading()));
+                    CartesianCoordinates newBuildingPosition = WarMathTools.addTwoPoints(((AliveWarAgent) builderAgent).getPosition(), new PolarCoordinates(Building.MAX_DISTANCE_BUILD, ((AliveWarAgent) builderAgent).getHeading()));
                     for (WarAgent agent : inGameTeam.getAllAgentsInRadiusOf(building, building.getHitboxMaxRadius())) {
                         agent.moveOutOfCollision();
                     }
