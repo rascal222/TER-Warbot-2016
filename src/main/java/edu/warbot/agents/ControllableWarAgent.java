@@ -56,6 +56,8 @@ public abstract class ControllableWarAgent extends AliveWarAgent implements Cont
         _brain = brain;
         if (_brain instanceof AgentBrainImplementer)
             ((AgentBrainImplementer) _brain).setAgent(this);
+        
+        thisTickMessages = new ArrayList<>();
     }
 
     @Override
@@ -69,8 +71,21 @@ public abstract class ControllableWarAgent extends AliveWarAgent implements Cont
     @Override
     protected void doBeforeEachTick() {
         super.doBeforeEachTick();
-        _perceptsGetter.setPerceptsOutdated(); // On indique au PerceptGetter qu'un nouveau tick est passé
-        thisTickMessages = null;
+        
+        // On indique au PerceptGetter qu'un nouveau tick est passé
+        _perceptsGetter.setPerceptsOutdated();
+        
+        // On met à jour la "boite aux lettres"
+        thisTickMessages = new ArrayList<>();
+        Message msg;
+        while ((msg = nextMessage()) != null) {
+            if (msg instanceof WarKernelMessage) {
+                WarMessage warMsg = new WarMessage((WarKernelMessage) msg, this);
+                logger.log(Level.FINER, this.toString() + " received message from " + warMsg.getSenderID());
+                logger.log(Level.FINEST, "This message is : " + warMsg.toString());
+                thisTickMessages.add(warMsg);
+            }
+        }
     }
 
     @Override
@@ -176,7 +191,7 @@ public abstract class ControllableWarAgent extends AliveWarAgent implements Cont
     public void broadcastMessageToAll(String message, String... content) {
         logger.finer(this.toString() + " send message to all his team.");
         logger.finest("This message is : [" + message + "] " + content);
-        getTeam().sendMessageToAllMembers(this, message, content);
+        broadcastMessage(getTeamName(), InGameTeam.DEFAULT_GROUP_NAME, "broadcast", new WarKernelMessage(this, message, content));
     }
 
     @Override
@@ -187,19 +202,8 @@ public abstract class ControllableWarAgent extends AliveWarAgent implements Cont
     }
 
     @Override
-    public List<WarMessage> getMessages() {
-        if (thisTickMessages == null) {
-            thisTickMessages = new ArrayList<>();
-            Message msg;
-            while ((msg = nextMessage()) != null) {
-                if (msg instanceof WarKernelMessage) {
-                    WarMessage warMsg = new WarMessage((WarKernelMessage) msg, this);
-                    logger.log(Level.FINER, this.toString() + " received message from " + warMsg.getSenderID());
-                    logger.log(Level.FINEST, "This message is : " + warMsg.toString());
-                    thisTickMessages.add(warMsg);
-                }
-            }
-        }
+    public List<WarMessage> getMessages()
+    {    
         return thisTickMessages;
     }
 

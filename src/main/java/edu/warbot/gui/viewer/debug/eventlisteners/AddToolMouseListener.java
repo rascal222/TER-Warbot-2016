@@ -11,6 +11,11 @@ import edu.warbot.tools.geometry.CartesianCoordinates;
 import edu.warbot.tools.geometry.PolarCoordinates;
 
 import javax.swing.*;
+
+import madkit.action.SchedulingAction;
+import madkit.message.SchedulingMessage;
+import turtlekit.agr.TKOrganization;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -49,6 +54,8 @@ public class AddToolMouseListener implements MouseListener, MouseMotionListener 
             _debugToolBar.getViewer().setMapExplorationEventsEnabled(false);
             if (_toolsPnl.getSelectedWarAgentTypeToCreate() != null) {
                 CartesianCoordinates mouseClickPosition = _debugToolBar.getViewer().convertClickPositionToMapPosition(e.getX(), e.getY());
+                _debugToolBar.getViewer().sendMessage(_debugToolBar.getViewer().getCommunity(), TKOrganization.ENGINE_GROUP, TKOrganization.SCHEDULER_ROLE,
+                        new SchedulingMessage(SchedulingAction.PAUSE));
                 try {
                     if (_toolsPnl.getSelectedWarAgentTypeToCreate().getCategory() == WarAgentCategory.Resource) {
                         currentCreatedAgent = game.getMotherNatureTeam().instantiateNewWarResource(_toolsPnl.getSelectedWarAgentTypeToCreate().toString());
@@ -77,7 +84,8 @@ public class AddToolMouseListener implements MouseListener, MouseMotionListener 
                     System.err.println("Erreur lors de l'instanciation de l'agent " + _toolsPnl.getSelectedWarAgentTypeToCreate().toString());
                     ex.printStackTrace();
                 }
-
+                _debugToolBar.getViewer().sendMessage(_debugToolBar.getViewer().getCommunity(), TKOrganization.ENGINE_GROUP, TKOrganization.SCHEDULER_ROLE,
+                        new SchedulingMessage(SchedulingAction.RUN));
             } else {
                 JOptionPane.showMessageDialog(_debugToolBar, "Veuillez sélectionner un type d'agent.", "Création d'un agent impossible", JOptionPane.ERROR_MESSAGE);
             }

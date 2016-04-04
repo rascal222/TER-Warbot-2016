@@ -48,7 +48,9 @@ public abstract class WarAgent extends Turtle implements CommonCapacities {
 
         rc = requestRole(getTeamName(), InGameTeam.DEFAULT_GROUP_NAME, getType().toString());
         logger.fine("RequestRole:<" + getTeamName()+ "," + InGameTeam.DEFAULT_GROUP_NAME + "," + getType().toString() + "> -> " + (rc.toString()));
-
+        
+        rc = requestRole(getTeamName(), InGameTeam.DEFAULT_GROUP_NAME, "broadcast");
+        logger.fine("RequestRole:<" + getTeamName()+ "," + InGameTeam.DEFAULT_GROUP_NAME + "," + "broadcast" + "> -> " + (rc.toString()));
     }
 
     public abstract void kill();

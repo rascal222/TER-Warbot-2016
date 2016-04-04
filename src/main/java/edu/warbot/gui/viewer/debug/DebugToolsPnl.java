@@ -72,7 +72,7 @@ public class DebugToolsPnl extends JPanel {
         _pnlSelectAgentAndTeam = new JPanel(new BorderLayout());
         JPanel pnlSelectAgent = new JPanel();
         pnlSelectAgent.setLayout(new FlowLayout());
-        pnlSelectAgent.setPreferredSize(new Dimension(200, 300));
+        pnlSelectAgent.setPreferredSize(new Dimension(300, 300));
         ButtonGroup groupSelectAgentToCreate = new ButtonGroup();
         WarAgentType[] typesWhichCanBeCreate = WarAgentType.getAgentsOfCategories(WarAgentCategory.Building,
                 WarAgentCategory.Soldier, WarAgentCategory.Worker, WarAgentCategory.Resource);

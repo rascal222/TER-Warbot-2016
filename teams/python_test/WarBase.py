@@ -6,6 +6,7 @@ st = {}
 st['n'] =0
 
 def actionWarBase():
+	broadcastMessageToAll("", "")
 	actionWarBase.n+=getNbElementsInBag()
 	setDebugString(`st['n']`+`actionWarBase.n`)
 	for m in getMessages():

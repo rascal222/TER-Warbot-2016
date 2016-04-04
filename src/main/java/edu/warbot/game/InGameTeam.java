@@ -8,12 +8,12 @@ import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.agents.teams.Team;
 import edu.warbot.brains.capacities.Builder;
 import edu.warbot.brains.capacities.Creator;
-import edu.warbot.communications.WarKernelMessage;
 import edu.warbot.game.listeners.TeamListener;
 import edu.warbot.gui.launcher.WarLauncherInterface;
 import edu.warbot.tools.WarMathTools;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -157,14 +157,6 @@ public class InGameTeam {
                 return a;
         }
         return null;
-    }
-
-    public void sendMessageToAllMembers(ControllableWarAgent sender, String message, String[] content) {
-        // A savoir que Madkit exclut la possibilité qu'un agent s'envoie un message à lui-même, nous ne faisons donc pas le test ici
-        for (WarAgent a : controllableAgents) {
-            sender.sendMessage(a.getAgentAddressIn(getName(), DEFAULT_GROUP_NAME, a.getClass().getSimpleName()),
-                    new WarKernelMessage(sender, message, content));
-        }
     }
 
     @Override
