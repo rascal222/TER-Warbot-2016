@@ -49,10 +49,8 @@ public class ImplementationProducer {
     @SuppressWarnings("unchecked")
 	public Class<? extends WarBrain> createWarBrainImplementationClass(String brainClassName)
             throws NotFoundException, CannotCompileException, IOException {
-
         //Récupération de l'implémentation de WarBrain commune
         CtClass brainImplementationClass = classPool.get(WarBrainImplementation.class.getName());
-
 
         if (brainImplementationClass.isFrozen())
             brainImplementationClass.defrost();

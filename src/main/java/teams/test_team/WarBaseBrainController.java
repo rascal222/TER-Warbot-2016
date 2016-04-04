@@ -1,9 +1,5 @@
 package teams.test_team;
 
-import edu.warbot.agents.agents.WarBase;
-import edu.warbot.agents.agents.WarEngineer;
-import edu.warbot.agents.enums.WarAgentType;
-import edu.warbot.agents.percepts.WarAgentPercept;
 import edu.warbot.brains.brains.WarBaseBrain;
 import edu.warbot.communications.WarMessage;
 
@@ -57,10 +53,19 @@ public abstract class WarBaseBrainController extends WarBaseBrain {
 
     @Override
     public String action() {
-        if (!_alreadyCreated) {
+    	List<WarMessage> msgs = getMessages();
+        for (WarMessage msg : msgs) {
+        	if (msg.getMessage().equals("Give me your ID base")) {
+                reply(msg, "I am the base and here is my ID", Integer.toString(getID()));
+            }
+        }
+        
+        return idle();
+    	
+        /*if (!_alreadyCreated) {
             setNextAgentToCreate(WarAgentType.WarEngineer);
             _alreadyCreated = true;
-            return create();
+            //return create();
         }
 
         List<WarMessage> msgs = getMessages();
@@ -144,7 +149,7 @@ public abstract class WarBaseBrainController extends WarBaseBrain {
             }
         }
 
-        return idle();
+        return idle();*/
     }
 
 }
