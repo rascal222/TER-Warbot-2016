@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
-
 public class InGameTeam {
 
     public static final String DEFAULT_GROUP_NAME = "defaultGroup-Warbot";
@@ -36,6 +35,7 @@ public class InGameTeam {
 
     private Color color;
 
+    private List<WarAgent> allAgents;
     private List<ControllableWarAgent> controllableAgents;
     private List<WarProjectile> projectiles;
     private List<AliveWarAgent> buildings;
@@ -49,6 +49,7 @@ public class InGameTeam {
     public InGameTeam(Team team) {
         this(team,
                 Color.WHITE,
+                new ArrayList<WarAgent>(),
                 new ArrayList<ControllableWarAgent>(),
                 new ArrayList<WarProjectile>(),
                 new ArrayList<AliveWarAgent>(),
@@ -60,6 +61,7 @@ public class InGameTeam {
     }
 
     public InGameTeam(Team team, Color color,
+    				  List<WarAgent> allAgent,
                       List<ControllableWarAgent> controllableAgents,
                       List<WarProjectile> projectiles,
                       List<AliveWarAgent> buildings,
@@ -67,6 +69,7 @@ public class InGameTeam {
 
         this.team = team;
         this.color = color;//GAME DRIVED
+        this.allAgents = allAgent;
         this.controllableAgents = controllableAgents;//GAME DRIVED
         this.projectiles = projectiles;//GAME DRIVED
         this.buildings = buildings;//GAME DRIVED
@@ -96,7 +99,6 @@ public class InGameTeam {
         return team.getDescription();
     }
 
-
     public List<ControllableWarAgent> getControllableAgents() {
         return controllableAgents;
     }
@@ -112,11 +114,15 @@ public class InGameTeam {
     public void removeWarAgent(WarAgent agent) {
         WarAgentType type = WarAgentType.valueOf(agent.getClass().getSimpleName());
         nbUnitsLeft.put(type, nbUnitsLeft.get(type) - 1);
-
+        
+        allAgents.remove(agent);
+        
         if (agent instanceof WarProjectile)
             projectiles.remove(agent);
-        else if (agent instanceof Building)
+        
+        if (agent instanceof Building)
             buildings.remove(agent);
+        
         if (agent instanceof ControllableWarAgent)
             controllableAgents.remove(agent);
 
@@ -129,11 +135,8 @@ public class InGameTeam {
         dyingAgents.add(agent);
     }
 
-    public ArrayList<WarAgent> getAllAgents() {
-        ArrayList<WarAgent> toReturn = new ArrayList<>();
-        toReturn.addAll(controllableAgents);
-        toReturn.addAll(projectiles);
-        toReturn.addAll(buildings);
+    public List<WarAgent> getAllAgents() {
+        List<WarAgent> toReturn = new ArrayList<>(allAgents);
         return toReturn;
     }
 
@@ -228,6 +231,7 @@ public class InGameTeam {
     public InGameTeam duplicate(String newName) {
         return new InGameTeam(team.duplicate(newName),
                 ((this.getColor() == null) ? null : (new Color(this.getColor().getRGB()))),
+                new ArrayList<>(this.getAllAgents()),
                 new ArrayList<>(this.getControllableAgents()),
                 new ArrayList<>(this.getProjectiles()),
                 new ArrayList<>(this.getBuildings()),
@@ -310,10 +314,15 @@ public class InGameTeam {
     public void addWarAgent(WarAgent agent) {
         WarAgentType type = WarAgentType.valueOf(agent.getClass().getSimpleName());
         nbUnitsLeft.put(type, nbUnitsLeft.get(type) + 1);
+        
+        allAgents.add(agent);
+        
         if (agent instanceof WarProjectile)
             projectiles.add((WarProjectile) agent);
-        else if (agent instanceof Building)
+        
+        if (agent instanceof Building)
             buildings.add((AliveWarAgent) agent);
+        
         if (agent instanceof ControllableWarAgent)
             controllableAgents.add((ControllableWarAgent) agent);
 

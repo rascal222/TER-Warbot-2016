@@ -64,8 +64,8 @@ public class MotherNatureTeam extends InGameTeam {
     }
 
     @Override
-    public ArrayList<WarAgent> getAllAgents() {
-        ArrayList<WarAgent> toReturn = super.getAllAgents();
+    public List<WarAgent> getAllAgents() {
+        List<WarAgent> toReturn = super.getAllAgents();
         toReturn.addAll(resources);
         return toReturn;
     }

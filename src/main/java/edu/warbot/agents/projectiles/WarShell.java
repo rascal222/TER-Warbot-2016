@@ -29,7 +29,6 @@ public class WarShell extends WarProjectile {
         RANGE = SPEED * AUTONOMY;
     }
 
-
     public WarShell(InGameTeam inGameTeam, WarAgent sender) {
         super(ACTION_MOVE, inGameTeam, WarGameConfig.getHitboxOfWarAgent(WarAgentType.WarShell), sender, SPEED, EXPLOSION_RADIUS, DAMAGE, AUTONOMY);
     }
@@ -40,7 +39,6 @@ public class WarShell extends WarProjectile {
     
     @Override
     public void explode() {
-    	System.out.println("test explosion WarBullet");
     	if (isAlive()) {
     		kill();
     		for (WarAgent a : getTeam().getGame().getAllAgentsInRadiusOf(this, getHitboxMaxRadius() + getSpeed())) {
