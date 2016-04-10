@@ -120,6 +120,30 @@ public class TeamConfigReader {
     public String getFSMConfigurationFileName() {
         return FsmXmlReader.xmlConfigurationDefaultFilename;
     }
+    
+    /**
+     * Méthode indiquant si l'équipe est une équipe IA
+     * 
+     * @return 
+     */
+    public boolean isIATeam() {
+    	if (config.containsKey("isIA"))
+    		return (boolean) config.get("isIA");
+    	else 
+    		return false;
+    }
+    
+    /**
+     * Méthode indiquant si l'équipe est une équipe IA
+     * 
+     * @return 
+     */
+    public boolean isPlayerTeam() {
+    	if (config.containsKey("isPlayer"))
+    		return (boolean) config.get("isPlayer");
+    	else 
+    		return false;
+    }
 
 
 

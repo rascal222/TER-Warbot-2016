@@ -33,6 +33,15 @@ public abstract class Team {
      */
     private ImageIcon imageIcon;
     private Map<WarAgentType, Class<? extends WarBrain>> brains;
+    
+    /**
+     * IA/Player
+     * Tags permettant de considérer la team comme une team IA, ou player. 
+     * Sert a concevoir les listes de teams des modes de jeux (Player vs IA, Player vs Player, etc...)
+     */
+    private boolean isIA;
+    private boolean isPlayer;
+    
 
     /**
      * @param teamName    Le nom d'une équipe
@@ -75,6 +84,22 @@ public abstract class Team {
 
     public Class<? extends WarBrain> getBrainOf(WarAgentType warAgentType) {
         return brains.get(warAgentType);
+    }
+    
+    public void setIA(boolean ia) {
+    	this.isIA = ia;
+    }
+    
+    public boolean isIA() {
+    	return this.isIA;
+    }
+    
+    public void setPlayer(boolean player) {
+    	this.isPlayer = player;
+    }
+    
+    public boolean isPlayer() {
+    	return this.isPlayer;
     }
 
     /**

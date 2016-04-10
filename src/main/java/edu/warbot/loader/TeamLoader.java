@@ -396,6 +396,9 @@ public class TeamLoader {
         ScriptedTeam team = new ScriptedTeam(teamConfigReader.getTeamName(),
                 teamConfigReader.getTeamDescription(),
                 loadLogo(teamDirectory, teamConfigReader));
+        
+        team.setIA(teamConfigReader.isIATeam());
+        team.setPlayer(teamConfigReader.isIATeam());
 
 //        team.initFunctionList();
         ScriptInterpreterLanguage language = teamConfigReader.getScriptLanguage();
@@ -476,6 +479,9 @@ public class TeamLoader {
             currentTeam = new JavaTeam(teamConfigReader.getTeamName(), teamConfigReader.getTeamDescription().trim(), logo,
                     brains);
         }
+        
+        currentTeam.setIA(teamConfigReader.isIATeam());
+        currentTeam.setPlayer(teamConfigReader.isIATeam());
 
         return currentTeam;
     }
