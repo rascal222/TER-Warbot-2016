@@ -1,4 +1,4 @@
-package teams.test_team;
+package teams.presentation_relic;
 
 import edu.warbot.agents.agents.WarExplorer;
 import edu.warbot.agents.enums.WarAgentType;
@@ -23,7 +23,6 @@ public abstract class WarExplorerBrainController extends WarExplorerBrain {
 
     @Override
     public String action() {
-    	setDebugString("searching food");
     	if (isBlocked()) {
     		setRandomHeading();
             return WarExplorer.ACTION_MOVE;
@@ -43,7 +42,6 @@ public abstract class WarExplorerBrainController extends WarExplorerBrain {
                 }
         	}
         	if (p.getType() == WarAgentType.WarFood) {
-        		setDebugString("taking Food");
                 if (p.getDistance() < WarFood.MAX_DISTANCE_TAKE && !isBagFull()) {
                     setHeading(p.getAngle());
                     return WarExplorer.ACTION_TAKE;
@@ -60,7 +58,6 @@ public abstract class WarExplorerBrainController extends WarExplorerBrain {
             	idBase = Integer.parseInt(msg.getContent()[0]);
                 if (!isBagEmpty()) {
                     setHeading(msg.getAngle());
-                    setDebugString("Coming home");
                     return WarExplorer.ACTION_MOVE;
                 } 
             }

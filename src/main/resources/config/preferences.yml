@@ -5,6 +5,8 @@ teamsSourcesFolders:
 #    PythonLevel0: "teams/level0"
     Time To Explode: "teams/timetoexplode"
 #    FSM: "teams/fsm"
+    Presentation relic: "teams/presentation_relic"
+    Debug team: "teams/debug_team"
     Test team: "teams/test_team"
 
 # Number of agents of each type to deploy at game start
