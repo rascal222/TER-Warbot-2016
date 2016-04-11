@@ -2,9 +2,9 @@ package edu.warbot.game;
 
 import edu.warbot.game.modes.DuelGameMode;
 import edu.warbot.game.modes.RelicGatheringGameMode;
-import edu.warbot.game.modes.ResourcesRunGameMode;
-import edu.warbot.game.modes.TimerGameMode;
-import edu.warbot.game.modes.NumberAgentGameMode;
+//import edu.warbot.game.modes.ResourcesRunGameMode;
+//import edu.warbot.game.modes.TimerGameMode;
+//import edu.warbot.game.modes.NumberAgentGameMode;
 import edu.warbot.game.modes.RessourcesAndConstructionMode;
 
 public enum WarGameMode {
@@ -13,13 +13,13 @@ public enum WarGameMode {
     
     RelicGathering(RelicGatheringGameMode.class),
 
-    RessourcesAndConstruction(RessourcesAndConstructionMode.class),
+    RessourcesAndConstruction(RessourcesAndConstructionMode.class);
 
-    ResourcesRun(ResourcesRunGameMode.class),
+//    ResourcesRun(ResourcesRunGameMode.class),
 
-    TimerRun(TimerGameMode.class),
+//    TimerRun(TimerGameMode.class),
 
-    NumberAgentGameMode(NumberAgentGameMode.class);
+//    NumberAgentGameMode(NumberAgentGameMode.class);
 
     private Class<? extends WarGame> gameModeClass;
 

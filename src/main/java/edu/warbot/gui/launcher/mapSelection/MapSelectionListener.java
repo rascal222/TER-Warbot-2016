@@ -1,24 +1,24 @@
 package edu.warbot.gui.launcher.mapSelection;
 
-import edu.warbot.gui.launcher.WarLauncherInterface;
+import edu.warbot.game.WarGameSettings;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MapSelectionListener implements ActionListener {
 
-    private WarLauncherInterface warLauncherInterface;
+	private MapMiniature mapMiniature;
+	private WarGameSettings warGameSettings;
     private MapSelectionDialog selectionDialog;
 
-    public MapSelectionListener(WarLauncherInterface warLauncherInterface) {
-        this.warLauncherInterface = warLauncherInterface;
+    public MapSelectionListener(MapMiniature mapMiniature, WarGameSettings warGameSettings) {
+    	this.mapMiniature = mapMiniature;
+    	this.warGameSettings = warGameSettings;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("MapSelectionListener:event");
-        selectionDialog = new MapSelectionDialog(warLauncherInterface);
+        selectionDialog = new MapSelectionDialog(mapMiniature, warGameSettings);
         selectionDialog.setVisible(true);
-        System.out.println("MapSelectionListener:event-setvisible");
     }
 }

@@ -1,13 +1,15 @@
 package edu.warbot.gui.launcher.mapSelection;
 
+import edu.warbot.game.WarGameSettings;
 import edu.warbot.gui.GuiIconsLoader;
-import edu.warbot.gui.launcher.WarLauncherInterface;
 import edu.warbot.maps.AbstractWarMap;
+
 import org.reflections.Reflections;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,18 +19,19 @@ import java.util.Vector;
 @SuppressWarnings("serial")
 public class MapSelectionDialog extends JFrame implements ActionListener, ListSelectionListener {
 
-    private WarLauncherInterface warLauncherInterface;
+	private MapMiniature mapMiniature;
+    private WarGameSettings settings;
     private Vector<MapMiniature> mapMiniaturesList;
     @SuppressWarnings("rawtypes")
 	private JList mapMiniaturesJList;
     private MapMiniaturePanel mapMiniaturePanel;
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	public MapSelectionDialog(WarLauncherInterface warLauncherInterface) {
+	public MapSelectionDialog(MapMiniature mapMiniature, WarGameSettings settings) {
         super("Choix de la carte");
         setLayout(new BorderLayout());
-
-        this.warLauncherInterface = warLauncherInterface;
+        this.mapMiniature = mapMiniature;
+        this.settings = settings;
 
         /* *** Fenêtre *** */
         setSize(1100, 450);
@@ -48,7 +51,7 @@ public class MapSelectionDialog extends JFrame implements ActionListener, ListSe
             try {
                 MapMiniature currentMapMiniature = new MapMiniature(mapClass.newInstance(), MapMiniature.SIZE_SMALL);
                 mapMiniaturesList.add(currentMapMiniature);
-                if (currentMapMiniature.getMap().getName().equals(warLauncherInterface.getGameSettings().getSelectedMap().getName()))
+                if (currentMapMiniature.getMap().getName().equals(settings.getSelectedMap().getName()))
                     selectedMapMiniature = currentMapMiniature;
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
@@ -102,8 +105,8 @@ public class MapSelectionDialog extends JFrame implements ActionListener, ListSe
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        warLauncherInterface.getGameSettings().setSelectedMap(getSelectedItem().getMap());
-        warLauncherInterface.notifySelectedMapChanged();
+        settings.setSelectedMap(getSelectedItem().getMap());
+        mapMiniature.setMap(getSelectedItem().getMap());
         this.dispose();
     }
 
