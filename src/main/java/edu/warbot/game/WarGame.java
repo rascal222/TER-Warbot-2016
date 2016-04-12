@@ -2,6 +2,7 @@ package edu.warbot.game;
 
 import edu.warbot.agents.AliveWarAgent;
 import edu.warbot.agents.WarAgent;
+import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.game.listeners.WarGameListener;
 import edu.warbot.game.modes.endCondition.AbstractEndCondition;
 import edu.warbot.launcher.WarLauncher;
@@ -250,4 +251,6 @@ public abstract class WarGame {
 	public void setScheduler(WarScheduler scheduler) {
 		this.scheduler = scheduler;	
 	}
+
+	public abstract boolean authorizedAgent(InGameTeam inGameTeam, WarAgentType agentType);
 }

@@ -4,6 +4,7 @@ import edu.warbot.agents.AliveWarAgent;
 import edu.warbot.agents.ControllableWarAgent;
 import edu.warbot.agents.WarAgent;
 import edu.warbot.agents.enums.WarAgentCategory;
+import edu.warbot.exceptions.UnauthorizedAgentException;
 import edu.warbot.game.WarGame;
 import edu.warbot.gui.viewer.debug.DebugModePanel;
 import edu.warbot.gui.viewer.debug.DebugToolsPnl;
@@ -80,6 +81,10 @@ public class AddToolMouseListener implements MouseListener, MouseMotionListener 
                     }
 
                     _debugToolBar.getViewer().getFrame().repaint();
+                } catch (UnauthorizedAgentException ex) {
+	    			System.err.println(ex.getMessage());
+	    			JOptionPane.showMessageDialog(_debugToolBar, ex.getMessage());
+					//ex.printStackTrace();
                 } catch (Exception ex) { // TODO exception la plus précise possible
                     System.err.println("Erreur lors de l'instanciation de l'agent " + _toolsPnl.getSelectedWarAgentTypeToCreate().toString());
                     ex.printStackTrace();

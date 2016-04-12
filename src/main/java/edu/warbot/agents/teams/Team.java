@@ -91,7 +91,8 @@ public abstract class Team {
     }
     
     public boolean isIA() {
-    	return this.isIA;
+    	//return this.isIA;
+    	return true;
     }
     
     public void setPlayer(boolean player) {
@@ -99,7 +100,8 @@ public abstract class Team {
     }
     
     public boolean isPlayer() {
-    	return this.isPlayer;
+    	//return this.isPlayer;
+    	return true;
     }
 
     /**

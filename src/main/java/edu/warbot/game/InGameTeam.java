@@ -9,6 +9,7 @@ import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.agents.teams.Team;
 import edu.warbot.brains.capacities.Builder;
 import edu.warbot.brains.capacities.Creator;
+import edu.warbot.exceptions.UnauthorizedAgentException;
 import edu.warbot.game.listeners.TeamListener;
 import edu.warbot.gui.launcher.WarLauncherInterface;
 import edu.warbot.tools.WarMathTools;
@@ -271,20 +272,40 @@ public class InGameTeam {
         this.game = game;
     }
 
-    public ControllableWarAgent instantiateNewControllableWarAgent(String agentName) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-        return team.instantiateControllableWarAgent(this, WarAgentType.valueOf(agentName));
+    public ControllableWarAgent instantiateNewControllableWarAgent(String agentName) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, UnauthorizedAgentException {
+    	WarAgentType agentType = WarAgentType.valueOf(agentName);
+
+    	if (game.authorizedAgent(this, agentType)) {
+    		return team.instantiateControllableWarAgent(this, agentType);
+    	} else {
+    		throw new UnauthorizedAgentException(this.getName(), agentType.name());
+    	}    	
     }
 
-    public AliveWarAgent instantiateNewBuilding(String buildingName) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-        return team.instantiateBuilding(this, WarAgentType.valueOf(buildingName));
+    public AliveWarAgent instantiateNewBuilding(String buildingName) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, UnauthorizedAgentException {
+    	WarAgentType agentType = WarAgentType.valueOf(buildingName);
+
+    	if (game.authorizedAgent(this, agentType)) {
+    		return team.instantiateBuilding(this, agentType);
+    	} else {
+    		throw new UnauthorizedAgentException(this.getName(), agentType.name());
+    	}
     }
 
-    public void createUnit(Creator creatorAgent, WarAgentType agentTypeToCreate) {
-        team.createUnit(this, creatorAgent, agentTypeToCreate);
+    public void createUnit(Creator creatorAgent, WarAgentType agentTypeToCreate) throws UnauthorizedAgentException {
+    	if (game.authorizedAgent(this, agentTypeToCreate)) {
+    		team.createUnit(this, creatorAgent, agentTypeToCreate);
+    	} else {
+    		throw new UnauthorizedAgentException(this.getName(), agentTypeToCreate.name());
+    	}
     }
 
-    public void build(Builder builderAgent, WarAgentType buildingTypeToBuild) {
-        team.build(this, builderAgent, buildingTypeToBuild);
+    public void build(Builder builderAgent, WarAgentType buildingTypeToBuild) throws UnauthorizedAgentException {
+    	if (game.authorizedAgent(this, buildingTypeToBuild)) {
+    		team.build(this, builderAgent, buildingTypeToBuild);
+    	} else {
+    		throw new UnauthorizedAgentException(this.getName(), buildingTypeToBuild.name());
+    	}
     }
 
     public void addTeamListener(TeamListener teamListener) {

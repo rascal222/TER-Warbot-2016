@@ -1,5 +1,7 @@
 package edu.warbot.game.modes;
 
+import edu.warbot.agents.enums.WarAgentType;
+import edu.warbot.game.InGameTeam;
 import edu.warbot.game.WarGame;
 import edu.warbot.game.WarGameSettings;
 import edu.warbot.game.modes.endCondition.NumberAgentEndCondition;
@@ -32,6 +34,11 @@ public class NumberAgentGameMode extends WarGame {
 	protected void doAfterEachTickForThisGameMode() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean authorizedAgent(InGameTeam inGameTeam, WarAgentType agentType) {
+		return true;
 	}
 
 }

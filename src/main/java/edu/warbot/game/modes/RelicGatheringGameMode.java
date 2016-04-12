@@ -9,6 +9,7 @@ import edu.warbot.agents.WarResource;
 import edu.warbot.agents.agents.WarBase;
 import edu.warbot.agents.agents.WarTurret;
 import edu.warbot.agents.enums.WarAgentType;
+import edu.warbot.exceptions.UnauthorizedAgentException;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.game.WarGame;
 import edu.warbot.game.WarGameSettings;
@@ -91,6 +92,9 @@ public class RelicGatheringGameMode extends WarGame {
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | ClassNotFoundException e) {
 			System.err.println("Erreur lors de l'instanciation de la base");
 			e.printStackTrace();
+		} catch (UnauthorizedAgentException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		// Placement des explorers
@@ -103,6 +107,9 @@ public class RelicGatheringGameMode extends WarGame {
 				explorer.setRandomPositionInCircle(selectedPosition);
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | ClassNotFoundException e) {
 				System.err.println("Erreur lors de l'instanciation de l'explorer n°" + countExplorer);
+				e.printStackTrace();
+			} catch (UnauthorizedAgentException e) {
+				System.err.println(e.getMessage());
 				e.printStackTrace();
 			}
 		}		
@@ -152,6 +159,9 @@ public class RelicGatheringGameMode extends WarGame {
 					| InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
 				System.err.println("Erreur lors de l'instanciation de la tourelle n°" + countTurret);
 				e.printStackTrace();
+			} catch (UnauthorizedAgentException e) {
+				System.err.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}		
 		
@@ -193,5 +203,22 @@ public class RelicGatheringGameMode extends WarGame {
         
         ressource.setPosition(pos);
         ressource.moveOutOfCollision();
+	}
+
+	@Override
+	public boolean authorizedAgent(InGameTeam inGameTeam, WarAgentType agentType) {
+		System.out.println("IGT="+inGameTeam+"\t AT="+agentType+"\t isPlayer="+inGameTeam.getTeam().isPlayer()+"\t isIA="+inGameTeam.getTeam().isIA());
+		//return true;
+		if (inGameTeam.getTeam().isPlayer()) {
+			if (agentType == WarAgentType.WarExplorer || 
+				agentType == WarAgentType.WarBase) {
+				return true;
+			} 
+		} 
+		if (inGameTeam.getTeam().isIA()) {
+			if (agentType == WarAgentType.WarTurret)
+				return true;
+		} 
+		return false;
 	}
 }
