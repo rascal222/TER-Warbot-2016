@@ -130,8 +130,8 @@ public class WarGameModePanel extends JPanel
         GridBagConstraints gridOfTeams = new GridBagConstraints();
         
         selectedTeams = new ArrayList<TeamSelectionPanel>();
-        selectedTeams.add(new TeamSelectionPanel("Équipe 1", this.warMain.getAvailableTeams()));
-        selectedTeams.add(new TeamSelectionPanel("Équipe 2", this.warMain.getAvailableTeams()));
+        selectedTeams.add(new TeamSelectionPanel(this.warMain.getAvailableTeams()));
+        selectedTeams.add(new TeamSelectionPanel(this.warMain.getAvailableTeams(), false));
 
         // Ajout des équipes au panel teams
         gridOfTeams.fill = GridBagConstraints.HORIZONTAL;
@@ -165,8 +165,8 @@ public class WarGameModePanel extends JPanel
         GridBagConstraints gridOfIa = new GridBagConstraints();
         
         selectedIas = new ArrayList<TeamSelectionPanel>();
-        selectedIas.add(new TeamSelectionPanel("Équipe 3", this.warMain.getAvailableTeams()));
-        selectedIas.add(new TeamSelectionPanel("Équipe 4", this.warMain.getAvailableTeams()));
+        selectedIas.add(new TeamSelectionPanel(this.warMain.getAvailableTeams()));
+        selectedIas.add(new TeamSelectionPanel(this.warMain.getAvailableTeams()));
 
         // Ajout des équipes au panel ia
         gridOfIa.fill = GridBagConstraints.HORIZONTAL;
@@ -235,7 +235,6 @@ public class WarGameModePanel extends JPanel
 	
 	public void validEnteredSettings()
 	{
-		System.out.println(getSize());
 		for (WarAgentType agent : WarAgentType.values())
 		{
 			WarAgentCountSlider slider = sliderNbAgents.get(agent);

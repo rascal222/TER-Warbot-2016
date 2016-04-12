@@ -5,12 +5,13 @@ import edu.warbot.agents.teams.Team;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public class TeamSelectionPanel extends JPanel {
-
-//    private ArrayList<JRadioButton> _radioButtons;
+public class TeamSelectionPanel extends JPanel
+{
     private Map<String, Team> availableTeams;
 	
 	ImageIcon[] logos;
@@ -22,33 +23,43 @@ public class TeamSelectionPanel extends JPanel {
 	JComboBox teamList;
 	JTextArea teamDescrition;
 	
+	public TeamSelectionPanel(Map<String, Team> availableTeams)
+    {
+		this(availableTeams, true);
+    }
+	
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	public TeamSelectionPanel(String title, Map<String, Team> availableTeams)
+	public TeamSelectionPanel(Map<String, Team> availableTeams, boolean necessary)
     {
     	super();
     	setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     	setLayout(new GridBagLayout());
     	setPreferredSize(new Dimension(-1, 70));
-    	setMaximumSize(new Dimension(1000, 70));
         GridBagConstraints gridOfTeamElement = new GridBagConstraints();
 
         this.availableTeams = availableTeams;
-    	
-//        selectedTeam = new JCheckBox(title,false);
-//        selectedTeam.setVerticalTextPosition(SwingConstants.TOP);
-//        selectedTeam.setHorizontalTextPosition(SwingConstants.CENTER);
-//        gridOfTeamElement.fill = GridBagConstraints.NONE;
-//        gridOfTeamElement.weighty = 0.;
-//        gridOfTeamElement.gridx = 0;
-//        gridOfTeamElement.gridy = 0;
-//        add(selectedTeam, gridOfTeamElement);
         
         //Load the pet images and create an array of indexes.
-    	logos = new ImageIcon[availableTeams.size()];
-    	names = new String[availableTeams.size()];
-    	descriptions = new String[availableTeams.size()];
+        int nbTeam = availableTeams.size();
+        if(!necessary)
+        {
+        	nbTeam++;
+        }
+    	logos = new ImageIcon[nbTeam];
+    	names = new String[nbTeam];
+    	descriptions = new String[nbTeam];
         Integer[] intArray = new Integer[names.length];
         int index = 0;
+        if(!necessary)
+        {
+        	intArray[index] = new Integer(index);
+            logos[index] = null;
+            names[index] = "None";
+            descriptions[index] = "Pas d'équipe sélectionnée";
+            if (logos[index] != null)
+            	logos[index].setDescription(names[index]);
+            index++;
+        }
         for (Team t : availableTeams.values())
         {
             intArray[index] = new Integer(index);
@@ -66,6 +77,11 @@ public class TeamSelectionPanel extends JPanel {
         teamList.setRenderer(renderer);
         teamList.setMaximumRowCount(5);
         teamList.setSize(new Dimension(300, 60));
+        teamList.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		teamDescrition.setText(descriptions[teamList.getSelectedIndex()]);
+        	}
+        });
         
         //Lay out the demo.
         gridOfTeamElement.fill = GridBagConstraints.NONE;
@@ -131,17 +147,6 @@ public class TeamSelectionPanel extends JPanel {
 			//Get the selected index. (The index param isn't
 			//always valid, so just use the value.)
 			int selectedIndex = ((Integer)value).intValue();
-			if (isSelected)
-			{
-				setBackground(list.getSelectionBackground());
-				setForeground(list.getSelectionForeground());
-				teamDescrition.setText(descriptions[selectedIndex]);
-			}
-			else
-			{
-				setBackground(list.getBackground());
-				setForeground(list.getForeground());
-			}
 			//Set the icon and text.  If icon was null, say so.
 			JPanel team = new JPanel();
 			team.setLayout(new BoxLayout(team, BoxLayout.X_AXIS));
@@ -154,6 +159,19 @@ public class TeamSelectionPanel extends JPanel {
 			else
 				nameAndLogo.setText(names[selectedIndex] + " (no image available)");
 			team.add(nameAndLogo);
+
+			if (isSelected || cellHasFocus)
+			{
+				team.setBackground(list.getSelectionBackground());
+				team.setForeground(list.getSelectionForeground());
+				if(isSelected)
+					teamDescrition.setText(descriptions[selectedIndex]);
+			}
+			else
+			{
+				team.setBackground(list.getBackground());
+				team.setForeground(list.getForeground());
+			}
 			return team;
 		}
 		
