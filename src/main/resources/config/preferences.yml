@@ -8,6 +8,7 @@ teamsSourcesFolders:
     Presentation relic: "teams/presentation_relic"
     Debug team: "teams/debug_team"
     Test team: "teams/test_team"
+    Resources and construction: "teams/resources_and_construction_team"
 
 # Number of agents of each type to deploy at game start
 NbAgentsAtStart:

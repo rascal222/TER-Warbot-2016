@@ -6,6 +6,7 @@ import java.util.Random;
 
 import edu.warbot.agents.ControllableWarAgent;
 import edu.warbot.agents.WarAgent;
+import edu.warbot.agents.enums.WarAgentCategory;
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.exceptions.UnauthorizedAgentException;
 import edu.warbot.game.InGameTeam;
@@ -67,7 +68,6 @@ public class RessourcesAndConstructionMode extends WarGame
 				                e.printStackTrace();
 				            } catch (UnauthorizedAgentException e) {
 				            	System.err.println(e.getMessage());
-								e.printStackTrace();
 							}
 				            // On créé autant de WarFood que d'agent au départ
 				            motherNatureTeam.createAndLaunchResource(this.getMap(), launcher, WarAgentType.WarFood);
@@ -86,8 +86,10 @@ public class RessourcesAndConstructionMode extends WarGame
 
 	@Override
 	public boolean authorizedAgent(InGameTeam inGameTeam, WarAgentType agentType) {
-		// TODO Auto-generated method stub
-		return true;
+		if (agentType.getCategory() == WarAgentCategory.Soldier)
+			return false;
+		else
+			return true;
 	}
 
 }

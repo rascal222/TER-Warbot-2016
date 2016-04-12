@@ -94,7 +94,6 @@ public class RelicGatheringGameMode extends WarGame {
 			e.printStackTrace();
 		} catch (UnauthorizedAgentException e) {
 			System.err.println(e.getMessage());
-			e.printStackTrace();
 		}
 		
 		// Placement des explorers
@@ -110,7 +109,6 @@ public class RelicGatheringGameMode extends WarGame {
 				e.printStackTrace();
 			} catch (UnauthorizedAgentException e) {
 				System.err.println(e.getMessage());
-				e.printStackTrace();
 			}
 		}		
 		
@@ -161,7 +159,6 @@ public class RelicGatheringGameMode extends WarGame {
 				e.printStackTrace();
 			} catch (UnauthorizedAgentException e) {
 				System.err.println(e.getMessage());
-				e.printStackTrace();
 			}
 		}		
 		
@@ -207,7 +204,7 @@ public class RelicGatheringGameMode extends WarGame {
 
 	@Override
 	public boolean authorizedAgent(InGameTeam inGameTeam, WarAgentType agentType) {
-		System.out.println("IGT="+inGameTeam+"\t AT="+agentType+"\t isPlayer="+inGameTeam.getTeam().isPlayer()+"\t isIA="+inGameTeam.getTeam().isIA());
+		//System.out.println("IGT="+inGameTeam+"\t AT="+agentType+"\t isPlayer="+inGameTeam.getTeam().isPlayer()+"\t isIA="+inGameTeam.getTeam().isIA());
 		//return true;
 		if (inGameTeam.getTeam().isPlayer()) {
 			if (agentType == WarAgentType.WarExplorer || 

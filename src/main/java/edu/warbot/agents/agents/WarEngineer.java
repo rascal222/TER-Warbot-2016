@@ -52,7 +52,6 @@ public class WarEngineer extends MovableWarAgent implements BuilderActionsMethod
 			getTeam().build(this, nextBuildingToBuild);
 		} catch (UnauthorizedAgentException e) {
 			System.err.println(e.getMessage());
-			e.printStackTrace();
 		}
         return getBrain().action();
     }

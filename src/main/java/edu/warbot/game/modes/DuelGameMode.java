@@ -48,7 +48,6 @@ public class DuelGameMode extends WarGame {
 			    			e.printStackTrace();
 			    		} catch (UnauthorizedAgentException e) {
 			    			System.err.println(e.getMessage());
-							e.printStackTrace();
 						}
 		            // On créé autant de WarFood que d'agent au départ
 		            motherNatureTeam.createAndLaunchResource(this.getMap(), launcher, WarAgentType.WarFood);

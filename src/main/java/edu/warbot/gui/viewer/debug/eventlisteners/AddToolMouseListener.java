@@ -84,7 +84,6 @@ public class AddToolMouseListener implements MouseListener, MouseMotionListener 
                 } catch (UnauthorizedAgentException ex) {
 	    			System.err.println(ex.getMessage());
 	    			JOptionPane.showMessageDialog(_debugToolBar, ex.getMessage());
-					//ex.printStackTrace();
                 } catch (Exception ex) { // TODO exception la plus précise possible
                     System.err.println("Erreur lors de l'instanciation de l'agent " + _toolsPnl.getSelectedWarAgentTypeToCreate().toString());
                     ex.printStackTrace();

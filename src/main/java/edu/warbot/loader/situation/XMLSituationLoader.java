@@ -154,7 +154,6 @@ public class XMLSituationLoader implements SituationLoader {
                         e.printStackTrace();
                     } catch (UnauthorizedAgentException e) {
                     	System.err.println(e.getMessage());
-						e.printStackTrace();
 					}
                 }
             }
