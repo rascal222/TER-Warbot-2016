@@ -7,6 +7,7 @@ import java.util.Random;
 import edu.warbot.agents.ControllableWarAgent;
 import edu.warbot.agents.WarAgent;
 import edu.warbot.agents.enums.WarAgentType;
+import edu.warbot.exceptions.UnauthorizedAgentException;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.game.MotherNatureTeam;
 import edu.warbot.game.WarGame;
@@ -64,7 +65,10 @@ public class RessourcesAndConstructionMode extends WarGame
 				            {
 				                System.err.println("Erreur lors de l'instanciation de l'agent. Type non reconnu : " + agentType);
 				                e.printStackTrace();
-				            }
+				            } catch (UnauthorizedAgentException e) {
+				            	System.err.println(e.getMessage());
+								e.printStackTrace();
+							}
 				            // On créé autant de WarFood que d'agent au départ
 				            motherNatureTeam.createAndLaunchResource(this.getMap(), launcher, WarAgentType.WarFood);
 				        }
@@ -78,6 +82,12 @@ public class RessourcesAndConstructionMode extends WarGame
 		    System.err.println("Erreur lors de l'instanciation des classes à partir des données XML");
 		    e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean authorizedAgent(InGameTeam inGameTeam, WarAgentType agentType) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

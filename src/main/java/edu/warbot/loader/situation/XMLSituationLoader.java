@@ -5,6 +5,7 @@ import edu.warbot.agents.ControllableWarAgent;
 import edu.warbot.agents.WarAgent;
 import edu.warbot.agents.enums.WarAgentCategory;
 import edu.warbot.agents.enums.WarAgentType;
+import edu.warbot.exceptions.UnauthorizedAgentException;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.game.WarGame;
 import edu.warbot.launcher.WarLauncher;
@@ -151,7 +152,10 @@ public class XMLSituationLoader implements SituationLoader {
                     } catch (InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
                         System.err.println("Erreur lors de l'instanciation de l'agent. Type non reconnu : " + agentTypeName);
                         e.printStackTrace();
-                    }
+                    } catch (UnauthorizedAgentException e) {
+                    	System.err.println(e.getMessage());
+						e.printStackTrace();
+					}
                 }
             }
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {

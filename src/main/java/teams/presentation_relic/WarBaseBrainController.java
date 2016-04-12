@@ -1,4 +1,4 @@
-package teams.test_team;
+package teams.presentation_relic;
 
 import edu.warbot.brains.brains.WarBaseBrain;
 import edu.warbot.communications.WarMessage;
@@ -13,7 +13,6 @@ public abstract class WarBaseBrainController extends WarBaseBrain {
 
     @Override
     public String action() {
-    	setDebugString("base");
     	List<WarMessage> msgs = getMessages();
         for (WarMessage msg : msgs) {
         	if (msg.getMessage().equals("Give me your ID base")) {

@@ -9,6 +9,7 @@ import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Builder;
 import edu.warbot.brains.capacities.Building;
+import edu.warbot.exceptions.UnauthorizedAgentException;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.launcher.WarGameConfig;
 
@@ -47,7 +48,12 @@ public class WarEngineer extends MovableWarAgent implements BuilderActionsMethod
 
     @Override
     public String build() {
-        getTeam().build(this, nextBuildingToBuild);
+        try {
+			getTeam().build(this, nextBuildingToBuild);
+		} catch (UnauthorizedAgentException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
         return getBrain().action();
     }
 

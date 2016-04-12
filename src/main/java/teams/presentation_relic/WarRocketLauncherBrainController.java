@@ -1,4 +1,4 @@
-package teams.test_team;
+package teams.presentation_relic;
 
 import edu.warbot.brains.brains.WarRocketLauncherBrain;
 import edu.warbot.communications.WarMessage;

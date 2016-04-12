@@ -4,6 +4,7 @@ import edu.warbot.agents.actions.CreatorActionsMethods;
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Creator;
+import edu.warbot.exceptions.UnauthorizedAgentException;
 import edu.warbot.game.InGameTeam;
 
 public abstract class CreatorWarAgent extends ControllableWarAgent implements CreatorActionsMethods, Creator {
@@ -18,7 +19,12 @@ public abstract class CreatorWarAgent extends ControllableWarAgent implements Cr
 
     @Override
     public String create() {
-        getTeam().createUnit(this, _nextAgentToCreate);
+        try {
+			getTeam().createUnit(this, _nextAgentToCreate);
+		} catch (UnauthorizedAgentException e) {
+			System.err.println("The agent '" + this.toString() + "' cannot create a '" + _nextAgentToCreate + "'");
+			e.printStackTrace();
+		}
         return getBrain().action();
     }
 

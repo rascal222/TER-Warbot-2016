@@ -1,13 +1,13 @@
-package teams.test_team;
+package teams.presentation_relic;
 
-import edu.warbot.brains.brains.WarRocketLauncherBrain;
+import edu.warbot.brains.brains.WarHeavyBrain;
 import edu.warbot.communications.WarMessage;
 
 import java.util.List;
 
-public abstract class WarRocketLauncherBrainController extends WarRocketLauncherBrain
+public abstract class WarHeavyBrainController extends WarHeavyBrain
 {
-    public WarRocketLauncherBrainController()
+    public WarHeavyBrainController()
     {
         super();
     }

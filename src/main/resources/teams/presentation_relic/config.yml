@@ -1,9 +1,9 @@
-Name: Test team
+Name: Presentation relic
 IconPath: test.png
 SoundPath: dekat.wav
 Description: |
     Equipe de test de debug et feature
-BrainsPackage: teams.test_team
+BrainsPackage: teams.presentation_relic
 AgentsBrainClasses:
     WarBase: WarBaseBrainController
     WarExplorer: WarExplorerBrainController
@@ -13,5 +13,5 @@ AgentsBrainClasses:
     WarKamikaze: WarKamikazeBrainController
     WarEngineer: WarEngineerBrainController
     WarTurret: WarTurretBrainController
-isIA: true
-isPlayer: false
+isIA: false
+isPlayer: true
