@@ -5,6 +5,7 @@ import edu.warbot.agents.WarProjectile;
 import edu.warbot.agents.actions.AgressiveActionsMethods;
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.agents.projectiles.WarRocket;
+import edu.warbot.agents.projectiles.WarShell;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Agressive;
 import edu.warbot.brains.capacities.Building;
@@ -76,7 +77,7 @@ public class WarTurret extends ControllableWarAgent implements AgressiveActionsM
         if (isReloaded()) {
             logger.log(Level.FINER, this.toString() + " fired.");
             // TODO Décider du type de projectile pour les tourelles et compléter en conséquence
-            WarProjectile wp = new WarRocket(getTeam(), this, 50);
+            WarProjectile wp = new WarShell(getTeam(), this);
             launchAgent(wp);
             _reloaded = false;
         }
