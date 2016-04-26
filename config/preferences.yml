@@ -2,11 +2,12 @@
 teamsSourcesFolders:
 #   <teamName>: path/to/directory/separated/by/slashes
     Engineer: "teams/engineer"
-#    PythonLevel0: "teams/level0"
-    Time To Explode: "teams/timetoexplode"
-#    FSM: "teams/fsm"
     Debug team: "teams/debug_team"
-
+    Test team: "teams/test_team"
+    Resources and construction: "teams/resources_and_construction_team"
+    Time To Explode: "teams/timetoexplode"
+#    PythonLevel0: "teams/level0"
+#    FSM: "teams/fsm"
 
 # Number of agents of each type to deploy at game start
 NbAgentsAtStart:

@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 
 public class WarMain implements WarGameListener {
 
-
     public static final String TEAMS_DIRECTORY_NAME = "teams";
     public static final String CMD_NAME = "java WarMain";
     public static final String CMD_HELP = "--help";
@@ -35,7 +34,6 @@ public class WarMain implements WarGameListener {
 
     private WarLauncherInterface launcherInterface;
     private Map<String, Team> availableTeams;
-
 
 
     public WarMain() {
@@ -106,7 +104,6 @@ public class WarMain implements WarGameListener {
                 commandLine(args);
             } catch (WarCommandException e) {
                 logger.log(Level.SEVERE, "WarCommand error", e);
-
             }
         }
     }
@@ -115,7 +112,6 @@ public class WarMain implements WarGameListener {
 
         WarGameSettings settings = new WarGameSettings();
         ArrayList<String> selectedTeams = new ArrayList<>();
-
 
         WarbotOptions wo = new WarbotOptions();
 
@@ -201,12 +197,10 @@ public class WarMain implements WarGameListener {
 
     }
 
-
     @Override
     public void onGameOver() {
         if (launcherInterface != null) {
             launcherInterface.displayGameResults(game);
-
         }
         else { // Si la simulation a été lancée depuis la ligne de commande
             String finalTeams = "";
@@ -241,7 +235,6 @@ public class WarMain implements WarGameListener {
         loadingDialog.dispose();
     }
 
-
     public void reloadTeams(boolean dialog) {
         List<String> othersTeam = new ArrayList<>();
         for (String key : availableTeams.keySet()) {
@@ -250,7 +243,6 @@ public class WarMain implements WarGameListener {
         }
         for (String key : othersTeam)
             availableTeams.remove(key);
-
 
         LoadingDialog loadDial = new LoadingDialog("Chargement des équipes...");
         loadDial.setVisible(dialog);

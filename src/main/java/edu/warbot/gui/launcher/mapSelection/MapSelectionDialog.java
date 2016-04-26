@@ -17,21 +17,21 @@ import java.util.Set;
 import java.util.Vector;
 
 @SuppressWarnings("serial")
-public class MapSelectionDialog extends JFrame implements ActionListener, ListSelectionListener {
+public class MapSelectionDialog extends JDialog implements ActionListener, ListSelectionListener {
 
-	private MapMiniature mapMiniature;
-    private WarGameSettings settings;
+	private MapMiniature _mapMiniature;
+    private WarGameSettings _settings;
     private Vector<MapMiniature> mapMiniaturesList;
     @SuppressWarnings("rawtypes")
 	private JList mapMiniaturesJList;
     private MapMiniaturePanel mapMiniaturePanel;
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	public MapSelectionDialog(MapMiniature mapMiniature, WarGameSettings settings) {
-        super("Choix de la carte");
+	public MapSelectionDialog(MapMiniature mapMiniature, WarGameSettings settings, JFrame owner) {
+        super(owner, "Choix de la carte", true);
         setLayout(new BorderLayout());
-        this.mapMiniature = mapMiniature;
-        this.settings = settings;
+        _mapMiniature = mapMiniature;
+        _settings = settings;
 
         /* *** Fenêtre *** */
         setSize(1100, 450);
@@ -51,7 +51,7 @@ public class MapSelectionDialog extends JFrame implements ActionListener, ListSe
             try {
                 MapMiniature currentMapMiniature = new MapMiniature(mapClass.newInstance(), MapMiniature.SIZE_SMALL);
                 mapMiniaturesList.add(currentMapMiniature);
-                if (currentMapMiniature.getMap().getName().equals(settings.getSelectedMap().getName()))
+                if (currentMapMiniature.getMap().getName().equals(_settings.getSelectedMap().getName()))
                     selectedMapMiniature = currentMapMiniature;
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
@@ -97,6 +97,7 @@ public class MapSelectionDialog extends JFrame implements ActionListener, ListSe
         JButton btnValid = new JButton("Valider");
         btnValid.addActionListener(this);
         add(btnValid, BorderLayout.SOUTH);
+        setVisible(true);
     }
 
     public MapMiniature getSelectedItem() {
@@ -105,8 +106,8 @@ public class MapSelectionDialog extends JFrame implements ActionListener, ListSe
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        settings.setSelectedMap(getSelectedItem().getMap());
-        mapMiniature.setMap(getSelectedItem().getMap());
+        _settings.setSelectedMap(getSelectedItem().getMap());
+        _mapMiniature.setMap(getSelectedItem().getMap());
         this.dispose();
     }
 

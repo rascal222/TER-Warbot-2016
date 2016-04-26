@@ -15,9 +15,9 @@ import edu.warbot.game.modes.endCondition.RessourcesAndConstructionEndCondition;
 import edu.warbot.maps.AbstractWarMap;
 import edu.warbot.tools.geometry.WarCircle;
 
-public class RessourcesAndConstructionMode extends WarGame
+public class ResourcesAndConstructionMode extends WarGame
 {
-	public RessourcesAndConstructionMode(WarGameSettings settings, Object[] args)
+	public ResourcesAndConstructionMode(WarGameSettings settings, Object[] args)
 	{
 		super(settings);
 		this.setEndCondition(new RessourcesAndConstructionEndCondition(this, 100000));
