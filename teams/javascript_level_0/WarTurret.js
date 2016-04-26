@@ -1,6 +1,6 @@
 var Turret = JsWarTurret.extend({
 
-	action : function() { 
+	action : function() {
 		return this.idle(); 
 	}
 

@@ -42,6 +42,7 @@ public class WarAgentCountSlider extends JPanel {
             }
         });
         add(_nbUnitSlider);
+        setMaximumSize(new Dimension(getMaximumSize().width, getPreferredSize().height));
     }
 
     public int getSelectedValue() {

@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public class WarLauncherInterface extends JFrame {
@@ -22,17 +24,29 @@ public class WarLauncherInterface extends JFrame {
     
     private JTabbedPane tabbedPaneMillieu;
 
-    private WarMain warMain;
-    private WarGameSettings settings;
+    private WarMain _warMain;
+    private WarGameSettings _settings;
 
-	public WarLauncherInterface(WarMain warMain, final WarGameSettings settings) {
+	public WarLauncherInterface(WarMain warMain, WarGameSettings settings) {
         super("Warbot 3D");
-        this.settings = settings;
-        this.warMain = warMain;
+        _settings = settings;
+        _warMain = warMain;
 
 		/* *** Fenêtre *** */
-        setSize(1000, 700);
-        setMinimumSize(new Dimension(800, 600));
+        // Dimensionnement de la fenêtre
+        int minWidth = Integer.MAX_VALUE, minHeight = Integer.MAX_VALUE;
+        for (GraphicsDevice gd : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
+        {
+            if (gd.getDisplayMode().getWidth() < minWidth)
+            	minWidth = gd.getDisplayMode().getWidth();
+            if (gd.getDisplayMode().getHeight() < minHeight)
+            	minHeight = gd.getDisplayMode().getHeight();
+        }
+        if(minWidth >= 1000 && minHeight >= 700)
+            setMinimumSize(new Dimension(1000, 700));
+        else
+            setMinimumSize(new Dimension(800, 600));
+        
         setIconImage(GuiIconsLoader.getLogo("iconLauncher.png").getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -83,7 +97,14 @@ public class WarLauncherInterface extends JFrame {
         tabbedPaneMillieu = new JTabbedPane();
         for(WarGameMode wgm : WarGameMode.values())
         {
-        	tabbedPaneMillieu.add(wgm.toString(), new WarGameModePanel(settings, warMain));
+        	try
+        	{
+				tabbedPaneMillieu.add(wgm.toString(), wgm.getGameModePanelClass().getConstructor(WarGameSettings.class, Map.class, WarLauncherInterface.class).newInstance(_settings, _warMain.getAvailableTeams(), this));
+			}
+        	catch (InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e)
+        	{
+	            e.printStackTrace();
+        	}
         }
         mainPanel.add(tabbedPaneMillieu, BorderLayout.CENTER);
         pack();
@@ -95,7 +116,7 @@ public class WarLauncherInterface extends JFrame {
      * Saves settings entered by the user in {@link WarGameSettings} instance
      */
     private void validEnteredSettings() {
-    	settings.setGameMode(WarGameMode.valueOf(tabbedPaneMillieu.getTitleAt(tabbedPaneMillieu.getSelectedIndex())));
+    	_settings.setGameMode(WarGameMode.valueOf(tabbedPaneMillieu.getTitleAt(tabbedPaneMillieu.getSelectedIndex())));
     	((WarGameModePanel)tabbedPaneMillieu.getSelectedComponent()).validEnteredSettings();
     }
 
@@ -104,21 +125,25 @@ public class WarLauncherInterface extends JFrame {
      */
     public void startGame() {
         validEnteredSettings();
-        warMain.startGame();
         setVisible(false);
+        _warMain.startGame();
     }
 
     public void reloadTeams(boolean dialog) {
-    	/*
-        duelTeamsPanel.removeAll();
-        duelTeamsPanel.setVisible(true);
-        warMain.reloadTeams(dialog);
-        pnlSelectionTeam1 = new TeamSelectionPanel("Choix de l'équipe 1", warMain.getAvailableTeams());
-        duelTeamsPanel.add(new JScrollPane(pnlSelectionTeam1));
-        pnlSelectionTeam2 = new TeamSelectionPanel("Choix de l'équipe 2", warMain.getAvailableTeams());
-        duelTeamsPanel.add(new JScrollPane(pnlSelectionTeam2));
-        duelTeamsPanel.repaint();
-        */
+    	tabbedPaneMillieu.removeAll();
+        _warMain.reloadTeams(dialog);
+        for(WarGameMode wgm : WarGameMode.values())
+        {
+        	try
+        	{
+				tabbedPaneMillieu.add(wgm.toString(), wgm.getGameModePanelClass().getConstructor(WarGameSettings.class, Map.class, WarLauncherInterface.class).newInstance(_settings, _warMain.getAvailableTeams(), this));
+			}
+        	catch (InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e)
+        	{
+	            e.printStackTrace();
+        	}
+        }
+        tabbedPaneMillieu.repaint();
     }
 
     public void displayGameResults(WarGame game) {
@@ -126,11 +151,11 @@ public class WarLauncherInterface extends JFrame {
     }
 
     public WarGameSettings getGameSettings() {
-        return settings;
+        return _settings;
     }
     
 	private void displayAdvancedSettingsInterface()
 	{
-	    new AdvancedSettingsInterface(settings);
+	    new AdvancedSettingsDialog(_settings, this);
 	}
 }

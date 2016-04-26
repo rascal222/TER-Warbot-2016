@@ -24,6 +24,7 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.io.*;
 import java.net.MalformedURLException;
@@ -47,9 +48,11 @@ import java.util.zip.ZipFile;
  * @since 3.2.3
  */
 public class TeamLoader {
+	
+    public static final String DEFAULT_IMAGE_PATH = "assets" + File.separatorChar + "icons" + File.separatorChar + "no_image.png";
 
     public static final String TEAMS_DIRECTORY_NAME = "teams";
-
+    
     @SuppressWarnings("unused")
 	private static final String TMP_BRAINS_OUTPUT_DIRECTORY = "bin";
 
@@ -66,7 +69,6 @@ public class TeamLoader {
     public ImplementationProducer getImplementationProducer() {
         return implementationProducer;
     }
-
 
     public Map<String, Team> loadAllAvailableTeams(boolean javaSource) {
         Map<String, Team> loadedTeams = new HashMap<>();
@@ -185,7 +187,6 @@ public class TeamLoader {
         return teamsLoaded;
     }
 
-
     private ImageIcon loadLogo(File file, final TeamConfigReader teamConfigReader) {
         File[] logo = file.listFiles(new FilenameFilter() {
             @Override
@@ -194,14 +195,26 @@ public class TeamLoader {
             }
         });
         ImageIcon teamLogo = null;
-        if (logo != null && logo.length == 1) {
-
+        if (logo != null && logo.length == 1)
+        {
             try {
                 FileInputStream fis = new FileInputStream(logo[0]);
                 teamLogo = new ImageIcon(WarIOTools.toByteArray(fis));
                 fis.close();
             } catch (IOException e) {
-                System.err.println("ERROR loading file " + logo[0].getName() + " inside directory " + file.getName());
+                System.err.println("Erreur lors du chargement du logo " + logo[0].getName() + " dans le répertoire " + file.getName());
+                e.printStackTrace();
+            }
+        }
+        if(teamLogo == null)
+        {
+        	try {
+        		InputStream fis = TeamLoader.class.getClassLoader().getResourceAsStream(DEFAULT_IMAGE_PATH);
+                teamLogo = new ImageIcon(WarIOTools.toByteArray(fis));
+                fis.close();
+                System.err.println("Erreur lors du chargement du logo " + teamConfigReader.getIconPath() + " de l'équipe " + teamConfigReader.getTeamName());
+            } catch (IOException e) {
+                System.err.println("Erreur lors du chargement du logo par défaut " + DEFAULT_IMAGE_PATH);
                 e.printStackTrace();
             }
         }
@@ -238,23 +251,19 @@ public class TeamLoader {
         final TeamConfigReader teamConfigReader = new TeamConfigReader();
         teamConfigReader.load(input);
         input.close();
-        ImageIcon teamLogo = loadLogo(file, teamConfigReader);
 
-
-        if (excludedTeams.contains(teamConfigReader.getTeamName())) {
+        if (excludedTeams.contains(teamConfigReader.getTeamName()))
             throw new TeamAlreadyExistsException(teamConfigReader.getTeamName());
-        }
 
         if (teamConfigReader.isScriptedTeam())
             currentTeam = generateScriptedTeam(teamConfigReader, file);
         else
             currentTeam = new JavaTeam(teamConfigReader.getTeamName(),
-                    teamConfigReader.getTeamDescription(), teamLogo, null);
+                    teamConfigReader.getTeamDescription(), loadLogo(file, teamConfigReader), null);
 
 
         return currentTeam;
     }
-
 
     @SuppressWarnings({ "rawtypes", "unused" })
 	private Team loadTeamFromJar(File file, JarFile jarFile, HashMap<String, JarEntry> jarEntries, Set<String> excludedTeams) throws IOException, ClassNotFoundException, NotFoundException, CannotCompileException, TeamAlreadyExistsException {
@@ -394,7 +403,7 @@ public class TeamLoader {
             NotFoundScriptLanguageException, UnrecognizedScriptLanguageException, IOException, ClassNotFoundException, DangerousFunctionPythonException {
 
         ScriptedTeam team = new ScriptedTeam(teamConfigReader.getTeamName(),
-                teamConfigReader.getTeamDescription(),
+                teamConfigReader.getTeamDescription().trim(),
                 loadLogo(teamDirectory, teamConfigReader));
         
         team.setIA(teamConfigReader.isIATeam());
@@ -439,7 +448,6 @@ public class TeamLoader {
 	private Team loadTeamFromSources(Map<String, String> teamsSourcesFolders, final TeamConfigReader teamConfigReader) throws ClassNotFoundException, IOException, NotFoundException, CannotCompileException, URISyntaxException {
         Team currentTeam;
         URL url = getClass().getClassLoader().getResource(teamsSourcesFolders.get(teamConfigReader.getTeamName()));
-        //System.err.println(url);
         if(url== null) {
             throw new IOException("Error when we try to access to value");
         }
@@ -486,17 +494,25 @@ public class TeamLoader {
         return currentTeam;
     }
 
-
     private ImageIcon getTeamLogoFromJar(JarEntry logoEntry, JarFile jarCurrentFile) {
         ImageIcon teamLogo = null;
         try {
             teamLogo = new ImageIcon(WarIOTools.toByteArray(jarCurrentFile.getInputStream(logoEntry)));
         } catch (IOException e) {
-            System.err.println("ERROR loading file " + logoEntry.getName() + " inside jar file " + jarCurrentFile.getName());
+            System.err.println("Erreur lors du chargement du logo " + logoEntry.getName() + " situé dans " + jarCurrentFile.getName());
             e.printStackTrace();
         }
-        // TODO set general logo if no image found
-        // On change sa taille
+        if(teamLogo == null)
+        {
+        	try {
+        		InputStream fis = TeamLoader.class.getClassLoader().getResourceAsStream(DEFAULT_IMAGE_PATH);
+                teamLogo = new ImageIcon(WarIOTools.toByteArray(fis));
+                fis.close();
+            } catch (IOException e) {
+                System.err.println("Erreur lors du chargement du logo par défaut " + DEFAULT_IMAGE_PATH);
+                e.printStackTrace();
+            }
+        }
         return scaleTeamLogo(teamLogo);
     }
 

@@ -19,7 +19,7 @@ import edu.warbot.tools.geometry.WarCircle;
 public class DuelGameMode extends WarGame {
 
     public DuelGameMode(WarGameSettings settings, Object[] args) {
-        super(settings);       
+        super(settings);
         this.setEndCondition(new DuelEndCondition(this));
     }
 

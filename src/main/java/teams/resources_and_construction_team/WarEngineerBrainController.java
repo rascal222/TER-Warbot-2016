@@ -9,21 +9,19 @@ import edu.warbot.brains.capacities.Building;
 
 import java.util.List;
 
-public abstract class WarEngineerBrainController extends WarEngineerBrain {
-
-    private int bat;
+public abstract class WarEngineerBrainController extends WarEngineerBrain
+{
     private int nbMove;
 
-    public WarEngineerBrainController() {
+    public WarEngineerBrainController()
+    {
         super();
-        bat = 0;
         nbMove = 0;
     }
 
     @Override
-    public String action() {
-    	
-    	
+    public String action()
+    {
     	if (getHealth() <= WarEngineer.MAX_HEALTH && !isBagEmpty())
             return eat();
     	
@@ -59,27 +57,22 @@ public abstract class WarEngineerBrainController extends WarEngineerBrain {
             }
         }
     	
-    	if(nbMove == 100)
+    	if(nbMove == 200)
     	{
     		nbMove = 0;
-    		if(bat == 0)
+    		double rand = Math.random();
+    		if(rand < 0.15)
     		{
-    			bat++;
-    			bat %= 3;
     			setNextBuildingToBuild(WarAgentType.WarBase);
     			return build();
     		}
-    		else if(bat == 1)
+    		else if(rand < 0.3)
     		{
-    			bat++;
-    			bat %= 3;
     			setNextBuildingToBuild(WarAgentType.WarTurret);
     			return build();
     		}
-    		else
+    		else if(rand < 0.4)
     		{
-    			bat++;
-    			bat %= 3;
     			setNextBuildingToBuild(WarAgentType.Wall);
     			return build();
     		}

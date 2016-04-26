@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,17 +18,17 @@ import edu.warbot.game.WarGameSettings;
 import edu.warbot.gui.GuiIconsLoader;
 
 @SuppressWarnings("serial")
-public class AdvancedSettingsInterface  extends JFrame
+public class AdvancedSettingsDialog  extends JDialog
 {
-	private WarGameSettings settings;
+	private WarGameSettings _settings;
     private JComboBox<String> cbLogLevel;
     private JCheckBox cbEnhancedGraphismEnabled;
 	
-	public AdvancedSettingsInterface(WarGameSettings settings)
+	public AdvancedSettingsDialog(WarGameSettings settings, JFrame owner)
 	{
-		super("Paramètres avancés");
+		super(owner, "Paramètres avancés", true);
         setLayout(new BorderLayout());
-        this.settings = settings;
+        _settings = settings;
         
         setIconImage(GuiIconsLoader.getLogo("iconLauncher.png").getImage());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -45,7 +46,6 @@ public class AdvancedSettingsInterface  extends JFrame
 		panelAdvanced.add(cbEnhancedGraphismEnabled, BorderLayout.SOUTH);
 		
 		add(panelAdvanced, BorderLayout.CENTER);
-		
 		
 		JPanel panelBas = new JPanel();
 
@@ -74,8 +74,14 @@ public class AdvancedSettingsInterface  extends JFrame
 	
 	private void validEnteredSettings()
 	{
-		settings.setDefaultLogLevel((Level.parse((String) cbLogLevel.getSelectedItem())));
-		settings.setEnabledEnhancedGraphism(cbEnhancedGraphismEnabled.isSelected());
+		_settings.setDefaultLogLevel((Level.parse((String) cbLogLevel.getSelectedItem())));
+		_settings.setEnabledEnhancedGraphism(cbEnhancedGraphismEnabled.isSelected());
 		dispose();
+	}
+	
+	public void dispose()
+	{
+		super.dispose();
+		
 	}
 }
