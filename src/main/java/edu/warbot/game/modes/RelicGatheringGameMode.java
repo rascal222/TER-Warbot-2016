@@ -13,6 +13,7 @@ import edu.warbot.exceptions.UnauthorizedAgentException;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.game.WarGame;
 import edu.warbot.game.WarGameSettings;
+import edu.warbot.game.modes.endCondition.RelicGatheringEndCondition;
 import edu.warbot.game.modes.endCondition.ResourcesRunEndCondition;
 import edu.warbot.maps.AbstractWarMap;
 import edu.warbot.tools.geometry.CartesianCoordinates;
@@ -31,7 +32,7 @@ public class RelicGatheringGameMode extends WarGame {
 		//this.resourcesNeededToWin = (Integer) args[0];
 		this.resourcesNeededToWin = 10;
 		this.selectedPosition = getMap().getTeamsPositions().get(0).get(new Random().nextInt(getMap().getTeamsPositions().get(0).size()));
-		this.setEndCondition(new ResourcesRunEndCondition(this, resourcesNeededToWin));
+		this.setEndCondition(new RelicGatheringEndCondition(this, resourcesNeededToWin));
 	}
 
 	@Override

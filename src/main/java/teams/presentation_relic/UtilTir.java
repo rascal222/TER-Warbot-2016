@@ -19,7 +19,7 @@ public abstract class UtilTir {
 			double headingCible,
 			double angleCible) {
 		//System.out.println("="+);
-		System.out.println("angleCible="+angleCible);
+//		System.out.println("angleCible="+angleCible);
 		double angleCibleTrans = angleCible;
 		
 		double angleCibleRelativeTireur = headingCible - angleCibleTrans;
@@ -29,18 +29,18 @@ public abstract class UtilTir {
 		
 		
 		
-		System.out.println("Calcul Tir");
-
-		System.out.println("angleCibleRelativeTireur="+angleCibleRelativeTireur);
+//		System.out.println("Calcul Tir");
+//
+//		System.out.println("angleCibleRelativeTireur="+angleCibleRelativeTireur);
 		double directionCibleRelativeTireur = Math.toRadians(angleCibleRelativeTireur);
-		System.out.println("Math.sin(directionCibleRelativeTireur)="+Math.sin(directionCibleRelativeTireur));
+//		System.out.println("Math.sin(directionCibleRelativeTireur)="+Math.sin(directionCibleRelativeTireur));
 		double vitesseAngulaireCible = vitesseCible * Math.abs(Math.sin(directionCibleRelativeTireur));
-		System.out.println("vitesseAngulaireCible="+vitesseAngulaireCible);
+//		System.out.println("vitesseAngulaireCible="+vitesseAngulaireCible);
 		double deltaPos = distanceCibleTireur;
 		double deltaVitesse = vitesseProjectile - vitesseAngulaireCible;
-		System.out.println("distance="+distanceCibleTireur);
+//		System.out.println("distance="+distanceCibleTireur);
 		double tempsAvantCollision = deltaPos/deltaVitesse;
-		System.out.println("tempsAvantCollision="+tempsAvantCollision);
+//		System.out.println("tempsAvantCollision="+tempsAvantCollision);
 		double distanceParcourueCible = vitesseCible * tempsAvantCollision;
 		double distanceParcourueProjectile = vitesseProjectile * tempsAvantCollision;
 		
@@ -49,7 +49,7 @@ public abstract class UtilTir {
 				+ (distanceParcourueProjectile * distanceParcourueProjectile);
 		double denominateurCosAngleDeTir = 2.0 * distanceCibleTireur * distanceParcourueProjectile;
 		double cosAngleDeTir = numerateurCosAngleDeTir / denominateurCosAngleDeTir;
-		System.out.println("cosAngleDeTir="+cosAngleDeTir);
+//		System.out.println("cosAngleDeTir="+cosAngleDeTir);
 		
 		double angleDeTir;
 		if (headingCible<90 && headingCible>270) {
@@ -60,7 +60,7 @@ public abstract class UtilTir {
 		}
 		
 		
-		System.out.println("angleDeTir="+angleDeTir);
+//		System.out.println("angleDeTir="+angleDeTir);
 		//return angleDeTir;	
 		return angleDeTir;
 	}

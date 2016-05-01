@@ -2,7 +2,6 @@ package teams.presentation_relic;
 
 import edu.warbot.agents.agents.WarExplorer;
 import edu.warbot.agents.agents.WarTurret;
-import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.agents.percepts.WarAgentPercept;
 import edu.warbot.agents.projectiles.WarShell;
 import edu.warbot.brains.brains.WarTurretBrain;
@@ -23,11 +22,9 @@ public abstract class WarTurretBrainController extends WarTurretBrain
     public String action()
     {
     	this.setDebugString("Activé");
-    	//_sight += 90;
-        //if (_sight == 360) {
-        //    _sight = 0;
-        //}
-        //setHeading(_sight);
+    	_sight += 180;
+    	_sight %= 360;
+        setHeading(_sight);
         
         List<WarAgentPercept> percepts = getPercepts();
         for (WarAgentPercept p : percepts) {

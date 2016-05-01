@@ -52,7 +52,7 @@ WarAgents:
             AngleOfView: 180.0
             DistanceOfView: 50.0
             Cost: 3000
-            MaxHealth: 3000
+            MaxHealth: 200
             BagSize: 4
             Speed: 1.2
             Armor: 0

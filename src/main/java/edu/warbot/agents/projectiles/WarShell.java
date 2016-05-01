@@ -50,6 +50,7 @@ public class WarShell extends WarProjectile {
                                 a)) {
                         	if (a instanceof AliveWarAgent) {
                                 ((AliveWarAgent) a).damage(getDamage());
+                                return;
                             }
                         }
                         currentStep += 1.0;
@@ -60,6 +61,7 @@ public class WarShell extends WarProjectile {
                             a)) {
                     	if (a instanceof AliveWarAgent) {
                             ((AliveWarAgent) a).damage(getDamage());
+                            return;
                         }
                     }
                 }
