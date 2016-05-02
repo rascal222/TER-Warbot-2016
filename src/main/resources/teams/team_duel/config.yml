@@ -1,0 +1,15 @@
+Name: Team duel
+IconPath: test.png
+SoundPath: dekat.wav
+Description: |
+    Equipe de test de debug et feature
+BrainsPackage: teams.team_duel
+AgentsBrainClasses:
+    WarBase: WarBaseBrainController
+    WarExplorer: WarExplorerBrainController
+    WarLight: WarLightBrainController
+    WarHeavy: WarHeavyBrainController
+    WarRocketLauncher: WarRocketLauncherBrainController
+    WarKamikaze: WarKamikazeBrainController
+    WarEngineer: WarEngineerBrainController
+    WarTurret: WarTurretBrainController
