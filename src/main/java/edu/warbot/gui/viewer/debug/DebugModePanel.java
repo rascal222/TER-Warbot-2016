@@ -1,12 +1,11 @@
 package edu.warbot.gui.viewer.debug;
 
+import edu.warbot.game.WarGame;
 import edu.warbot.gui.GuiIconsLoader;
 import edu.warbot.launcher.AbstractWarViewer;
-import madkit.action.SchedulingAction;
-import madkit.message.SchedulingMessage;
-import turtlekit.agr.TKOrganization;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,8 +62,7 @@ public class DebugModePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 _viewer.getDebugModePanel().setVisible(btnDebug.isSelected());
                 if (btnDebug.isSelected()) {
-                    _viewer.sendMessage(_viewer.getCommunity(), TKOrganization.ENGINE_GROUP, TKOrganization.SCHEDULER_ROLE,
-                            new SchedulingMessage(SchedulingAction.PAUSE));
+                	WarGame.getInstance().setGamePaused();
                 }
             }
         });

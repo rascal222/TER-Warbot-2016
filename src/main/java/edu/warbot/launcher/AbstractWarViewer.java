@@ -1,25 +1,41 @@
 package edu.warbot.launcher;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JToolBar;
+
+import madkit.simulation.probe.SingleAgentProbe;
+import turtlekit.agr.TKOrganization;
+import turtlekit.kernel.TKScheduler;
+import turtlekit.viewer.AbstractGridViewer;
 import edu.warbot.agents.ControllableWarAgent;
 import edu.warbot.agents.WarAgent;
 import edu.warbot.agents.percepts.WarAgentPercept;
 import edu.warbot.game.WarGame;
+import edu.warbot.game.listeners.WarGameAdapter;
+import edu.warbot.gui.launcher.GameResultsDialog;
 import edu.warbot.gui.viewer.MapExplorationListener;
 import edu.warbot.gui.viewer.WarToolBar;
 import edu.warbot.gui.viewer.debug.DebugModePanel;
 import edu.warbot.gui.viewer.stats.GameStatsPanel;
 import edu.warbot.tools.geometry.CartesianCoordinates;
-import madkit.simulation.probe.SingleAgentProbe;
-import turtlekit.agr.TKOrganization;
-import turtlekit.kernel.TKScheduler;
-import turtlekit.viewer.AbstractGridViewer;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseWheelListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public abstract class AbstractWarViewer extends AbstractGridViewer {
@@ -39,8 +55,7 @@ public abstract class AbstractWarViewer extends AbstractGridViewer {
     private WarGame game;
 
     private boolean isRenderable;
-
-
+    
     public AbstractWarViewer(WarGame warGame, boolean isRenderable) {
         super();
         this.isRenderable = isRenderable;
@@ -64,8 +79,24 @@ public abstract class AbstractWarViewer extends AbstractGridViewer {
     @Override
     public void setupFrame(final JFrame frame) {
         super.setupFrame(frame);
+        
+        WarGame.addWarGameListener(new WarGameAdapter(){
+        	@Override
+        	public void onGameOver()
+        	{
+        		new GameResultsDialog(frame);
+        		WarGame.removeWarGameListener(this);
+        	}
+        });
+        
+        WindowListener[] wl = (WindowListener[])frame.getListeners(WindowListener.class);
+        for (int i = 0; i < wl.length; i++) {
+            frame.removeWindowListener(wl[i]);
+        }
+        
         for (MouseWheelListener listener : getDisplayPane().getMouseWheelListeners())
             getDisplayPane().removeMouseWheelListener(listener);
+        
         setDisplayPane(new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -75,8 +106,13 @@ public abstract class AbstractWarViewer extends AbstractGridViewer {
         });
         frame.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosed(WindowEvent e) {
-                game.stopGame();
+            public void windowClosing(WindowEvent e) {
+            	WarGame.getInstance().setGamePaused();
+            	int confirmation = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir arrêter le combat ?", "Demande de confirmation", JOptionPane.YES_NO_OPTION);
+            	if (confirmation == JOptionPane.YES_OPTION)
+            		WarGame.getInstance().setGameOver();
+            	else
+            		WarGame.getInstance().setGameResumed();
             }
         });
         frame.getContentPane().remove(((BorderLayout) frame.getContentPane().getLayout()).getLayoutComponent(BorderLayout.PAGE_START));
@@ -129,12 +165,26 @@ public abstract class AbstractWarViewer extends AbstractGridViewer {
         toolBar.addSeparator();
         JToolBar schedulerToolBar = tkScheduler.getSchedulerToolBar();
         schedulerToolBar.setFloatable(false);
+        
+        ((Component) schedulerToolBar.getComponents()[0]).addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e){
+				WarGame.getInstance().setGameResumed();
+			}
+        });
+        
+        ((Component) schedulerToolBar.getComponents()[1]).addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e){
+				WarGame.getInstance().setGamePaused();
+			}
+        });
+        
         toolBar.add(schedulerToolBar);
         toolBar.add(tkScheduler.getGVTLabel());
 
         return toolBar;
     }
-
 
     @Override
     protected void render(Graphics g) {
@@ -199,5 +249,4 @@ public abstract class AbstractWarViewer extends AbstractGridViewer {
     public void setMapExplorationEventsEnabled(boolean bool) {
         mapExplorationMouseListener.setOnlyRightClick(!bool);
     }
-
 }

@@ -13,4 +13,8 @@ public interface WarGameListener {
     void onGameStopped();
 
     void onGameStarted();
+    
+    void onGamePaused();
+    
+    void onGameResumed();
 }

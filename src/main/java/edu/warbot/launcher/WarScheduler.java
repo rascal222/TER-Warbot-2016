@@ -1,9 +1,5 @@
 package edu.warbot.launcher;
 
-import edu.warbot.agents.WarAgent;
-import edu.warbot.game.InGameTeam;
-import edu.warbot.game.WarGame;
-import edu.warbot.game.listeners.WarGameListener;
 import madkit.action.KernelAction;
 import madkit.agr.LocalCommunity;
 import madkit.agr.LocalCommunity.Groups;
@@ -12,6 +8,10 @@ import madkit.message.KernelMessage;
 import madkit.simulation.activator.GenericBehaviorActivator;
 import turtlekit.agr.TKOrganization;
 import turtlekit.kernel.TKScheduler;
+import edu.warbot.agents.WarAgent;
+import edu.warbot.game.InGameTeam;
+import edu.warbot.game.WarGame;
+import edu.warbot.game.listeners.WarGameListener;
 
 public class WarScheduler extends TKScheduler implements WarGameListener {
 
@@ -37,7 +37,7 @@ public class WarScheduler extends TKScheduler implements WarGameListener {
 
         setDelay(INITIAL_DELAY);
 
-        game.addWarGameListener(this);
+        WarGame.addWarGameListener(this);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class WarScheduler extends TKScheduler implements WarGameListener {
 
     @Override
     public void onGameStopped() {
-        game.removeWarGameListener(this);
+        WarGame.removeWarGameListener(this);
         sendMessage(
                 LocalCommunity.NAME,
                 Groups.SYSTEM,
@@ -100,9 +100,21 @@ public class WarScheduler extends TKScheduler implements WarGameListener {
     }
 
     @Override
-    public void onGameStarted() {
-    }
+    public void onGameStarted()
+    {}
+    
+    @Override
+	public void onGamePaused()
+    {
+        setSimulationState(SimulationState.PAUSED);
+	}
 
+	@Override
+	public void onGameResumed()
+	{
+        setSimulationState(SimulationState.RUNNING);
+	}
+    
     public WarGame getGame() {
         return game;
     }

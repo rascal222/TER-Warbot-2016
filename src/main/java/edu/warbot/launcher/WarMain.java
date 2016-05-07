@@ -1,5 +1,28 @@
 package edu.warbot.launcher;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.ParseException;
+
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl.LwjglCanvas;
+
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.agents.teams.ScriptedTeam;
 import edu.warbot.agents.teams.Team;
@@ -12,13 +35,8 @@ import edu.warbot.game.WarGameSettings;
 import edu.warbot.game.listeners.WarGameListener;
 import edu.warbot.gui.launcher.LoadingDialog;
 import edu.warbot.gui.launcher.WarLauncherInterface;
+import edu.warbot.gui.viewer.gdx.WarViewerGdx;
 import edu.warbot.loader.TeamLoader;
-import org.apache.commons.cli.*;
-
-import javax.swing.*;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class WarMain implements WarGameListener {
 
@@ -34,15 +52,19 @@ public class WarMain implements WarGameListener {
 
     private WarLauncherInterface launcherInterface;
     private Map<String, Team> availableTeams;
-
+    
+    private WarViewerGdx gdxGame;
+    private JFrame gdxFrame;
 
     public WarMain() {
+        WarGame.addWarGameListener(this);
+        
         availableTeams = new HashMap<>();
         settings = new WarGameSettings();
 
         // On récupère les équipes
-        LoadingDialog loadDial = new LoadingDialog("Chargement des équipes...");
-        loadDial.setVisible(true);
+        loadingDialog = new LoadingDialog("Chargement des équipes...");
+        loadingDialog.setVisible(true);
 
         TeamLoader tl = new TeamLoader();
         
@@ -54,16 +76,38 @@ public class WarMain implements WarGameListener {
             final WarMain warMain = this;
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    launcherInterface = new WarLauncherInterface(warMain, settings);
-                    launcherInterface.setVisible(true);
+					launcherInterface = new WarLauncherInterface(warMain, settings);
+					launcherInterface.setVisible(true);
+                  
+					LwjglApplicationConfiguration configCanvas = new LwjglApplicationConfiguration();
+					gdxGame = new WarViewerGdx(800, 600);
+					LwjglCanvas gameCanvas = new LwjglCanvas(gdxGame, configCanvas);
+					gdxFrame = new JFrame("Warbot 2.5D !!");
+					gdxFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+					gdxFrame.addWindowListener(new WindowAdapter() {
+			            @Override
+			            public void windowClosing(WindowEvent e) {
+			            	WarGame.getInstance().setGamePaused();
+			            	int confirmation = JOptionPane.showConfirmDialog(null, "Voulez-vous fermer la fenêtre graphique ?", "Demande de confirmation", JOptionPane.YES_NO_OPTION);
+			            	if (confirmation == JOptionPane.YES_OPTION)
+			            		gdxFrame.setVisible(false);
+			            	WarGame.getInstance().setGameResumed();
+			            }
+			        });
+					gdxFrame.setAlwaysOnTop(true);
+					gdxFrame.add(gameCanvas.getCanvas());
+					gdxFrame.setSize(800, 600);
+					gdxFrame.setVisible(true);
+					gdxFrame.setVisible(false);
+					
                 }
             });
         } else {
             JOptionPane.showMessageDialog(null, "Aucune équipe n'a été trouvé dans le dossier \"" + TEAMS_DIRECTORY_NAME + "\"",
                     "Aucune équipe", JOptionPane.ERROR_MESSAGE);
         }
-
-        loadDial.dispose();
+        
+        loadingDialog.setVisible(false);
     }
 
     public WarMain(WarGameSettings settings, String... selectedTeamsName) throws WarCommandException {
@@ -171,7 +215,7 @@ public class WarMain implements WarGameListener {
     }
 
     public void startGame() {
-        loadingDialog = new LoadingDialog("Lancement de la simulation...");
+        loadingDialog.setMessage("Lancement de la simulation...");
         loadingDialog.setVisible(true);
         start();
     }
@@ -180,7 +224,6 @@ public class WarMain implements WarGameListener {
         game = WarGame.createGameFromSettings(settings);
         WarLauncher launcher = new WarLauncher(game);
         launcher.executeLauncher();
-        game.addWarGameListener(this);
     }
 
     public Map<String, Team> getAvailableTeams() {
@@ -199,10 +242,8 @@ public class WarMain implements WarGameListener {
 
     @Override
     public void onGameOver() {
-        if (launcherInterface != null) {
-            launcherInterface.displayGameResults(game);
-        }
-        else { // Si la simulation a été lancée depuis la ligne de commande
+        if (launcherInterface == null)
+        { // Si la simulation a été lancée depuis la ligne de commande
             String finalTeams = "";
             for (InGameTeam team : game.getPlayerTeams()) {
                 finalTeams += team.getName() + ", ";
@@ -213,13 +254,13 @@ public class WarMain implements WarGameListener {
             } else {
                 logger.log(Level.INFO, "Ex-Aequo entre les équipes : " + finalTeams);
             }
-            game.stopGame();
+            game.setGameStopped();
         }
     }
 
     @Override
     public void onGameStopped() {
-        game.removeWarGameListener(this);
+    	gdxFrame.setVisible(false);
         for (int i = 0; i < game.getAllTeams().size(); ++i) {
             game.getAllTeams().get(i).removeAllAgents();
         }
@@ -228,11 +269,15 @@ public class WarMain implements WarGameListener {
         settings.prepareForNewGame();
         logger.log(Level.INFO, "Reset settings");
         launcherInterface.setVisible(true);
+        launcherInterface.revalidate();
+        launcherInterface.repaint();
     }
 
     @Override
     public void onGameStarted() {
-        loadingDialog.dispose();
+        loadingDialog.setVisible(false);
+        if(settings.isEnabledEnhancedGraphism())
+        	gdxFrame.setVisible(true);
     }
 
     public void reloadTeams(boolean dialog) {
@@ -244,8 +289,8 @@ public class WarMain implements WarGameListener {
         for (String key : othersTeam)
             availableTeams.remove(key);
 
-        LoadingDialog loadDial = new LoadingDialog("Chargement des équipes...");
-        loadDial.setVisible(dialog);
+        loadingDialog.setMessage("Chargement des équipes...");
+        loadingDialog.setVisible(dialog);
         TeamLoader tl = new TeamLoader();
         // On initialise la liste des équipes existantes dans le dossier "teams"
         try {
@@ -253,7 +298,19 @@ public class WarMain implements WarGameListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        loadDial.dispose();
+        loadingDialog.setVisible(false);
 
     }
+
+	@Override
+	public void onGamePaused() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameResumed() {
+		// TODO Auto-generated method stub
+		
+	}
 }

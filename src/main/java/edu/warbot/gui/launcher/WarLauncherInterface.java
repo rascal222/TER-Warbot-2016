@@ -1,18 +1,28 @@
 package edu.warbot.gui.launcher;
 
-import edu.warbot.game.WarGame;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+import com.badlogic.gdx.Gdx;
+
 import edu.warbot.game.WarGameMode;
 import edu.warbot.game.WarGameSettings;
 import edu.warbot.gui.GuiIconsLoader;
 import edu.warbot.launcher.WarMain;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
 
 @SuppressWarnings("serial")
 public class WarLauncherInterface extends JFrame {
@@ -31,7 +41,7 @@ public class WarLauncherInterface extends JFrame {
         super("Warbot 3D");
         _settings = settings;
         _warMain = warMain;
-
+        
 		/* *** Fenêtre *** */
         // Dimensionnement de la fenêtre
         int minWidth = Integer.MAX_VALUE, minHeight = Integer.MAX_VALUE;
@@ -48,7 +58,7 @@ public class WarLauncherInterface extends JFrame {
             setMinimumSize(new Dimension(800, 600));
         
         setIconImage(GuiIconsLoader.getLogo("iconLauncher.png").getImage());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -78,10 +88,23 @@ public class WarLauncherInterface extends JFrame {
         leaveButton = new JButton("Quitter");
         leaveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(NORMAL);
+            	if(Gdx.app != null)
+            		Gdx.app.exit();
+            	else
+            		System.exit(NORMAL);
             }
         });
         panelBas.add(leaveButton);
+        
+        addWindowListener(new WindowAdapter() {
+        	@Override
+            public void windowClosing(WindowEvent windowEvent) {
+        		if(Gdx.app != null)
+	        		Gdx.app.exit();
+	        	else
+	        		System.exit(NORMAL);
+            }
+        });
         
         JButton advancedSettingsButton = new JButton("Avancés");
         advancedSettingsButton.addActionListener(new ActionListener() {
@@ -127,6 +150,7 @@ public class WarLauncherInterface extends JFrame {
         validEnteredSettings();
         setVisible(false);
         _warMain.startGame();
+        
     }
 
     public void reloadTeams(boolean dialog) {
@@ -144,10 +168,6 @@ public class WarLauncherInterface extends JFrame {
         	}
         }
         tabbedPaneMillieu.repaint();
-    }
-
-    public void displayGameResults(WarGame game) {
-        new GameResultsDialog(game);
     }
 
     public WarGameSettings getGameSettings() {

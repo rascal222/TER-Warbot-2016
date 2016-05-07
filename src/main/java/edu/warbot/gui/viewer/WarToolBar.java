@@ -1,12 +1,11 @@
 package edu.warbot.gui.viewer;
 
+import edu.warbot.game.WarGame;
 import edu.warbot.gui.GuiIconsLoader;
 import edu.warbot.launcher.AbstractWarViewer;
-import madkit.action.SchedulingAction;
-import madkit.message.SchedulingMessage;
-import turtlekit.agr.TKOrganization;
 
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,14 +31,12 @@ public class WarToolBar extends JToolBar implements ActionListener {
         btnEndGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                WarToolBar.this.viewer.sendMessage(WarToolBar.this.viewer.getCommunity(), TKOrganization.ENGINE_GROUP, TKOrganization.SCHEDULER_ROLE,
-                        new SchedulingMessage(SchedulingAction.PAUSE));
+                WarGame.getInstance().setGamePaused();
                 int confirmation = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir arrêter le combat ?", "Demande de confirmation", JOptionPane.YES_NO_OPTION);
                 if (confirmation == JOptionPane.YES_OPTION) {
                     getViewer().getGame().setGameOver();
                 } else {
-                    WarToolBar.this.viewer.sendMessage(WarToolBar.this.viewer.getCommunity(), TKOrganization.ENGINE_GROUP, TKOrganization.SCHEDULER_ROLE,
-                            new SchedulingMessage(SchedulingAction.RUN));
+                	WarGame.getInstance().setGameResumed();
                 }
             }
         });

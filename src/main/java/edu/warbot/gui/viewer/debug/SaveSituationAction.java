@@ -5,14 +5,13 @@ import edu.warbot.agents.ControllableWarAgent;
 import edu.warbot.agents.WarAgent;
 import edu.warbot.agents.WarProjectile;
 import edu.warbot.game.InGameTeam;
+import edu.warbot.game.WarGame;
 import edu.warbot.launcher.AbstractWarViewer;
 import edu.warbot.loader.situation.XMLSituationLoader;
 import edu.warbot.tools.WarXmlWriter;
-import madkit.action.SchedulingAction;
-import madkit.message.SchedulingMessage;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import turtlekit.agr.TKOrganization;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -21,6 +20,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
+
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -48,8 +48,7 @@ public class SaveSituationAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        warViewer.sendMessage(warViewer.getCommunity(), TKOrganization.ENGINE_GROUP,
-                TKOrganization.SCHEDULER_ROLE, new SchedulingMessage(SchedulingAction.PAUSE));
+        WarGame.getInstance().setGamePaused();
 
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);

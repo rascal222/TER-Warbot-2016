@@ -5,6 +5,7 @@ import edu.warbot.agents.WarAgent;
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.game.listeners.WarGameListener;
 import edu.warbot.game.modes.endCondition.AbstractEndCondition;
+import edu.warbot.gui.launcher.LoadingDialog;
 import edu.warbot.launcher.WarLauncher;
 import edu.warbot.launcher.WarScheduler;
 import edu.warbot.maps.AbstractWarMap;
@@ -31,7 +32,7 @@ public abstract class WarGame {
     private double timeLastSecond = -1;
     private Integer currentFPS = 0;
 
-    private List<WarGameListener> listeners;
+    private static List<WarGameListener> listeners = new ArrayList<>();
 
     private MotherNatureTeam _motherNature;
     private List<InGameTeam> playerInGameTeams;
@@ -43,10 +44,12 @@ public abstract class WarGame {
 
 	protected WarLauncher launcher;
 	protected WarScheduler scheduler;
+	
+	private static WarGame _instance;
 
     public WarGame(WarGameSettings settings) {
         this.settings = settings;
-        listeners = new ArrayList<>();
+//        listeners = new ArrayList<>();
         this._motherNature = new MotherNatureTeam(this);
         this.playerInGameTeams = settings.getSelectedInGameTeams();
         loserInGameTeams = new ArrayList<>();
@@ -181,15 +184,32 @@ public abstract class WarGame {
             listener.onGameOver();
     }
 
-    public void stopGame() {
+    public void setGameStopped() {
+    	LoadingDialog waitDialog = new LoadingDialog("Arrêt de la simulation...");
+    	waitDialog.setVisible(true);
+    	
         for (WarGameListener listener : getListeners())
             listener.onGameStopped();
+        
+        waitDialog.setVisible(false);
     }
 
     public void setGameStarted() {
         for (WarGameListener listener : getListeners())
             listener.onGameStarted();
     }
+    
+    public void setGamePaused()
+	{
+		for (WarGameListener listener : getListeners())
+            listener.onGamePaused();
+	}
+	
+	public void setGameResumed()
+	{
+		for (WarGameListener listener : getListeners())
+            listener.onGameResumed();
+	}
 
     protected void calculeFPS() {
         currentFPS++;
@@ -204,11 +224,11 @@ public abstract class WarGame {
         return FPS;
     }
 
-    public void addWarGameListener(WarGameListener warGameListener) {
+    public static void addWarGameListener(WarGameListener warGameListener) {
         listeners.add(warGameListener);
     }
 
-    public void removeWarGameListener(WarGameListener warGameListener) {
+    public static void removeWarGameListener(WarGameListener warGameListener) {
         listeners.remove(warGameListener);
     }
 
@@ -242,6 +262,7 @@ public abstract class WarGame {
     	WarGame game = null;
     	try {
     		game = settings.getGameMode().getGameModeClass().getConstructor(WarGameSettings.class, Object[].class).newInstance(settings, settings.getGameModeArguments());
+    		_instance = game;
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -253,4 +274,9 @@ public abstract class WarGame {
 	}
 
 	public abstract boolean authorizedAgent(InGameTeam inGameTeam, WarAgentType agentType);
+
+	public static WarGame getInstance()
+	{
+		return _instance;
+	}
 }
