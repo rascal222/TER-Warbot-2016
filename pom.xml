@@ -132,6 +132,26 @@
 	</dependencies>
 	
     <build>
+    
+    	<resources>
+    		<resource>
+    			<directory>src/main/java/edu/warbot</directory>
+    		</resource>
+    		
+    		<resource>
+    			<directory>src/main/java/teams</directory>
+    		</resource>
+    		
+    		<resource>
+    			<directory>src/main/resources</directory>
+    		</resource>
+    		
+    		<resource>
+    			<directory>assets</directory>
+    		</resource>
+    	</resources>
+    
+    
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

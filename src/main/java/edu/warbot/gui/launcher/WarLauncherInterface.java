@@ -2,8 +2,10 @@ package edu.warbot.gui.launcher;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -58,7 +60,7 @@ public class WarLauncherInterface extends JFrame {
             setMinimumSize(new Dimension(800, 600));
         
         setIconImage(GuiIconsLoader.getLogo("iconLauncher.png").getImage());
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -88,6 +90,8 @@ public class WarLauncherInterface extends JFrame {
         leaveButton = new JButton("Quitter");
         leaveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	for(Window w : Frame.getWindows())
+            		w.dispose();
             	if(Gdx.app != null)
             		Gdx.app.exit();
             	else
@@ -99,6 +103,8 @@ public class WarLauncherInterface extends JFrame {
         addWindowListener(new WindowAdapter() {
         	@Override
             public void windowClosing(WindowEvent windowEvent) {
+        		for(Window w : Frame.getWindows())
+            		w.dispose();
         		if(Gdx.app != null)
 	        		Gdx.app.exit();
 	        	else
