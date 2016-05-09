@@ -28,9 +28,7 @@ public class WarViewerMap implements WarViewerObject
 	public WarViewerMap(int id, String name, int mapWidth, int mapHeight, int tileWidth, int tileHeight) {
 		this.id = id;
 		this.name = name;
-//		map = new TmxMapLoader().load("maps/" + name + ".tmx");
 		map = WarViewerGdx.getMapTexture();
-//		renderer = new IsometricTiledMapRenderer(map);
 		renderer = WarViewerGdx.getMapRenderer();
 		MAP_WIDHT = mapWidth;
 		MAP_HEIGHT = mapHeight;

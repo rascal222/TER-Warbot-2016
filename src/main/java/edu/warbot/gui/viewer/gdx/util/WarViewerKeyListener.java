@@ -1,9 +1,7 @@
 package edu.warbot.gui.viewer.gdx.util;
 
-
-
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
@@ -14,11 +12,13 @@ public class WarViewerKeyListener implements InputProcessor {
 	
 	private OrthographicCamera camera;
 	
-	private float mouveCameraSpeed = 0.1f;
 	private final float zoomSpeed = 0.1f;
 	
 	private int xMouseLeftDown;
 	private int yMouseLeftDown;
+	
+	private float scaleX;
+	private float scaleY;
 	
 	public WarViewerKeyListener(OrthographicCamera camera) {
 		this.camera = camera;
@@ -71,13 +71,13 @@ public class WarViewerKeyListener implements InputProcessor {
 	public boolean scrolled(int arg0) {
 		switch (arg0) {
 		case -1: // molette haut
-			if (camera.zoom == 1.0) {
+			if (camera.zoom <= 0.2) {
 				return false;
 			}
-			camera.zoom -= zoomSpeed;
+			camera.zoom -= camera.zoom*zoomSpeed;
 			break;
 		case 1: // molette bas
-			camera.zoom += zoomSpeed;
+			camera.zoom += camera.zoom*zoomSpeed;
 			break;
 		}
 		return true;
@@ -92,16 +92,28 @@ public class WarViewerKeyListener implements InputProcessor {
 
 	@Override
 	public boolean touchDragged(int arg0, int arg1, int arg2) {
+		update();
 		Vector2 vect = new Vector2(xMouseLeftDown - arg0, yMouseLeftDown - arg1);
-		camera.translate(vect.x * mouveCameraSpeed, vect.y * (- mouveCameraSpeed));
+		xMouseLeftDown = arg0;
+		yMouseLeftDown = arg1;
+		camera.translate(vect.x*camera.zoom/scaleX, -vect.y*camera.zoom/scaleY);
+		
 		return true;
 	}
 
 	@Override
 	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
 		if (arg3 == 1) { //right click
-			camera.zoom = 1.0f;
+			camera.zoom = 4.0f;
+			camera.position.x = 3245;
+			camera.position.y = -100;
 		}
 		return true;
+	}
+	
+	private void update()
+	{
+		scaleX =  Gdx.graphics.getWidth() / camera.viewportWidth;
+		scaleY = Gdx.graphics.getHeight() / camera.viewportHeight;
 	}
 }

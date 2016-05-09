@@ -2,9 +2,12 @@ package edu.warbot.gui.viewer.gdx.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import edu.warbot.gui.viewer.gdx.WarViewerGdx;
 import edu.warbot.gui.viewer.gdx.WarViewerMap;
@@ -27,6 +30,9 @@ public class WarViewerScreen implements Screen
 	
 	private boolean showInfo;
 	private boolean showInitialsUnities;
+	
+	boolean gamePaused;
+    public BitmapFont font;
 
 	public WarViewerScreen(final WarViewerGdx gameGdx)
 	{
@@ -43,24 +49,34 @@ public class WarViewerScreen implements Screen
 		
 		showInfo = true;
 		showInitialsUnities = true;
+		
+		gamePaused = true;
+		font = gameGdx.font;
 	}
+	
+	@Override
+	public void show() {}
 
 	@Override
-	public void dispose()
-	{}
+	public void dispose() {}
 
 	@Override
 	public void hide() {}
 
 	@Override
-	public void pause() {}
-	
-	@Override
-	public void show()
+	public void pause()
 	{
-		world = new WarViewerWorld();
-		world.initEntities();
+		gamePaused = true;
 	}
+
+	@Override
+	public void resume()
+	{
+		gamePaused = false;
+	}
+
+	@Override
+	public void resize(int arg0, int arg1) {}
 
 	@Override
 	public void render(float delta)
@@ -111,13 +127,32 @@ public class WarViewerScreen implements Screen
 				entity.render(delta, camera, batch);
 			}
 		}
+		
+		if(gamePaused)
+		{
+			Gdx.gl.glEnable(GL20.GL_BLEND);
+			Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+		    
+		    float saveZoom = camera.zoom;
+			camera.zoom = 0.5f;
+			camera.update();
+			gameGdx.batch.setProjectionMatrix(camera.combined);
+
+			ShapeRenderer shapeRenderer = new ShapeRenderer();
+		    shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		    shapeRenderer.setProjectionMatrix(camera.combined);
+		    shapeRenderer.setColor(0,0,0,0.3f);
+			shapeRenderer.rect((camera.position.x - WarViewerGdx.WIDTH/2), (camera.position.y - WarViewerGdx.HEIGHT/2), WarViewerGdx.WIDTH, WarViewerGdx.HEIGHT);
+		    shapeRenderer.end();
+		    
+			batch.begin();
+				font.setColor(Color.WHITE);
+				font.draw(batch, "Simulation en pause", camera.position.x-font.getSpaceWidth()*"Simulation en pause     ".length(), camera.position.y);
+			batch.end();
+			
+			camera.zoom = saveZoom;
+		}
 	}
-
-	@Override
-	public void resize(int arg0, int arg1) {}
-
-	@Override
-	public void resume() {}
 
 	public OrthographicCamera getCamera() {
 		return camera;
@@ -145,5 +180,11 @@ public class WarViewerScreen implements Screen
 
 	public void setShowInitialsUnities(boolean showInitialsUnities) {
 		this.showInitialsUnities = showInitialsUnities;
+	}
+	
+	public void loadNewWorld()
+	{
+		world = new WarViewerWorld();
+		world.initEntities();
 	}
 }

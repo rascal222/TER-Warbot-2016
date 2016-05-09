@@ -1,5 +1,6 @@
 package edu.warbot.launcher;
 
+import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -97,9 +98,9 @@ public class WarMain implements WarGameListener {
 					gdxFrame.setAlwaysOnTop(true);
 					gdxFrame.add(gameCanvas.getCanvas());
 					gdxFrame.setSize(800, 600);
+					gdxFrame.setMinimumSize(new Dimension(450, 450));
 					gdxFrame.setVisible(true);
 					gdxFrame.setVisible(false);
-					
                 }
             });
         } else {

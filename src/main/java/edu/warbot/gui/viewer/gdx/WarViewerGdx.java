@@ -23,7 +23,7 @@ public class WarViewerGdx extends Game implements WarGameListener
 	public static int WIDTH;
 	public static int HEIGHT;
 	
-	private Screen gameScreen;
+	private WarViewerScreen gameScreen;
 	
 	public SpriteBatch batch;
     public BitmapFont font;
@@ -188,6 +188,7 @@ public class WarViewerGdx extends Game implements WarGameListener
 	@Override
 	public void onGameStarted()
 	{
+		gameScreen.loadNewWorld();
 		setScreen(gameScreen);
 	}
 

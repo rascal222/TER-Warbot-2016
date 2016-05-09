@@ -26,20 +26,37 @@ public class WarViewerPauseScreen implements Screen {
 	}
 
 	@Override
+	public void show() {
+//		batch = new SpriteBatch();
+//		font = new BitmapFont();
+//		BitmapFont.TextBounds tb = font.getBounds("Affichage en pause");
+//		
+//		x = WarViewerGdx.WIDTH / 2 - tb.width / 2;
+//		y = WarViewerGdx.HEIGHT / 2 - tb.height / 2;
+
+		x = WarViewerGdx.WIDTH / 2;
+		y = WarViewerGdx.HEIGHT / 2;
+	}
+
+	@Override
 	public void dispose() {}
 
 	@Override
-	public void hide() {
-
-	}
+	public void hide() {System.out.println("WarViewerPauseScreen begin/end hide");}
 
 	@Override
-	public void pause() {
-
-	}
+	public void pause() {System.out.println("WarViewerPauseScreen begin/end pause");}
 
 	@Override
-	public void render(float arg0) {
+	public void resume() {System.out.println("WarViewerPauseScreen begin/end resume");}
+
+	@Override
+	public void resize(int arg0, int arg1) {}
+
+	@Override
+	public void render(float arg0)
+	{
+		System.out.println("WarViewerPauseScreen begin/end render");
 		if (Gdx.input.isKeyPressed(Keys.ENTER) || Gdx.input.justTouched()) {
 			game.setScreen(game.getScreen());
 		}
@@ -51,29 +68,6 @@ public class WarViewerPauseScreen implements Screen {
 			font.setColor(Color.WHITE);
 			font.draw(batch, "Affichage en pause", x, y);
 		batch.end();
-	}
-
-	@Override
-	public void resize(int arg0, int arg1) {
-
-	}
-
-	@Override
-	public void resume() {
-
-	}
-
-	@Override
-	public void show() {
-//		batch = new SpriteBatch();
-//		font = new BitmapFont();
-//		BitmapFont.TextBounds tb = font.getBounds("Affichage en pause");
-//		
-//		x = WarViewerGdx.WIDTH / 2 - tb.width / 2;
-//		y = WarViewerGdx.HEIGHT / 2 - tb.height / 2;
-
-		x = WarViewerGdx.WIDTH / 2;
-		y = WarViewerGdx.HEIGHT / 2;
 	}
 
 }
