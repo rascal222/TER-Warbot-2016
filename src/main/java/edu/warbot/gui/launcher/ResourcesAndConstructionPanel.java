@@ -20,8 +20,8 @@ public class ResourcesAndConstructionPanel extends WarGameModePanel
 		setNbTeams(2);
 		WarAgentType[] authorizedAgentsTeams = {WarAgentType.WarBase, WarAgentType.WarExplorer, WarAgentType.WarEngineer, WarAgentType.WarTurret, WarAgentType.Wall};
 		setAuthorizedAgentsTeams(authorizedAgentsTeams);
-		setNbIas(0);
-		setAuthorizedAgentsIas(null);
+		setNbComputers(0);
+		setAuthorizedAgentsComputers(null);
 		setAuthorizedResourcesNature(WarAgentType.getAgentsOfCategories(WarAgentCategory.Resource));
 		constructPanel();
 	}

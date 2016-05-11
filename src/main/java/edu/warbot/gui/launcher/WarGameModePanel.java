@@ -37,14 +37,14 @@ public abstract class WarGameModePanel extends JPanel
     private HashMap<WarAgentType, WarAgentCountSlider> nbAgentsTeamsSliders;
     private ArrayList<TeamSelectionPanel> selectedTeams;
     
-    private HashMap<WarAgentType, WarAgentCountSlider> nbAgentsIasSliders;
-    private ArrayList<TeamSelectionPanel> selectedIas;
+    private HashMap<WarAgentType, WarAgentCountSlider> nbAgentsComputersSliders;
+    private ArrayList<TeamSelectionPanel> selectedComputers;
     
     private HashMap<WarAgentType, WarAgentCountSlider> resourcesRatesNatureSliders;
     
     // TODO ressources en début de partie
     //private HashMap<WarAgentType, WarAgentCountSlider> resourcesRatesTeamsSliders;
-    //private HashMap<WarAgentType, WarAgentCountSlider> resourcesRatesIasSliders;
+    //private HashMap<WarAgentType, WarAgentCountSlider> resourcesRatesComputersSliders;
     
     private MapMiniature currentDisplayedMapMiniature;
     
@@ -55,11 +55,11 @@ public abstract class WarGameModePanel extends JPanel
     private String gameModeDescription;
     private int nbTeams;
     // private ArrayList<Team> teams;
-    private int nbIas;
-    // private ArrayList<Team> ias;
+    private int nbComputers;
+    // private ArrayList<Team> computerss;
 
     private WarAgentType[] authorizedAgentsTeams;
-    private WarAgentType[] authorizedAgentsIas;
+    private WarAgentType[] authorizedAgentsComputers;
     private WarAgentType[] authorizedResourcesNature;
     
 	public WarGameModePanel(WarGameSettings settings, Map<String, Team> availableTeams, WarLauncherInterface mainFrame)
@@ -71,16 +71,16 @@ public abstract class WarGameModePanel extends JPanel
 
 		nbAgentsTeamsSliders = new HashMap<WarAgentType, WarAgentCountSlider>();
 		selectedTeams = new ArrayList<TeamSelectionPanel>();
-		nbAgentsIasSliders = new HashMap<WarAgentType, WarAgentCountSlider>();
-		selectedIas = new ArrayList<TeamSelectionPanel>();
+		nbAgentsComputersSliders = new HashMap<WarAgentType, WarAgentCountSlider>();
+		selectedComputers = new ArrayList<TeamSelectionPanel>();
 		resourcesRatesNatureSliders = new HashMap<WarAgentType, WarAgentCountSlider>();
 		
 		// Init des param par défaut
 		setGameModeDescription("Le constructeur de la classe mère a été appelé, veuillez personnaliser le panel de ce mode de jeu (au minimum cette description).");
 		setNbTeams(2);
-		setNbIas(2);
+		setNbComputers(2);
 	    setAuthorizedAgentsTeams(WarAgentType.getControllableAgentTypes());
-	    setAuthorizedAgentsIas(WarAgentType.getControllableAgentTypes());
+	    setAuthorizedAgentsComputers(WarAgentType.getControllableAgentTypes());
 	    setAuthorizedResourcesNature(WarAgentType.getAgentsOfCategories(WarAgentCategory.Resource));
 	}
 	
@@ -115,7 +115,7 @@ public abstract class WarGameModePanel extends JPanel
 	        JPanel nbAgentsPanel = new JPanel(new BorderLayout());
 	        nbAgentsPanel.setBorder(new TitledBorder("Agents"));
 	        
-	        // Onglets contenant les sliders nb agents/food des teams/ias
+	        // Onglets contenant les sliders nb agents/food des teams/computers
 	        JTabbedPane slidersTabbedPane = new JTabbedPane();
 	        
 	        // Onglet teams
@@ -137,21 +137,21 @@ public abstract class WarGameModePanel extends JPanel
         	}
 		        
 	        // Onglet ordinateurs
-	        if(authorizedAgentsIas!=null)
+	        if(authorizedAgentsComputers!=null)
 	        {
-		        JPanel nbAgentsIasPanel = new JPanel();
-		        nbAgentsIasPanel.setLayout(new BoxLayout(nbAgentsIasPanel, BoxLayout.Y_AXIS));
+		        JPanel nbAgentsComputersPanel = new JPanel();
+		        nbAgentsComputersPanel.setLayout(new BoxLayout(nbAgentsComputersPanel, BoxLayout.Y_AXIS));
 		
 		        // Controllables
-		        for (WarAgentType a : authorizedAgentsIas) {
+		        for (WarAgentType a : authorizedAgentsComputers) {
 		            WarAgentCountSlider slider = new WarAgentCountSlider("Nombre de " + a.toString(),
 		                    0, 30, UserPreferences.getNbAgentsAtStartOfType(a.toString()), 1, 10);
-		            nbAgentsIasSliders.put(a, slider);
-		            nbAgentsIasPanel.add(slider);
+		            nbAgentsComputersSliders.put(a, slider);
+		            nbAgentsComputersPanel.add(slider);
 		        }
-		        JScrollPane agentsIasScrollPanel = new JScrollPane(nbAgentsIasPanel);
-		        agentsIasScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		        slidersTabbedPane.add("Ordinateurs", agentsIasScrollPanel);
+		        JScrollPane agentsComputersScrollPanel = new JScrollPane(nbAgentsComputersPanel);
+		        agentsComputersScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		        slidersTabbedPane.add("Ordinateurs", agentsComputersScrollPanel);
 	        }
 	        
 	        // Onglet nature
@@ -247,37 +247,37 @@ public abstract class WarGameModePanel extends JPanel
 	        selectionPanel.add(teamsPanelMarginExt, gridOfSelection);
         }
         
-        // Panel proposant difficulté/équipe de l'IA
-        if(nbIas!=0)
+        // Panel proposant difficulté/équipe de l'ordinateur
+        if(nbComputers!=0)
         {
-	    	JPanel iaPanel = new JPanel();
-	    	iaPanel.setLayout(new GridBagLayout());
-	    	iaPanel.setBorder(new TitledBorder("Choix des ordinateurs"));
-	        GridBagConstraints gridOfIa = new GridBagConstraints();
+	    	JPanel computerPanel = new JPanel();
+	    	computerPanel.setLayout(new GridBagLayout());
+	    	computerPanel.setBorder(new TitledBorder("Choix des ordinateurs"));
+	        GridBagConstraints gridOfComputer = new GridBagConstraints();
 	        
-	        for(int i=0; i<nbIas; i++)
+	        for(int i=0; i<nbComputers; i++)
 	        {
-	        	selectedIas.add(new TeamSelectionPanel(_availableTeams, true));
+	        	selectedComputers.add(new TeamSelectionPanel(_availableTeams, true));
 	
-		        // Ajout des équipes au panel ia
-		        gridOfIa.fill = GridBagConstraints.HORIZONTAL;
-		        gridOfIa.weightx = 0.5;
-		        gridOfIa.gridx = 0;
-		        gridOfIa.gridy = i;
-		        iaPanel.add(selectedIas.get(i), gridOfIa);
+		        // Ajout des équipes au panel ordinateur
+		        gridOfComputer.fill = GridBagConstraints.HORIZONTAL;
+		        gridOfComputer.weightx = 0.5;
+		        gridOfComputer.gridx = 0;
+		        gridOfComputer.gridy = i;
+		        computerPanel.add(selectedComputers.get(i), gridOfComputer);
 	        }
 	        
-	        // Ajout du panel ia au panel selection (panel de la tab)
-	        gridOfIa.fill = GridBagConstraints.HORIZONTAL;
-	        gridOfIa.weightx = 0.5;
-	        gridOfIa.gridx = 0;
-	        gridOfIa.gridy = incr_panelsOfSelection;
+	        // Ajout du panel ordinateur au panel selection (panel de la tab)
+	        gridOfComputer.fill = GridBagConstraints.HORIZONTAL;
+	        gridOfComputer.weightx = 0.5;
+	        gridOfComputer.gridx = 0;
+	        gridOfComputer.gridy = incr_panelsOfSelection;
 	        incr_panelsOfSelection++;
 	        // Ajout de marge
-	        JPanel iaPanelMarginExt = new JPanel(new BorderLayout());
-	        iaPanelMarginExt.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-	        iaPanelMarginExt.add(iaPanel, BorderLayout.CENTER);
-	        selectionPanel.add(iaPanelMarginExt, gridOfIa);
+	        JPanel computerPanelMarginExt = new JPanel(new BorderLayout());
+	        computerPanelMarginExt.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+	        computerPanelMarginExt.add(computerPanel, BorderLayout.CENTER);
+	        selectionPanel.add(computerPanelMarginExt, gridOfComputer);
         }
 	        
         // Panel vide (invisible) permettant de monter en haut les autres
@@ -331,7 +331,7 @@ public abstract class WarGameModePanel extends JPanel
 		}
 		for (WarAgentType agent : WarAgentType.values())
 		{
-			WarAgentCountSlider slider = nbAgentsIasSliders.get(agent);
+			WarAgentCountSlider slider = nbAgentsComputersSliders.get(agent);
 			if (slider != null)
 				_settings.setNbAgentOfType(agent, slider.getSelectedValue());
 		}
@@ -341,7 +341,7 @@ public abstract class WarGameModePanel extends JPanel
 		for(TeamSelectionPanel tsp : selectedTeams)
 			_settings.addSelectedTeam(tsp.getSelectedTeam());
 		
-		for(TeamSelectionPanel tsp : selectedIas)
+		for(TeamSelectionPanel tsp : selectedComputers)
 			_settings.addSelectedTeam(tsp.getSelectedTeam());
 	}
 
@@ -361,12 +361,12 @@ public abstract class WarGameModePanel extends JPanel
 		this.nbTeams = nbTeams;
 	}
 
-	public int getNbIas() {
-		return nbIas;
+	public int getNbComputers() {
+		return nbComputers;
 	}
 
-	public void setNbIas(int nbIas) {
-		this.nbIas = nbIas;
+	public void setNbComputers(int nbComputers) {
+		this.nbComputers = nbComputers;
 	}
 
 	public WarAgentType[] getAuthorizedAgentsTeams() {
@@ -377,12 +377,12 @@ public abstract class WarGameModePanel extends JPanel
 		this.authorizedAgentsTeams = authorizedAgentsTeams;
 	}
 
-	public WarAgentType[] getAuthorizedAgentsIas() {
-		return authorizedAgentsIas;
+	public WarAgentType[] getAuthorizedAgentsComputers() {
+		return authorizedAgentsComputers;
 	}
 
-	public void setAuthorizedAgentsIas(WarAgentType[] authorizedAgentsIas) {
-		this.authorizedAgentsIas = authorizedAgentsIas;
+	public void setAuthorizedAgentsComputers(WarAgentType[] authorizedAgentsComputers) {
+		this.authorizedAgentsComputers = authorizedAgentsComputers;
 	}
 
 	public WarAgentType[] getAuthorizedResourcesNature() {
@@ -395,7 +395,7 @@ public abstract class WarGameModePanel extends JPanel
 	
 	public void reloadTeams()
 	{
-		for(TeamSelectionPanel t : selectedIas)
+		for(TeamSelectionPanel t : selectedComputers)
 			t.reloadTeams();
 		
 		for(TeamSelectionPanel t : selectedTeams)

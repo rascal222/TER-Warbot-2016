@@ -13,13 +13,12 @@ import edu.warbot.exceptions.UnauthorizedAgentException;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.game.WarGame;
 import edu.warbot.game.WarGameSettings;
-import edu.warbot.game.modes.endCondition.RelicGatheringEndCondition;
-import edu.warbot.game.modes.endCondition.ResourcesRunEndCondition;
+import edu.warbot.game.modes.endCondition.ResourcesGatheringEndCondition;
 import edu.warbot.maps.AbstractWarMap;
 import edu.warbot.tools.geometry.CartesianCoordinates;
 import edu.warbot.tools.geometry.WarCircle;
 
-public class RelicGatheringGameMode extends WarGame {
+public class ResourcesGatheringGameMode extends WarGame {
 	
 	private static final int NB_POSITION_GENERATIONS_MAX_PER_TURRET = 500;
 	private static final int NB_POSITION_GENERATIONS_MAX_PER_FOOD = 500;
@@ -27,12 +26,12 @@ public class RelicGatheringGameMode extends WarGame {
 	private int resourcesNeededToWin;
 	private WarCircle selectedPosition;
 
-	public RelicGatheringGameMode(WarGameSettings settings, Object[] args) {
+	public ResourcesGatheringGameMode(WarGameSettings settings, Object[] args) {
 		super(settings);
 		//this.resourcesNeededToWin = (Integer) args[0];
 		this.resourcesNeededToWin = 10;
 		this.selectedPosition = getMap().getTeamsPositions().get(0).get(new Random().nextInt(getMap().getTeamsPositions().get(0).size()));
-		this.setEndCondition(new RelicGatheringEndCondition(this, resourcesNeededToWin));
+		this.setEndCondition(new ResourcesGatheringEndCondition(this, resourcesNeededToWin));
 	}
 
 	@Override

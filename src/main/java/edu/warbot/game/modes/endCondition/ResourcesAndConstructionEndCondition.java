@@ -4,12 +4,12 @@ import edu.warbot.agents.AliveWarAgent;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.game.WarGame;
 
-public class RessourcesAndConstructionEndCondition extends AbstractEndCondition
+public class ResourcesAndConstructionEndCondition extends AbstractEndCondition
 {
 	private int pointsNeededToWin;
     private InGameTeam winner;
 	
-	public RessourcesAndConstructionEndCondition(WarGame game, int pointsNeededToWin)
+	public ResourcesAndConstructionEndCondition(WarGame game, int pointsNeededToWin)
 	{
 		super(game);
 		this.pointsNeededToWin = pointsNeededToWin;

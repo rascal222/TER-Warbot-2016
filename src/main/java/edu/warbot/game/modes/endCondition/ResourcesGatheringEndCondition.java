@@ -6,12 +6,12 @@ import edu.warbot.agents.agents.WarExplorer;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.game.WarGame;
 
-public class RelicGatheringEndCondition extends AbstractEndCondition {
+public class ResourcesGatheringEndCondition extends AbstractEndCondition {
 
     private int resourcesNeededToWin;
     private InGameTeam winner;
 
-    public RelicGatheringEndCondition(WarGame game, int resourcesNeededToWin) {
+    public ResourcesGatheringEndCondition(WarGame game, int resourcesNeededToWin) {
         super(game);
         this.resourcesNeededToWin = resourcesNeededToWin;
     }

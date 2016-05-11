@@ -19,8 +19,8 @@ public class DuelPanel extends WarGameModePanel
 		setGameModeDescription("Détruisez toutes les bases ennemies. Une seule règle : il n'y a pas de règles !");
 		setNbTeams(2);
 		setAuthorizedAgentsTeams(WarAgentType.getControllableAgentTypes());
-		setNbIas(0);
-		setAuthorizedAgentsIas(null);
+		setNbComputers(0);
+		setAuthorizedAgentsComputers(null);
 		setAuthorizedResourcesNature(WarAgentType.getAgentsOfCategories(WarAgentCategory.Resource));
 		constructPanel();
 	}

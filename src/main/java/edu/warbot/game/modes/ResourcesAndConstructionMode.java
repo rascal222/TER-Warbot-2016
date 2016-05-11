@@ -13,7 +13,7 @@ import edu.warbot.game.InGameTeam;
 import edu.warbot.game.MotherNatureTeam;
 import edu.warbot.game.WarGame;
 import edu.warbot.game.WarGameSettings;
-import edu.warbot.game.modes.endCondition.RessourcesAndConstructionEndCondition;
+import edu.warbot.game.modes.endCondition.ResourcesAndConstructionEndCondition;
 import edu.warbot.maps.AbstractWarMap;
 import edu.warbot.tools.geometry.WarCircle;
 
@@ -22,7 +22,7 @@ public class ResourcesAndConstructionMode extends WarGame
 	public ResourcesAndConstructionMode(WarGameSettings settings, Object[] args)
 	{
 		super(settings);
-		this.setEndCondition(new RessourcesAndConstructionEndCondition(this, 100000));
+		this.setEndCondition(new ResourcesAndConstructionEndCondition(this, 100000));
 	}
 
 	@Override
