@@ -1,5 +1,8 @@
 package edu.warbot.gui.viewer.gdx.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -41,10 +44,14 @@ public class WarViewerEntityProjectile extends WarViewerEntity implements WarVie
 	
 	private void updatePosition() {
 		WarGame g = WarGame.getInstance();
-		for (WarProjectile projectile: g.getPlayerTeam(team.getName()).getProjectiles()) {
-			if (projectile.getID() == id) {
-				patchX = (int) projectile.getX();
-				patchY = (int) projectile.getY();
+		if(g.getPlayerTeam(team.getName()) != null)
+		{
+			List<WarProjectile> projectiles = new ArrayList<WarProjectile>(g.getPlayerTeam(team.getName()).getProjectiles());
+			for (WarProjectile projectile: projectiles) {
+				if (projectile.getID() == id) {
+					patchX = (int) projectile.getX();
+					patchY = (int) projectile.getY();
+				}
 			}
 		}
 	}

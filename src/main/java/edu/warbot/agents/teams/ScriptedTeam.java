@@ -95,8 +95,6 @@ public class ScriptedTeam extends JavaTeam {
 
     private Map<WarAgentType, Script> brainScripts = new HashMap<>();
 
-
-
     /**
      * @param teamName    Le nom d'une équipe
      * @param description La description d'une équipe
@@ -113,7 +111,6 @@ public class ScriptedTeam extends JavaTeam {
     public ScriptInterpreter getInterpreter() {
         return interpreter;
     }
-
 
     @Override
     public ControllableWarAgent instantiateControllableWarAgent(InGameTeam inGameTeam, WarAgentType warAgentType)
@@ -185,7 +182,6 @@ public class ScriptedTeam extends JavaTeam {
         return st;
     }
 
-
     public ScriptInterpreterLanguage getLanguage() {
         return language;
     }
@@ -193,7 +189,6 @@ public class ScriptedTeam extends JavaTeam {
     public void setLanguage(ScriptInterpreterLanguage language) {
         this.language = language;
     }
-
 
     public void addBrainScript(InputStream input, WarAgentType warAgentType) {
         try {

@@ -21,6 +21,7 @@ import javax.swing.JTabbedPane;
 
 import com.badlogic.gdx.Gdx;
 
+import edu.warbot.agents.teams.Team;
 import edu.warbot.game.WarGameMode;
 import edu.warbot.game.WarGameSettings;
 import edu.warbot.gui.GuiIconsLoader;
@@ -153,27 +154,17 @@ public class WarLauncherInterface extends JFrame {
      * Valid entered settings, hide this window and starts the game
      */
     public void startGame() {
-        validEnteredSettings();
+        if(_settings.getSituationLoader() == null)
+        	validEnteredSettings();
         setVisible(false);
         _warMain.startGame();
         
     }
 
-    public void reloadTeams(boolean dialog) {
-    	tabbedPaneMillieu.removeAll();
-        _warMain.reloadTeams(dialog);
-        for(WarGameMode wgm : WarGameMode.values())
-        {
-        	try
-        	{
-				tabbedPaneMillieu.add(wgm.toString(), wgm.getGameModePanelClass().getConstructor(WarGameSettings.class, Map.class, WarLauncherInterface.class).newInstance(_settings, _warMain.getAvailableTeams(), this));
-			}
-        	catch (InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e)
-        	{
-	            e.printStackTrace();
-        	}
-        }
-        tabbedPaneMillieu.repaint();
+    public void reloadTeams() {
+		_warMain.reloadTeams();
+		for(int i=0; i<tabbedPaneMillieu.getTabCount(); i++)
+			((WarGameModePanel) tabbedPaneMillieu.getComponentAt(i)).reloadTeams();
     }
 
     public WarGameSettings getGameSettings() {
@@ -183,5 +174,15 @@ public class WarLauncherInterface extends JFrame {
 	private void displayAdvancedSettingsInterface()
 	{
 	    new AdvancedSettingsDialog(_settings, this);
+	}
+	
+	public Map<String, Team> getAvailableTeams()
+	{
+		 return _warMain.getAvailableTeams();
+	}
+
+	public WarGameSettings getSettings()
+	{
+		return _settings;
 	}
 }

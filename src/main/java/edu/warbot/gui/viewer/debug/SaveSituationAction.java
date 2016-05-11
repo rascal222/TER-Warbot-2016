@@ -85,7 +85,13 @@ public class SaveSituationAction extends AbstractAction {
 
             Element rootElement = doc.createElement("WarSituation");
             doc.appendChild(rootElement);
-
+            
+            rootElement.appendChild(WarXmlWriter.createTextElement(doc,
+                    "WarGameMode", WarGame.getInstance().getSettings().getGameMode().toString()));
+            
+            rootElement.appendChild(WarXmlWriter.createTextElement(doc,
+                    "WarMap", WarGame.getInstance().getSettings().getSelectedMap().getClass().getSimpleName()));
+            
             Element teams = doc.createElement("Teams");
             rootElement.appendChild(teams);
             for (InGameTeam t : warViewer.getGame().getAllTeams()) {

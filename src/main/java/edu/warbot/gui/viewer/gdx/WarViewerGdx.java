@@ -55,57 +55,57 @@ public class WarViewerGdx extends Game implements WarGameListener
 		textures.put(
 				"base_blue",
 				new Texture(Gdx.files
-						.internal("textures/agents/base_blue.png")));
+						.internal("assets/textures/agents/base_blue.png")));
 		textures.put(
 				"base_red",
 				new Texture(Gdx.files
-						.internal("textures/agents/base_red.png")));
+						.internal("assets/textures/agents/base_red.png")));
 		textures.put(
 				"turret_blue",
 				new Texture(Gdx.files
-						.internal("textures/agents/turret_blue.png")));
+						.internal("assets/textures/agents/turret_blue.png")));
 		textures.put(
 				"turret_red",
 				new Texture(Gdx.files
-						.internal("textures/agents/turret_red.png")));
+						.internal("assets/textures/agents/turret_red.png")));
 		textures.put(
 				"sheet_blue",
 				new Texture(Gdx.files
-						.internal("textures/agents/sheet_blue.png")));
+						.internal("assets/textures/agents/sheet_blue.png")));
 		textures.put(
 				"sheet_red",
-				new Texture(Gdx.files.internal("textures/agents/sheet_red.png")));
+				new Texture(Gdx.files.internal("assets/textures/agents/sheet_red.png")));
 		textures.put("food",
-				new Texture(Gdx.files.internal("textures/resources/food.png")));
+				new Texture(Gdx.files.internal("assets/textures/resources/food.png")));
 		textures.put(
 				"rocket",
 				new Texture(Gdx.files
-						.internal("textures/projectiles/rocket.png")));
+						.internal("assets/textures/projectiles/rocket.png")));
 		textures.put(
 				"explosion",
 				new Texture(Gdx.files
-						.internal("textures/animations/explosion.png")));
+						.internal("assets/textures/animations/explosion.png")));
 		textures.put(
 				"explosion_mark",
 				new Texture(Gdx.files
-						.internal("textures/animations/explosion_mark.png")));
+						.internal("assets/textures/animations/explosion_mark.png")));
 		
 		textures.put(
 				"health_bar",
 				new Texture(Gdx.files
-						.internal("textures/info/health_bar.png")));
+						.internal("assets/textures/info/health_bar.png")));
 		
 		textures.put(
 				"food_indicator",
 				new Texture(Gdx.files
-						.internal("textures/info/food_indicator.png")));
+						.internal("assets/textures/info/food_indicator.png")));
 		
 		textures.put(
 				"unities_info",
 				new Texture(Gdx.files
-						.internal("textures/info/unities_info.png")));
+						.internal("assets/textures/info/unities_info.png")));
 		
-		mapTexture = new TmxMapLoader().load("maps/" + "map_8x8-patch_125_75_64_32_2" + ".tmx");
+		mapTexture = new TmxMapLoader().load("assets/maps/" + "map_8x8-patch_125_75_64_32_2" + ".tmx");
 		mapRenderer = new IsometricTiledMapRenderer(mapTexture);
 		
 	}

@@ -48,8 +48,6 @@ class PyWarKamikaze(PyWarAgent):
 	def maxDistanceGive(self):
 		return KamikazeAction.MAX_DISTANCE_GIVE;
 
-
-
 	def isReloaded(self):
 		return self.getRetAgent().isReloaded();
 

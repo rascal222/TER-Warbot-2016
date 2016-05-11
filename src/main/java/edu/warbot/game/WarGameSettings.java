@@ -135,7 +135,7 @@ public class WarGameSettings {
             t.removeAllAgents();
         selectedInGameTeams.clear();
         situationLoader = null;
-        restartParameters();
+//        restartParameters();
     }
 
     public SituationLoader getSituationLoader() {

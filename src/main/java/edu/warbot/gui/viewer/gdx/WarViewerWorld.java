@@ -2,6 +2,7 @@ package edu.warbot.gui.viewer.gdx;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.badlogic.gdx.utils.Array;
 
@@ -324,8 +325,9 @@ public class WarViewerWorld {
 
 	private boolean existDyingAgentsInGame(WarViewerEntity agent) {
 		for (InGameTeam t : inGameTeams) {
-			for (WarAgent ag: t.getDyingAgents()) {
-				if (ag.getID() == agent.getId()) {
+			List<WarAgent> dyingAgents = new ArrayList<WarAgent>(t.getDyingAgents());
+			for (WarAgent ag : dyingAgents) {
+				if (ag != null && agent != null && ag.getID() == agent.getId()) {
 					return true;
 				}
 			}

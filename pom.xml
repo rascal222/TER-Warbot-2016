@@ -132,22 +132,20 @@
 	</dependencies>
 	
     <build>
-    
+    	<!-- default maven folder build -->
     	<resources>
     		<resource>
-    			<directory>src/main/java/edu/warbot</directory>
+    			<directory>src/main/java</directory>
     		</resource>
-    		
-    		<resource>
-    			<directory>src/main/java/teams</directory>
-    		</resource>
-    		
     		<resource>
     			<directory>src/main/resources</directory>
     		</resource>
     		
     		<resource>
-    			<directory>assets</directory>
+    			<directory>src/test/java</directory>
+    		</resource>
+    		<resource>
+    			<directory>src/test/resources</directory>
     		</resource>
     	</resources>
     

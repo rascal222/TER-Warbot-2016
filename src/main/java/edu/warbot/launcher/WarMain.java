@@ -100,7 +100,8 @@ public class WarMain implements WarGameListener {
 					gdxFrame.setSize(800, 600);
 					gdxFrame.setMinimumSize(new Dimension(450, 450));
 					gdxFrame.setVisible(true);
-					gdxFrame.setVisible(false);
+					while(gdxFrame.isVisible())
+						gdxFrame.setVisible(false);
                 }
             });
         } else {
@@ -265,7 +266,6 @@ public class WarMain implements WarGameListener {
         for (int i = 0; i < game.getAllTeams().size(); ++i) {
             game.getAllTeams().get(i).removeAllAgents();
         }
-        launcherInterface.reloadTeams(false);
         game.getPlayerTeams().clear();
         settings.prepareForNewGame();
         logger.log(Level.INFO, "Reset settings");
@@ -281,7 +281,9 @@ public class WarMain implements WarGameListener {
         	gdxFrame.setVisible(true);
     }
 
-    public void reloadTeams(boolean dialog) {
+    public void reloadTeams() {
+    	loadingDialog = new LoadingDialog("Chargement des équipes...");
+    	loadingDialog.setVisible(true);
         List<String> othersTeam = new ArrayList<>();
         for (String key : availableTeams.keySet()) {
             if (availableTeams.get(key) instanceof ScriptedTeam)
@@ -289,9 +291,7 @@ public class WarMain implements WarGameListener {
         }
         for (String key : othersTeam)
             availableTeams.remove(key);
-
-        loadingDialog.setMessage("Chargement des équipes...");
-        loadingDialog.setVisible(dialog);
+        
         TeamLoader tl = new TeamLoader();
         // On initialise la liste des équipes existantes dans le dossier "teams"
         try {
@@ -299,8 +299,8 @@ public class WarMain implements WarGameListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        loadingDialog.setVisible(false);
-
+        
+    	loadingDialog.setVisible(false);
     }
 
 	@Override

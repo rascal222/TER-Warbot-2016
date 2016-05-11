@@ -14,6 +14,7 @@ def actionWarEngineer():
 
 	if(getHealth() > 0.75 * getMaxHealth()):
 		#setDebugString("Creating tower")
-		return createTurret()
+		setNextBuildingToBuild(WarAgentType.WarTurret)
+		return build()
 
 	return move();

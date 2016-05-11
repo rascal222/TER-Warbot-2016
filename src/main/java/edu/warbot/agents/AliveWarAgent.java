@@ -27,8 +27,6 @@ public abstract class AliveWarAgent extends WarAgent implements Alive, IdlerActi
     * Armure de l'agent
     */
    private int _armor;
-    
-    
 
     /**
      * @param firstActionToDo l'action à réaliser au démarrage
@@ -88,11 +86,13 @@ public abstract class AliveWarAgent extends WarAgent implements Alive, IdlerActi
      * @param quantity quantité de dégâts infligés
      */
     public void damage(int quantity) {
-        logger.finest(this.toString() + "damaged of " + (quantity - _armor) + "life points.");
-        _health -= (quantity - _armor);
+    	int damages = 0;
+    	if(quantity - _armor > 0)
+    		damages = (quantity - _armor);
+        logger.finest(this.toString() + "damaged of " + damages + "life points.");
+        _health -= damages;
         if (_health <= 0) {
             logger.finer(this.toString() + "killed.");
-//            System.out.println(killAgent(this));
             kill();
         }
     }

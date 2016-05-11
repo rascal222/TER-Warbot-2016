@@ -1,6 +1,7 @@
 package edu.warbot.gui.viewer.gdx.util;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -64,6 +65,8 @@ public class WarViewerKeyListener implements InputProcessor {
 
 	@Override
 	public boolean mouseMoved(int arg0, int arg1) {
+		xMouseLeftDown = arg0;
+		yMouseLeftDown = arg1;
 		return false;
 	}
 
@@ -71,9 +74,16 @@ public class WarViewerKeyListener implements InputProcessor {
 	public boolean scrolled(int arg0) {
 		switch (arg0) {
 		case -1: // molette haut
-			if (camera.zoom <= 0.2) {
+			if (camera.zoom <= 0.5) {
 				return false;
 			}
+			update();
+			Vector2 vect1 = new Vector2(1.01f*(Gdx.graphics.getWidth()/2)*camera.zoom/scaleX, 1.01f*(Gdx.graphics.getHeight()/2)*camera.zoom/scaleY);
+			Vector2 vect2 = new Vector2((Gdx.graphics.getWidth()/2)*(camera.zoom-camera.zoom*zoomSpeed)/scaleX, (Gdx.graphics.getHeight()/2)*(camera.zoom-camera.zoom*zoomSpeed)/scaleY);
+			Vector2 vect3 = new Vector2((xMouseLeftDown - Gdx.graphics.getWidth()/2)*camera.zoom/scaleX, (yMouseLeftDown - Gdx.graphics.getHeight()/2)*camera.zoom/scaleY);
+			
+			Vector2 vect = new Vector2(vect3.x*(vect1.x-vect2.x)/vect1.x, vect3.y*(vect1.y-vect2.y)/vect1.y);
+			camera.translate(vect.x, -vect.y);
 			camera.zoom -= camera.zoom*zoomSpeed;
 			break;
 		case 1: // molette bas
@@ -103,7 +113,7 @@ public class WarViewerKeyListener implements InputProcessor {
 
 	@Override
 	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
-		if (arg3 == 1) { //right click
+		if (arg3 == Input.Buttons.RIGHT) { //right click
 			camera.zoom = 4.0f;
 			camera.position.x = 3245;
 			camera.position.y = -100;

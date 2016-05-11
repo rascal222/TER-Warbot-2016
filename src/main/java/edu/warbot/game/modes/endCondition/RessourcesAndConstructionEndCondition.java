@@ -13,6 +13,7 @@ public class RessourcesAndConstructionEndCondition extends AbstractEndCondition
 	{
 		super(game);
 		this.pointsNeededToWin = pointsNeededToWin;
+		System.out.println("RessourcesAndConstructionEndCondition");
 	}
 
 	@Override

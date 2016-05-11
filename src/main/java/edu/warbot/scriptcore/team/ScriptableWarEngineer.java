@@ -11,7 +11,6 @@ public abstract class ScriptableWarEngineer extends WarEngineerBrain implements 
 
     public ScriptableWarEngineer() {
         super();
-
     }
 
     @Override

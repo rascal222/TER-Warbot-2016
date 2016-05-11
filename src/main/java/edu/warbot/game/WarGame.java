@@ -5,7 +5,6 @@ import edu.warbot.agents.WarAgent;
 import edu.warbot.agents.enums.WarAgentType;
 import edu.warbot.game.listeners.WarGameListener;
 import edu.warbot.game.modes.endCondition.AbstractEndCondition;
-import edu.warbot.gui.launcher.LoadingDialog;
 import edu.warbot.launcher.WarLauncher;
 import edu.warbot.launcher.WarScheduler;
 import edu.warbot.maps.AbstractWarMap;
@@ -185,13 +184,8 @@ public abstract class WarGame {
     }
 
     public void setGameStopped() {
-    	LoadingDialog waitDialog = new LoadingDialog("Arrêt de la simulation...");
-    	waitDialog.setVisible(true);
-    	
         for (WarGameListener listener : getListeners())
             listener.onGameStopped();
-        
-        waitDialog.setVisible(false);
     }
 
     public void setGameStarted() {

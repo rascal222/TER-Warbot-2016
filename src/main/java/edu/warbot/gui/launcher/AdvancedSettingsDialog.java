@@ -38,11 +38,11 @@ public class AdvancedSettingsDialog  extends JDialog
 		panelAdvanced.setBorder(new TitledBorder("Avancé"));
 		String comboOption[] = {"ALL", "SEVERE", "WARNING", "INFO", "CONFIG", "FINE", "FINER", "FINEST"};
 		this.cbLogLevel = new JComboBox<>(comboOption);
-		cbLogLevel.setSelectedItem("WARNING");
+		cbLogLevel.setSelectedItem(settings.getLogLevel().getName());
 		panelAdvanced.add(new JLabel("Niveau de détail des logs"), BorderLayout.NORTH);
 		panelAdvanced.add(cbLogLevel, BorderLayout.CENTER);
 		// graphisme
-		cbEnhancedGraphismEnabled = new JCheckBox("Charger la vue 2D isométrique", false);
+		cbEnhancedGraphismEnabled = new JCheckBox("Charger la vue 2D isométrique", settings.isEnabledEnhancedGraphism());
 		panelAdvanced.add(cbEnhancedGraphismEnabled, BorderLayout.SOUTH);
 		
 		add(panelAdvanced, BorderLayout.CENTER);

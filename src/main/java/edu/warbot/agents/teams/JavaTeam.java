@@ -118,7 +118,10 @@ public class JavaTeam extends Team {
             if (builderAgent.isAbleToBuild(buildingTypeToBuild)) {
             	AliveWarAgent building;
             	if(buildingTypeToBuild.isControllable())
+            	{
             		building = instantiateControllableWarAgent(inGameTeam, buildingTypeToBuild);
+            		associateBrain((ControllableWarAgent)building);
+            	}
             	else
             		building = instantiateBuilding(inGameTeam, buildingTypeToBuild);
                 if (building.getCost() < ((AliveWarAgent) builderAgent).getHealth()) {

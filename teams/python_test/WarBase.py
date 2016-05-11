@@ -8,7 +8,7 @@ st['n'] =0
 def actionWarBase():
 	broadcastMessageToAll("", "")
 	actionWarBase.n+=getNbElementsInBag()
-	setDebugString(`st['n']`+`actionWarBase.n`)
+	#setDebugString(`st['n']`+`actionWarBase.n`)
 	for m in getMessages():
 		if m.getMessage() == "whereAreYouBase":
 			reply(m,"Here","")
@@ -17,6 +17,6 @@ def actionWarBase():
 		return createRocketLauncher()
 
 	st['n'] += 1
-	return BaseAction.ACTION_IDLE
+	return idle()
 
 actionWarBase.n = 0
