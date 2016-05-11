@@ -29,8 +29,8 @@ var JsWarEngineer = JsWarAgent.extend({
 		return this.getExginneer().SPEED;
 	},
 
-	create : function () {
-		return this.getExginneer().ACTION_CREATE;
+	build : function () {
+		return this.getExginneer().ACTION_BUILD;
 	},
 
 	eat : function () {
@@ -57,18 +57,23 @@ var JsWarEngineer = JsWarAgent.extend({
 		return this.getExginneer().MAX_DISTANCE_GIVE;
 	},
 
-	setNextAgentToCreate : function (agent) {
-		this.getAgent().setNextAgentToCreate(agent);
+	setNextBuildingToBuild : function (agent) {
+		this.getExginneer().setNextBuildingToBuild(agent);
 	},
 
-	getNextAgentToCreate : function () {
-		return this.getAgent().getNextAgentToCreate();
+	getNextBuildingToBuild : function () {
+		return this.getExginneer().getNextBuildingToBuild();
 	},
 
-	isAbleToCreate : function (agent) {
-		return this.getAgent().isAbleToCreate(agent);
+	isAbleToBuild : function (agent) {
+		return this.getExginneer().isAbleToBuild(agent);
+	},
+	
+	setIdNextBuildingToRepair : function (idBuild) {
+		this.getExginneer().setIdNextBuildingToRepair(idBuild);
+	},
+	
+	getIdNextBuildingToRepair : function () {
+		return this.getExginneer().getIdNextBuildingToRepair();
 	}
-	
-
-	
 });

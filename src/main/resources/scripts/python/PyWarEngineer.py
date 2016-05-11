@@ -24,8 +24,8 @@ class PyWarEngineer(PyWarAgent):
 	def speed(self):
 		return EngineerAction.SPEED;
 
-	def create(self):
-		return EngineerAction.ACTION_CREATE;
+	def build(self):
+		return EngineerAction.ACTION_BUILD;
 
 	def eat(self):
 		return EngineerAction.ACTION_EAT;
@@ -42,9 +42,6 @@ class PyWarEngineer(PyWarAgent):
 	def take(self):
 		return EngineerAction.ACTION_TAKE;
 
-	def build(self):
-		return EngineerAction.ACTION_BUILD;
-
 	def repair(self):
 		return EngineerAction.ACTION_REPAIR;
 
@@ -53,26 +50,17 @@ class PyWarEngineer(PyWarAgent):
 
 	# WarEngineerAdapter
 
-	def setNextAgentToCreate(self, nextAgentToCreate):
-		self.getRetAgent().setNextAgentToCreate(nextAgentToCreate)
-
-	def setNextBuildingToBuild(self, nextBuildToCreate):
-		self.getRetAgent().setNextBuildingToBuild(nextBuildToCreate)
-	
-	def getNextAgentToCreate(self):
-		return self.getRetAgent().getNextAgentToCreate()
+	def setNextBuildingToBuild(self, nextBuild):
+		self.getRetAgent().setNextBuildingToBuild(nextBuild);
 
 	def getNextBuildingToBuild(self):
-		return self.getRetAgent().getNextBuildingToBuild()
-
-	def isAbleToCreate(self, agent):
-		return self.getRetAgent().isAbleToCreate(agent)
+		return self.getRetAgent().getNextBuildingToBuild();
 
 	def isAbleToBuild(self, agent):
-		return self.getRetAgent().isAbleToBuild(agent)
+		return self.getRetAgent().isAbleToBuild(agent);
 
 	def getIdNextBuildingToRepair(self):
-		return self.getRetAgent().getIdNextBuildingToRepair()
+		return self.getRetAgent().getIdNextBuildingToRepair();
 
 	def setIdNextBuildingToRepair(self, idBuilding):
-		self.getRetAgent().setIdNextBuildingToRepair(idBuilding)
+		self.getRetAgent().setIdNextBuildingToRepair(idBuilding);

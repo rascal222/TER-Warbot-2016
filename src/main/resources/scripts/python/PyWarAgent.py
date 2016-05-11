@@ -709,6 +709,9 @@ def speed():
 
 def create():
 	return WA.create();
+	
+def build():
+	return WA.build();
 
 def eat():
 	return WA.eat();
@@ -731,8 +734,8 @@ def maxDistanceGive():
 def setNextAgentToCreate(nextAgentToCreate):
 	WA.setNextAgentToCreate(nextAgentToCreate)
 
-def setNextBuildingToBuild(nextBuid):
-	WA.setNextBuildingToBuild(nextBuid)
+def setNextBuildingToBuild(nextBuild):
+	WA.setNextBuildingToBuild(nextBuild)
 
 def getNextAgentToCreate():
 	return WA.getNextAgentToCreate()

@@ -1,15 +1,5 @@
 package edu.warbot.scriptcore.interpreter.python;
 
-import edu.warbot.agents.enums.WarAgentType;
-import edu.warbot.scriptcore.exceptions.NotFoundConfigurationException;
-import edu.warbot.scriptcore.interpreter.ScriptInterpreter;
-import edu.warbot.scriptcore.script.PyScript;
-import edu.warbot.scriptcore.script.Script;
-import edu.warbot.scriptcore.scriptagent.ScriptAgent;
-import org.python.core.PyInstance;
-import org.python.core.PyObjectDerived;
-import org.python.util.PythonInterpreter;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,6 +9,17 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
+
+import org.python.core.PyInstance;
+import org.python.core.PyObjectDerived;
+import org.python.util.PythonInterpreter;
+
+import edu.warbot.agents.enums.WarAgentType;
+import edu.warbot.scriptcore.exceptions.NotFoundConfigurationException;
+import edu.warbot.scriptcore.interpreter.ScriptInterpreter;
+import edu.warbot.scriptcore.script.PyScript;
+import edu.warbot.scriptcore.script.Script;
+import edu.warbot.scriptcore.scriptagent.ScriptAgent;
 
 
 public class PyScriptInterpreter extends PythonInterpreter implements ScriptInterpreter {
@@ -122,8 +123,9 @@ public class PyScriptInterpreter extends PythonInterpreter implements ScriptInte
 
     private InputStream getFileConfigPython(String pathPython, FileConfigPython nameFilePython) {
         InputStream path = null;
+//    	URL path = null;
         try {
-            //URL path = getClass().getClassLoader().getResource(pathPython+nameFilePython);
+//        	  path = getClass().getClassLoader().getResource(pathPython+nameFilePython);
             path = getClass().getClassLoader().getResourceAsStream(pathPython + nameFilePython);
 
             if (path == null)

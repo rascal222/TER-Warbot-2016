@@ -38,7 +38,7 @@ public class LoadSituationActionListener implements ActionListener {
             String fileName = file.toString();
             if (!fileName.endsWith(XMLSituationLoader.SITUATION_FILES_EXTENSION))
                 file = new File(fileName + XMLSituationLoader.SITUATION_FILES_EXTENSION);
-            _launcherInterface.getGameSettings().setSituationLoader(new XMLSituationLoader(file));
+            _launcherInterface.getGameSettings().setSituationLoader(new XMLSituationLoader(file, _launcherInterface.getSettings(), _launcherInterface.getAvailableTeams()));
             _launcherInterface.startGame();
         }
     }

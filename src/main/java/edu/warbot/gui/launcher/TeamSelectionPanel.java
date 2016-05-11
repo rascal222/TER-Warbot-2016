@@ -20,6 +20,7 @@ public class TeamSelectionPanel extends JPanel
 	private int maxWidth = 0;
 	
     private Map<String, Team> _teams;
+    boolean _necessary;
 	
 	ImageIcon[] logos;
 	String[] names;
@@ -33,7 +34,6 @@ public class TeamSelectionPanel extends JPanel
 		this(teams, true);
     }
 	
-    @SuppressWarnings({ "unchecked" })
 	public TeamSelectionPanel(Map<String, Team> teams, boolean necessary)
     {
     	super();
@@ -42,10 +42,23 @@ public class TeamSelectionPanel extends JPanel
     	setPreferredSize(new Dimension(-1, 70));
 
         _teams = teams;
+        _necessary = necessary;
+        reloadTeams();
+    }
+    
+    public Team getSelectedTeam()
+    {
+    	return _teams.get(names[teamList.getSelectedIndex()]);
+    }
+    
+    @SuppressWarnings("unchecked")
+	public void reloadTeams()
+    {
+
         
         //Load the pet images and create an array of indexes.
         int nbTeam = _teams.size();
-        if(!necessary)
+        if(!_necessary)
         {
         	nbTeam++;
         }
@@ -54,7 +67,7 @@ public class TeamSelectionPanel extends JPanel
     	descriptions = new String[nbTeam];
         Integer[] intArray = new Integer[names.length];
         int index = 0;
-        if(!necessary)
+        if(!_necessary)
         {
         	intArray[index] = new Integer(index);
             logos[index] = new ImageIcon(GuiIconsLoader.getIcon("no_image.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -252,10 +265,5 @@ public class TeamSelectionPanel extends JPanel
 				}
 			});
         }
-    }
-    
-    public Team getSelectedTeam()
-    {
-    	return _teams.get(names[teamList.getSelectedIndex()]);
     }
 }

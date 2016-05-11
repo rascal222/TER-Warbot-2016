@@ -30,4 +30,16 @@ public class WarGameAdapter implements WarGameListener {
     public void onGameStarted() {
 
     }
+
+	@Override
+	public void onGamePaused() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameResumed() {
+		// TODO Auto-generated method stub
+		
+	}
 }

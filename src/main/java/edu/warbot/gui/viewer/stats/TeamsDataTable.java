@@ -24,7 +24,7 @@ public class TeamsDataTable extends JTable implements WarGameListener {
         setModel(_model);
         getColumnModel().getColumn(0).setCellRenderer(new HeaderCellRenderer());
 
-        game.addWarGameListener(this);
+        WarGame.addWarGameListener(this);
     }
 
     @Override
@@ -54,4 +54,16 @@ public class TeamsDataTable extends JTable implements WarGameListener {
         setModel(_model);
         getColumnModel().getColumn(0).setCellRenderer(new HeaderCellRenderer());
     }
+
+	@Override
+	public void onGamePaused() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameResumed() {
+		// TODO Auto-generated method stub
+		
+	}
 }

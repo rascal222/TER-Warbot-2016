@@ -338,15 +338,11 @@ public abstract class WarGameModePanel extends JPanel
 		if(resourcesRatesNatureSliders.get(WarAgentType.WarFood) != null)
 			_settings.setFoodAppearanceRate(resourcesRatesNatureSliders.get(WarAgentType.WarFood).getSelectedValue());
 		
-		if (_settings.getSituationLoader() == null)
-		{
-			for(TeamSelectionPanel tsp : selectedTeams)
-				_settings.addSelectedTeam(tsp.getSelectedTeam());
-			for(TeamSelectionPanel tsp : selectedIas)
-				_settings.addSelectedTeam(tsp.getSelectedTeam());
-		}
-		else
-		{}
+		for(TeamSelectionPanel tsp : selectedTeams)
+			_settings.addSelectedTeam(tsp.getSelectedTeam());
+		
+		for(TeamSelectionPanel tsp : selectedIas)
+			_settings.addSelectedTeam(tsp.getSelectedTeam());
 	}
 
 	public String getGameModeDescription() {
@@ -395,5 +391,14 @@ public abstract class WarGameModePanel extends JPanel
 
 	public void setAuthorizedResourcesNature(WarAgentType[] authorizedResourcesNature) {
 		this.authorizedResourcesNature = authorizedResourcesNature;
+	}
+	
+	public void reloadTeams()
+	{
+		for(TeamSelectionPanel t : selectedIas)
+			t.reloadTeams();
+		
+		for(TeamSelectionPanel t : selectedTeams)
+			t.reloadTeams();
 	}
 }

@@ -1,18 +1,15 @@
 package edu.warbot.launcher;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import madkit.action.KernelAction;
+import madkit.kernel.Madkit;
+import turtlekit.kernel.TKLauncher;
+import turtlekit.kernel.TurtleKit;
 import edu.warbot.game.WarGame;
 import edu.warbot.game.WarGameSettings;
 import edu.warbot.gui.viewer.WarDefaultViewer;
-import madkit.action.KernelAction;
-import madkit.action.SchedulingAction;
-import madkit.kernel.Madkit;
-import madkit.message.SchedulingMessage;
-import turtlekit.agr.TKOrganization;
-import turtlekit.kernel.TKLauncher;
-import turtlekit.kernel.TurtleKit;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class WarLauncher extends TKLauncher {
 
@@ -22,6 +19,7 @@ public class WarLauncher extends TKLauncher {
         super();
         this.warGame = warGame;
         warGame.setLauncher(this);
+        initProperties();
     }
 
     @Override
@@ -61,16 +59,12 @@ public class WarLauncher extends TKLauncher {
         this.launchConfigTurtles();
         
         warGame.launchAllAgents(this);
+        // TODO HIGH
         /*WarGameSettings settings = warGame.getSettings();
         if (settings.getSituationLoader() == null)
             launchAllAgents();
         else
             settings.getSituationLoader().launchAllAgentsFromSituation(this, warGame);*/
-
-        // Puis on lance la simulation
-        sendMessage(getMadkitProperty(turtlekit.kernel.TurtleKit.Option.community),
-                TKOrganization.ENGINE_GROUP, TKOrganization.SCHEDULER_ROLE, new SchedulingMessage(SchedulingAction.RUN));
-
 
         warGame.setGameStarted();
     }
@@ -88,7 +82,8 @@ public class WarLauncher extends TKLauncher {
 
     @Override
     protected void launchViewers() {
-        WarDefaultViewer viewer = new WarDefaultViewer(warGame);
+        AbstractWarViewer viewer;
+        viewer = new WarDefaultViewer(warGame);
         launchAgent(viewer, viewer.isRenderable());
         viewer.moveMapOffsetTo(100, 100);
     }
@@ -96,8 +91,9 @@ public class WarLauncher extends TKLauncher {
     public void executeLauncher(String... args) {
         final ArrayList<String> arguments = new ArrayList<>(Arrays.asList(
                 Madkit.BooleanOption.desktop.toString(), "false",
-                Madkit.Option.configFile.toString(), "turtlekit/kernel/turtlekit.properties"
+                Madkit.Option.configFile.toString(), "edu/warbot/launcher/warbot.properties"
         ));
+        
         if (args != null) {
             arguments.addAll(Arrays.asList(args));
         }

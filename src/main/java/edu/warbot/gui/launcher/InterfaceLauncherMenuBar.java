@@ -24,7 +24,7 @@ public class InterfaceLauncherMenuBar extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                launcherInterface.reloadTeams(true);
+                launcherInterface.reloadTeams();
                 launcherInterface.setVisible(true);
             }
         });

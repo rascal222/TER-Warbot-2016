@@ -1,19 +1,18 @@
 package edu.warbot.agents.agents;
 
+import java.util.Map;
+import java.util.logging.Level;
+
 import edu.warbot.agents.ControllableWarAgent;
 import edu.warbot.agents.WarProjectile;
 import edu.warbot.agents.actions.AgressiveActionsMethods;
 import edu.warbot.agents.enums.WarAgentType;
-import edu.warbot.agents.projectiles.WarRocket;
 import edu.warbot.agents.projectiles.WarShell;
 import edu.warbot.brains.WarBrain;
 import edu.warbot.brains.capacities.Agressive;
 import edu.warbot.brains.capacities.Building;
 import edu.warbot.game.InGameTeam;
 import edu.warbot.launcher.WarGameConfig;
-
-import java.util.Map;
-import java.util.logging.Level;
 
 public class WarTurret extends ControllableWarAgent implements AgressiveActionsMethods, Agressive, Building {
 

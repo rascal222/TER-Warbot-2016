@@ -5,7 +5,9 @@ import edu.warbot.agents.ControllableWarAgent;
 import edu.warbot.agents.WarAgent;
 import edu.warbot.agents.enums.WarAgentCategory;
 import edu.warbot.exceptions.UnauthorizedAgentException;
+import edu.warbot.game.InGameTeam;
 import edu.warbot.game.WarGame;
+import edu.warbot.game.listeners.WarGameListener;
 import edu.warbot.gui.viewer.debug.DebugModePanel;
 import edu.warbot.gui.viewer.debug.DebugToolsPnl;
 import edu.warbot.tools.geometry.CartesianCoordinates;
@@ -14,14 +16,12 @@ import edu.warbot.tools.geometry.PolarCoordinates;
 import javax.swing.*;
 
 import madkit.action.SchedulingAction;
-import madkit.message.SchedulingMessage;
-import turtlekit.agr.TKOrganization;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class AddToolMouseListener implements MouseListener, MouseMotionListener {
+public class AddToolMouseListener implements MouseListener, MouseMotionListener, WarGameListener {
 
     private DebugModePanel _debugToolBar;
     private DebugToolsPnl _toolsPnl;
@@ -29,12 +29,16 @@ public class AddToolMouseListener implements MouseListener, MouseMotionListener 
     private WarAgent currentCreatedAgent;
 
     private WarGame game;
+    
+    private SchedulingAction gameState;
 
     public AddToolMouseListener(DebugModePanel debugToolBar, DebugToolsPnl toolsPnl) {
         _debugToolBar = debugToolBar;
         _toolsPnl = toolsPnl;
 
         game = _debugToolBar.getViewer().getGame();
+        
+        WarGame.addWarGameListener(this);
     }
 
     @Override
@@ -52,11 +56,11 @@ public class AddToolMouseListener implements MouseListener, MouseMotionListener 
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
+            SchedulingAction stateBeforeAdd = gameState;
             _debugToolBar.getViewer().setMapExplorationEventsEnabled(false);
             if (_toolsPnl.getSelectedWarAgentTypeToCreate() != null) {
                 CartesianCoordinates mouseClickPosition = _debugToolBar.getViewer().convertClickPositionToMapPosition(e.getX(), e.getY());
-                _debugToolBar.getViewer().sendMessage(_debugToolBar.getViewer().getCommunity(), TKOrganization.ENGINE_GROUP, TKOrganization.SCHEDULER_ROLE,
-                        new SchedulingMessage(SchedulingAction.PAUSE));
+                game.setGamePaused();
                 try {
                     if (_toolsPnl.getSelectedWarAgentTypeToCreate().getCategory() == WarAgentCategory.Resource) {
                         currentCreatedAgent = game.getMotherNatureTeam().instantiateNewWarResource(_toolsPnl.getSelectedWarAgentTypeToCreate().toString());
@@ -88,8 +92,8 @@ public class AddToolMouseListener implements MouseListener, MouseMotionListener 
                     System.err.println("Erreur lors de l'instanciation de l'agent " + _toolsPnl.getSelectedWarAgentTypeToCreate().toString());
                     ex.printStackTrace();
                 }
-                _debugToolBar.getViewer().sendMessage(_debugToolBar.getViewer().getCommunity(), TKOrganization.ENGINE_GROUP, TKOrganization.SCHEDULER_ROLE,
-                        new SchedulingMessage(SchedulingAction.RUN));
+                if(stateBeforeAdd == SchedulingAction.RUN)
+	                game.setGameResumed();
             } else {
                 JOptionPane.showMessageDialog(_debugToolBar, "Veuillez sélectionner un type d'agent.", "Création d'un agent impossible", JOptionPane.ERROR_MESSAGE);
             }
@@ -120,4 +124,46 @@ public class AddToolMouseListener implements MouseListener, MouseMotionListener 
     public void mouseMoved(MouseEvent e) {
 
     }
+
+	@Override
+	public void onNewTeamAdded(InGameTeam newInGameTeam) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTeamLost(InGameTeam removedInGameTeam) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameOver() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameStopped() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameStarted() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGamePaused() {
+		// TODO Auto-generated method stub
+		gameState = SchedulingAction.PAUSE;
+	}
+
+	@Override
+	public void onGameResumed() {
+		// TODO Auto-generated method stub
+		gameState = SchedulingAction.RUN;
+	}
 }
