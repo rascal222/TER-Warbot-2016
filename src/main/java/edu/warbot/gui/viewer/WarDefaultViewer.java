@@ -45,8 +45,10 @@ public class WarDefaultViewer extends AbstractWarViewer {
         super.render(g);
         Graphics2D g2d = (Graphics2D) g;
 
+        // affichage du mode de jeu
+        g2d.drawString(WarGame.getInstance().getClass().getSimpleName(), 5, 15);
         //affichage du nombre de ticks par seconde
-        g2d.drawString("TPS : " + getGame().getFPS().toString(), 1, 11);
+        g2d.drawString("TPS : " + getGame().getFPS().toString(), 5, 30);
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);

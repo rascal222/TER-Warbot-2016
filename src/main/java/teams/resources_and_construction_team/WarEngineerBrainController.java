@@ -12,7 +12,6 @@ import java.util.List;
 public abstract class WarEngineerBrainController extends WarEngineerBrain
 {
     private int nbMove;
-    private int nbt=0;
 
     public WarEngineerBrainController()
     {
@@ -23,13 +22,6 @@ public abstract class WarEngineerBrainController extends WarEngineerBrain
     @Override
     public String action()
     {
-    	if(nbt==0)
-    	{
-    		nbt++;
-	    	setNextBuildingToBuild(WarAgentType.WarTurret);
-			return build();
-    	}
-    	
     	if (getHealth() <= WarEngineer.MAX_HEALTH && !isBagEmpty())
             return eat();
     	
