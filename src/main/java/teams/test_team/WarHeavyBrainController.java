@@ -55,6 +55,36 @@ public abstract class WarHeavyBrainController extends WarHeavyBrain {
                             return beginReloadWeapon();
                     }
                     break;
+                case WarHeavy:
+                	if (isEnemy(p)) {
+                        _baseFound = true;
+                        setHeading(p.getAngle());
+                        if (isReloaded()) {
+                            return fire();
+                        } else
+                            return beginReloadWeapon();
+                    }
+                    break;
+                case WarLight:
+                	if (isEnemy(p)) {
+                        _baseFound = true;
+                        setHeading(p.getAngle());
+                        if (isReloaded()) {
+                            return fire();
+                        } else
+                            return beginReloadWeapon();
+                    }
+                    break;
+                case WarRocketLauncher:
+                	if (isEnemy(p)) {
+                        _baseFound = true;
+                        setHeading(p.getAngle());
+                        if (isReloaded()) {
+                            return fire();
+                        } else
+                            return beginReloadWeapon();
+                    }
+                    break;
                 default:
                     if (isEnemy(p)) {
                         setHeading(p.getAngle());
