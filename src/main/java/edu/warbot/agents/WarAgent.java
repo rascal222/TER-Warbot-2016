@@ -83,7 +83,9 @@ public abstract class WarAgent extends Turtle implements CommonCapacities {
 
     @Override
     public int getNumberOfAgentsInRole(String group, String role) {
-        return (getAgentsWithRole(getTeamName(), group, role).size());
+    	if(getAgentsWithRole(getTeamName(), group, role, true) == null)
+    		return 0;
+        return (getAgentsWithRole(getTeamName(), group, role, true).size());
     }
 
     public InGameTeam getTeam() {

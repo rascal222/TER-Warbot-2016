@@ -38,7 +38,9 @@ getID
 requestRole
 leaveRole
 leaveGroup
-numberOfAgentsInRole
+myRoles
+myGroups
+getNumberOfAgentsInRole
 getMaxDistanceTakeFood
 getFoodHealthGiven
 angleOfView
