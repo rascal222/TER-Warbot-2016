@@ -1,0 +1,3 @@
+
+def actionWarBase():
+		return idle();

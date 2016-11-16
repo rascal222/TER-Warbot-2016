@@ -1,0 +1,17 @@
+Name: Test team
+IconPath: test.png
+SoundPath: dekat.wav
+Description: |
+    Equipe de test de debug et feature
+BrainsPackage: teams.test_team
+AgentsBrainClasses:
+    WarBase: WarBaseBrainController
+    WarExplorer: WarExplorerBrainController
+    WarLight: WarLightBrainController
+    WarHeavy: WarHeavyBrainController
+    WarRocketLauncher: WarRocketLauncherBrainController
+    WarKamikaze: WarKamikazeBrainController
+    WarEngineer: WarEngineerBrainController
+    WarTurret: WarTurretBrainController
+isIA: true
+isPlayer: false

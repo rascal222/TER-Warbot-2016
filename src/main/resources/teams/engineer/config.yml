@@ -1,0 +1,15 @@
+Name: Engineer
+IconPath: dekat.png
+SoundPath: dekat.wav
+Description: |
+    Equipe d'ingénieur défensif un peu plus intelligent
+BrainsPackage: teams.engineer
+AgentsBrainClasses:
+    WarBase: WarBaseBrainController
+    WarExplorer: WarExplorerBrainController
+    WarLight: WarLightBrainController
+    WarHeavy: WarHeavyBrainController
+    WarRocketLauncher: WarRocketLauncherBrainController
+    WarKamikaze: WarKamikazeBrainController
+    WarEngineer: WarEngineerBrainController
+    WarTurret: WarTurretBrainController

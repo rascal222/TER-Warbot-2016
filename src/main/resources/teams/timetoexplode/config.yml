@@ -1,0 +1,15 @@
+Name: Time To Explode
+IconPath: dekat.png
+SoundPath: dekat.wav
+Description: |
+    Equipe de WarKamikaze très all-in
+BrainsPackage: teams.timetoexplode
+AgentsBrainClasses:
+    WarBase: WarBaseBrainController
+    WarExplorer: WarExplorerBrainController
+    WarLight: WarLightBrainController
+    WarHeavy: WarHeavyBrainController
+    WarRocketLauncher: WarRocketLauncherBrainController
+    WarKamikaze: WarKamikazeBrainController
+    WarEngineer: WarEngineerBrainController
+    WarTurret: WarTurretBrainController

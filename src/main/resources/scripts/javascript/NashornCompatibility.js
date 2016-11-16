@@ -1,0 +1,1 @@
+load("nashorn:mozilla_compat.js");
