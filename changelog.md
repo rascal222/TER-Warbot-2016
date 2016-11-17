@@ -1,3 +1,16 @@
+# Warbot 4.0.1 (Novembre 2016)
+### Equilibrage
+- Les caractéristiques des agents ont été rééquilibrées, consultez le fichier config/warbot_settings.yml pour avoir les nouvelles caractéristiques. Les changements ont été faits de sorte que chaque agent remplisse mieux son rôle, en amplifiant ses aventages et désavantages.
+
+### Débug
+- Le bouton Reload du launcher n'engendre plus de changement d'équipe. Vous pouvez l'utiliser pour recharger votre code python sans avoir besoin de relancer Warbot.
+- Les fonctions suivantes fonctionnent désormais : 
+ - myRoles
+ - myGroups
+ - getNumberOfAgentsInRole
+- La fenêtre 2D.5 ne s'affiche plus au lancement.
+
+
 # Warbot 4.0 (Avril 2016)
 ### Nouveaux modes de jeu 
 - Récolte et survie
