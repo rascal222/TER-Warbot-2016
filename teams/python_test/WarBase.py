@@ -17,6 +17,8 @@ def actionWarBase():
 		return createRocketLauncher()
 
 	st['n'] += 1
+	requestRole('gr', 'role')
+	setDebugString(str(getNumberOfAgentsInRole('gr','role')))
 	return idle()
 
 actionWarBase.n = 0

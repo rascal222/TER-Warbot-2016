@@ -91,7 +91,8 @@ public class WarMain implements WarGameListener {
 			            	WarGame.getInstance().setGamePaused();
 			            	int confirmation = JOptionPane.showConfirmDialog(null, "Voulez-vous fermer la fenêtre graphique ?", "Demande de confirmation", JOptionPane.YES_NO_OPTION);
 			            	if (confirmation == JOptionPane.YES_OPTION)
-			            		gdxFrame.setVisible(false);
+								gdxFrame.setExtendedState(JFrame.ICONIFIED);
+//			            		gdxFrame.setVisible(false);
 			            	WarGame.getInstance().setGameResumed();
 			            }
 			        });
@@ -100,8 +101,9 @@ public class WarMain implements WarGameListener {
 					gdxFrame.setSize(800, 600);
 					gdxFrame.setMinimumSize(new Dimension(450, 450));
 					gdxFrame.setVisible(true);
-					while(gdxFrame.isVisible())
-						gdxFrame.setVisible(false);
+					gdxFrame.setExtendedState(JFrame.ICONIFIED);
+//					while(gdxFrame.isVisible())
+//						gdxFrame.setVisible(false);
                 }
             });
         } else {
@@ -262,7 +264,8 @@ public class WarMain implements WarGameListener {
 
     @Override
     public void onGameStopped() {
-    	gdxFrame.setVisible(false);
+		gdxFrame.setExtendedState(JFrame.ICONIFIED);
+//    	gdxFrame.setVisible(false);
         for (int i = 0; i < game.getAllTeams().size(); ++i) {
             game.getAllTeams().get(i).removeAllAgents();
         }
@@ -278,7 +281,8 @@ public class WarMain implements WarGameListener {
     public void onGameStarted() {
         loadingDialog.setVisible(false);
         if(settings.isEnabledEnhancedGraphism())
-        	gdxFrame.setVisible(true);
+			gdxFrame.setExtendedState(JFrame.NORMAL);
+//        	gdxFrame.setVisible(true);
     }
 
     public void reloadTeams() {

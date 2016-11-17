@@ -37,9 +37,6 @@ public class TeamSelectionPanel extends JPanel
 	public TeamSelectionPanel(Map<String, Team> teams, boolean necessary)
     {
     	super();
-    	setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-    	setLayout(new BorderLayout());
-    	setPreferredSize(new Dimension(-1, 70));
 
         _teams = teams;
         _necessary = necessary;
@@ -54,8 +51,16 @@ public class TeamSelectionPanel extends JPanel
     @SuppressWarnings("unchecked")
 	public void reloadTeams()
     {
+    	int saveSelectedIndex = 0;
+    	if(teamList != null)
+    		saveSelectedIndex = teamList.getSelectedIndex();
+    	
+    	removeAll();
 
-        
+    	setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    	setLayout(new BorderLayout());
+    	setPreferredSize(new Dimension(-1, 70));
+    	
         //Load the pet images and create an array of indexes.
         int nbTeam = _teams.size();
         if(!_necessary)
@@ -172,6 +177,11 @@ public class TeamSelectionPanel extends JPanel
         teamDescriptionPanel.add(new JPanel(), gridOfTeamDescription);
         
         add(teamDescriptionPanel, BorderLayout.CENTER);
+        
+        if(saveSelectedIndex < _teams.size())
+        	teamList.setSelectedIndex(saveSelectedIndex);
+        else
+        	teamList.setSelectedIndex(0);
     }
     
     @SuppressWarnings("rawtypes")

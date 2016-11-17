@@ -514,10 +514,10 @@ class PyWarAgent(ScriptAgent):
 		def myGroups(self):
 			return self.getRetAgent().myGroups()
 
-		def myRolesIn(self,group):
-			return self.getRetAgent().myRolesIn(group)
+		def myRoles(self,group):
+			return self.getRetAgent().myRoles(group)
 
-		def numberOfAgentsInRole(self, group, role):
+		def getNumberOfAgentsInRole(self, group, role):
 			"""
 			Permet de savoir combien d'agent d'un groupe d'agent on ce role
 
@@ -527,7 +527,7 @@ class PyWarAgent(ScriptAgent):
 			return : int le nombre d'agent
 			"""
 
-			return self.getRetAgent().numberOfAgentsInRole(group, role)
+			return self.getRetAgent().getNumberOfAgentsInRole(group, role)
 
 		# Methode contenu dans la class WarFood
 
@@ -1008,8 +1008,11 @@ def getRolesIn(group):
 def myGroups():
 	return WA.myGroups()
 
-def myRolesIn(group):
-	return WA.myROlesIn(group)
+def myRoles(group):
+	return WA.myRoles(group)
 
 def setTargetDistance(targetDistance):
 	WA.setTargetDistance(targetDistance)
+	
+def getNumberOfAgentsInRole(groupe, role):
+	return WA.getNumberOfAgentsInRole(groupe, role)

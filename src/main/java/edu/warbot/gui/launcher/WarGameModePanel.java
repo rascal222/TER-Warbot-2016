@@ -400,5 +400,8 @@ public abstract class WarGameModePanel extends JPanel
 		
 		for(TeamSelectionPanel t : selectedTeams)
 			t.reloadTeams();
+		
+		revalidate();
+		repaint();
 	}
 }
