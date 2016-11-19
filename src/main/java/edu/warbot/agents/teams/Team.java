@@ -39,8 +39,10 @@ public abstract class Team {
      * Tags permettant de considérer la team comme une team IA, ou player. 
      * Sert a concevoir les listes de teams des modes de jeux (Player vs IA, Player vs Player, etc...)
      */
-    private boolean isIA;
-    private boolean isPlayer;
+    @SuppressWarnings("unused")
+	private boolean isIA;
+    @SuppressWarnings("unused")
+	private boolean isPlayer;
     
 
     /**

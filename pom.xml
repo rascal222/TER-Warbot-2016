@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>edu</groupId>
 	<artifactId>warbot</artifactId>
-	<version>3.2.6</version>
+	<version>4.0.1</version>
 	<packaging>jar</packaging>
 	<name>warbot</name>
     <url>http://www.madkit.net/warbot/</url>
@@ -73,9 +73,9 @@
        	<dependency>
            	<groupId>edu</groupId>
            	<artifactId>madkit</artifactId>
-    		<scope>system</scope>
+    		<!--<scope>system</scope>-->
            	<version>5.0.5.3</version>
-    		<systemPath>${basedir}/libs/madkit-5.0.5.3.jar</systemPath>
+    		<!--<systemPath>${basedir}/libs/madkit-5.0.5.3.jar</systemPath>-->
       	</dependency>
       	
        	<dependency>
@@ -87,9 +87,9 @@
        	<dependency>
            	<groupId>edu</groupId>
            	<artifactId>TurtleKit</artifactId>
-    		<scope>system</scope>
+    		<!--<scope>system</scope>-->
        	    <version>3.0.0.4c</version>
-    		<systemPath>${basedir}/libs/turtlekit-3.0.0.4c.jar</systemPath>
+    		<!--<systemPath>${basedir}/libs/turtlekit-3.0.0.4c.jar</systemPath>-->
        	</dependency>
        	
        	<dependency>
