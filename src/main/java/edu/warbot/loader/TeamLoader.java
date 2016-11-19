@@ -72,11 +72,10 @@ public class TeamLoader {
 
     public Map<String, Team> loadAllAvailableTeams(boolean javaSource) {
         Map<String, Team> loadedTeams = new HashMap<>();
-
+        
         //RAJOUTER A UNE FACTORY DE CHARGEMENT
         if (javaSource)
             loadedTeams.putAll(getTeamsFromSourceDirectory());
-
         for (Map.Entry<String, Team> currentLoadedTeam : getTeamsFromJarDirectory(loadedTeams.keySet(), javaSource).entrySet()) {
             loadedTeams.put(currentLoadedTeam.getKey(), currentLoadedTeam.getValue());
         }
@@ -187,16 +186,19 @@ public class TeamLoader {
         return teamsLoaded;
     }
 
-    private ImageIcon loadLogo(File file, final TeamConfigReader teamConfigReader) {
+    private ImageIcon loadLogo(File file, final TeamConfigReader teamConfigReader) { // TODO
         File[] logo = file.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
                 return name.equals(teamConfigReader.getIconPath());
             }
         });
+        
         ImageIcon teamLogo = null;
-        if (logo != null && logo.length == 1)
-        {
+        if (logo == null) { // Equipe interne au .jar
+        	// TODO RECUPERER LES ICONES DES EQUIPES DANS LE JAR DE WARBOT ET DANS LES JAR DES JOUEURS
+        }
+        if (logo != null && logo.length == 1) { // Equipe externe au .jar        
             try {
                 FileInputStream fis = new FileInputStream(logo[0]);
                 teamLogo = new ImageIcon(WarIOTools.toByteArray(fis));
@@ -206,17 +208,10 @@ public class TeamLoader {
                 e.printStackTrace();
             }
         }
-        if(teamLogo == null)
+        if(teamLogo == null) // Equipe sans icone
         {
-        	try {
-        		InputStream fis = TeamLoader.class.getClassLoader().getResourceAsStream(DEFAULT_IMAGE_PATH);
-                teamLogo = new ImageIcon(WarIOTools.toByteArray(fis));
-                fis.close();
-                System.err.println("Erreur lors du chargement du logo " + teamConfigReader.getIconPath() + " de l'équipe " + teamConfigReader.getTeamName());
-            } catch (IOException e) {
-                System.err.println("Erreur lors du chargement du logo par défaut " + DEFAULT_IMAGE_PATH);
-                e.printStackTrace();
-            }
+        	teamLogo = WarIOTools.loadImage(DEFAULT_IMAGE_PATH);
+            System.err.println("Erreur lors du chargement du logo " + teamConfigReader.getIconPath() + " de l'équipe " + teamConfigReader.getTeamName());
         }
         return (teamLogo != null) ? scaleTeamLogo(teamLogo) : null;
     }
@@ -348,8 +343,9 @@ public class TeamLoader {
 
     public Map<String, Team> getTeamsFromSourceDirectory() {
         Map<String, Team> teamsLoaded = new HashMap<>();
-
+        
         Map<String, String> teamsSourcesFolders = UserPreferences.getTeamsSourcesFolders();
+        
         for (String currentFolder : teamsSourcesFolders.values()) {
             try {
                 Team currentTeam;
@@ -360,7 +356,7 @@ public class TeamLoader {
                 TeamConfigReader teamConfigReader = new TeamConfigReader();
                 teamConfigReader.load(input);
                 input.close();
-
+                
                 currentTeam = loadTeamFromSources(teamsSourcesFolders, teamConfigReader);
 
                 // Si il y a déjà une équipe du même nom on ne l'ajoute pas
@@ -451,7 +447,7 @@ public class TeamLoader {
         if(url== null) {
             throw new IOException("Error when we try to access to value");
         }
-        File teamDirectory = new File(url.getFile());
+        File teamDirectory = new File(url.getFile()); //System.out.println("dir : " + teamDirectory);
         ImageIcon logo = loadLogo(teamDirectory, teamConfigReader);
         if (logo == null) {
             InputStream is = getClass().getClassLoader().getResourceAsStream(teamConfigReader.getBrainsPackageName().replace(".", "/") + "/" + teamConfigReader.getIconPath());
