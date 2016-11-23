@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>edu</groupId>
 	<artifactId>warbot</artifactId>
-	<version>4.0.1</version>
+	<version>3.3.2</version>
 	<packaging>jar</packaging>
 	<name>warbot</name>
     <url>http://www.madkit.net/warbot/</url>

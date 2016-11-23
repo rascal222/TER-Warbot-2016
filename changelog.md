@@ -1,4 +1,8 @@
-# Warbot 4.0.1 (Novembre 2016)
+# Warbot 3.3.2 (Novembre 2016)
+- Changement du versionnage (4.0.x -> 3.3.x)
+- Les ingénieurs ne peuvent plus construire de base.
+
+# Warbot 3.3.1 (Novembre 2016)
 ### Equilibrage
 - Les caractéristiques des agents ont été rééquilibrées, consultez le fichier config/warbot_settings.yml pour avoir les nouvelles caractéristiques. Les changements ont été faits de sorte que chaque agent remplisse mieux son rôle, en amplifiant ses aventages et désavantages.
 
@@ -11,7 +15,7 @@
 - La fenêtre 2D.5 ne s'affiche plus au lancement.
 
 
-# Warbot 4.0 (Avril 2016)
+# Warbot 3.3.0 (Avril 2016)
 ### Nouveaux modes de jeu 
 - Récolte et survie
 - Récolte et construction

@@ -81,7 +81,8 @@ public class WarEngineer extends MovableWarAgent implements BuilderActionsMethod
 
     @Override
     public boolean isAbleToBuild(WarAgentType building) {
-        return building.getCategory() == WarAgentCategory.Building;
+    	// TODO Ceci est un débug temporaire, le WarEngineer n'est pas censé construire de Base en DualGameMode).
+        return (building.getCategory() == WarAgentCategory.Building && building != WarAgentType.WarBase);
     }
 
     @Override

@@ -73,15 +73,15 @@ public abstract class WarEngineerBrainController extends WarEngineerBrain {
     		{
     			bat++;
     			bat %= 3;
-    			setNextBuildingToBuild(WarAgentType.WarTurret);
-    			return build();
+    			//setNextBuildingToBuild(WarAgentType.WarTurret);
+    			//return build();
     		}
     		else
     		{
     			bat++;
     			bat %= 3;
-    			setNextBuildingToBuild(WarAgentType.Wall);
-    			return build();
+    			//setNextBuildingToBuild(WarAgentType.Wall);
+    			//return build();
     		}
     	}
         
