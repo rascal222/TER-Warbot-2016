@@ -152,6 +152,11 @@ public class TeamSelectionPanel extends JPanel
         gridOfTeamDescription.gridy = 0;
         teamDescriptionPanel.add(new JPanel(), gridOfTeamDescription);
         
+	if(saveSelectedIndex < _teams.size())
+        	teamList.setSelectedIndex(saveSelectedIndex);
+        else
+        	teamList.setSelectedIndex(0);
+	
         teamDescription = new JTextArea();
         teamDescription.setText(descriptions[teamList.getSelectedIndex()]);
         teamDescription.setWrapStyleWord(true);
@@ -177,11 +182,6 @@ public class TeamSelectionPanel extends JPanel
         teamDescriptionPanel.add(new JPanel(), gridOfTeamDescription);
         
         add(teamDescriptionPanel, BorderLayout.CENTER);
-        
-        if(saveSelectedIndex < _teams.size())
-        	teamList.setSelectedIndex(saveSelectedIndex);
-        else
-        	teamList.setSelectedIndex(0);
     }
     
     @SuppressWarnings("rawtypes")
