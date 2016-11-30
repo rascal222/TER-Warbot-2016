@@ -1,3 +1,10 @@
+# Warbot 3.3.3 (Novembre 2016)
+- Tourelles de nouveau constructibles
+- Equilibrage des unités (voir warbot_settings.yml)
+- Zone de départ réduites de moitié (Les tourelles de départ sont donc plus efficaces)
+- Les agents ne devraient plus apparaitre dans les murs
+- Description des équipes affichées correctement après un reload
+
 # Warbot 3.3.2 (Novembre 2016)
 - Changement du versionnage (4.0.x -> 3.3.x)
 - Les ingénieurs ne peuvent plus construire de base.
