@@ -29,14 +29,14 @@ WarAgents:
             AngleOfView: 360.0
             DistanceOfView: 80.0
             Cost: 1000
-            MaxHealth: 2000
+            MaxHealth: 6000
             BagSize: 1000000
             Armor: 10
             Hitbox: { Shape: Square, SideLength: 4.0 }
         WarTurret:
             AngleOfView: 180.0
             DistanceOfView: 50.0
-            Cost: 1000
+            Cost: 1500
             MaxHealth: 4000
             BagSize: 10
             TicksToReload: 5
@@ -50,7 +50,7 @@ WarAgents:
     Worker:
         WarExplorer:
             AngleOfView: 180.0
-            DistanceOfView: 50.0
+            DistanceOfView: 60.0
             Cost: 200
             MaxHealth: 200
             BagSize: 4
@@ -70,7 +70,7 @@ WarAgents:
     Soldier:
         WarLight:
             AngleOfView: 120.0
-            DistanceOfView: 20.0
+            DistanceOfView: 40.0
             Cost: 250
             MaxHealth: 200
             BagSize: 4
@@ -80,7 +80,7 @@ WarAgents:
             Hitbox: { Shape: Square, SideLength: 5.0 }
         WarHeavy:
             AngleOfView: 120.0
-            DistanceOfView: 40.0
+            DistanceOfView: 30.0
             Cost: 500
             MaxHealth: 800
             BagSize: 4
@@ -94,8 +94,8 @@ WarAgents:
             Cost: 1000
             MaxHealth: 200
             BagSize: 4
-            Speed: 1.2
-            TicksToReload: 50
+            Speed: 1.0
+            TicksToReload: 25
             Armor: 1
             Hitbox: { Shape: Square, SideLength: 3.0 }
         WarKamikaze:
@@ -117,20 +117,20 @@ WarAgents:
         WarShell:
             Speed: 10.0
             ExplosionRadius: 1.0
-            Autonomy: 5
+            Autonomy: 6
             Damage: 50
             Hitbox: { Shape: Arrow, Radius: 1.0 }
         WarBullet:
             Speed: 10.0
             ExplosionRadius: 0.5
-            Autonomy: 3
+            Autonomy: 4
             Damage: 20
             Hitbox: { Shape: Triangle, Radius: 0.5 }
         WarBomb:
             Speed: 0.0
             ExplosionRadius: 40.0
             Autonomy: 0
-            Damage: 2000
+            Damage: 1000
             Hitbox: { Shape: Circle, Radius: 1.0 }
         WarDeathRocket:
             Speed: 3.0
