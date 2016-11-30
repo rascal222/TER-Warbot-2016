@@ -51,14 +51,14 @@ public class ForestWarMap extends AbstractWarMap {
         }
 
         addTeamPositions(
-                new CartesianCoordinates(TEAM_POSITION_RADIUS + 10, TEAM_POSITION_RADIUS + 10),
-                new CartesianCoordinates(TEAM_POSITION_RADIUS + 10, getHeight() / 2),
-                new CartesianCoordinates(TEAM_POSITION_RADIUS + 10, getHeight() - TEAM_POSITION_RADIUS - 10)
+                new CartesianCoordinates(TEAM_POSITION_RADIUS + 50, TEAM_POSITION_RADIUS + 50),
+                new CartesianCoordinates(TEAM_POSITION_RADIUS + 50, getHeight() / 2),
+                new CartesianCoordinates(TEAM_POSITION_RADIUS + 50, getHeight() - TEAM_POSITION_RADIUS - 50)
         );
         addTeamPositions(
-                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 10, TEAM_POSITION_RADIUS + 10),
-                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 10, getHeight() / 2),
-                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 10, getHeight() - TEAM_POSITION_RADIUS - 10)
+                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 50, TEAM_POSITION_RADIUS + 50),
+                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 50, getHeight() / 2),
+                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 50, getHeight() - TEAM_POSITION_RADIUS - 50)
         );
 
         addFoodPosition(getCenterX(), getCenterY() - (getCenterY() / 2.));

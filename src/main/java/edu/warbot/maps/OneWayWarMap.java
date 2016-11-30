@@ -20,14 +20,14 @@ public class OneWayWarMap extends AbstractWarMap {
         forbidArea(new Rectangle2D.Double((WIDTH - MIDDLE_WALL_WIDTH) / 2., ((HEIGHT - MIDDLE_WALL_DOOR_HEIGHT) / 2.) + MIDDLE_WALL_DOOR_HEIGHT, MIDDLE_WALL_WIDTH, (HEIGHT - MIDDLE_WALL_DOOR_HEIGHT) / 2.));
 
         addTeamPositions(
-                new CartesianCoordinates(TEAM_POSITION_RADIUS + 10, TEAM_POSITION_RADIUS + 10),
-                new CartesianCoordinates(TEAM_POSITION_RADIUS + 10, getHeight() / 2),
-                new CartesianCoordinates(TEAM_POSITION_RADIUS + 10, getHeight() - TEAM_POSITION_RADIUS - 10)
+                new CartesianCoordinates(TEAM_POSITION_RADIUS + 50, TEAM_POSITION_RADIUS + 50),
+                new CartesianCoordinates(TEAM_POSITION_RADIUS + 50, getHeight() / 2),
+                new CartesianCoordinates(TEAM_POSITION_RADIUS + 50, getHeight() - TEAM_POSITION_RADIUS - 50)
         );
         addTeamPositions(
-                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 10, TEAM_POSITION_RADIUS + 10),
-                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 10, getHeight() / 2),
-                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 10, getHeight() - TEAM_POSITION_RADIUS - 10)
+                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 50, TEAM_POSITION_RADIUS + 50),
+                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 50, getHeight() / 2),
+                new CartesianCoordinates(getWidth() - TEAM_POSITION_RADIUS - 50, getHeight() - TEAM_POSITION_RADIUS - 50)
         );
 
         addFoodPosition(getCenterX() - (getCenterX() / 4.), getCenterY());

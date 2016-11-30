@@ -36,7 +36,7 @@ WarAgents:
         WarTurret:
             AngleOfView: 180.0
             DistanceOfView: 50.0
-            Cost: 1000
+            Cost: 1200
             MaxHealth: 4000
             BagSize: 10
             TicksToReload: 5
