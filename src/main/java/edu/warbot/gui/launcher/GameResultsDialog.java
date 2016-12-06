@@ -56,6 +56,7 @@ public class GameResultsDialog extends JDialog {
 
         JButton btnOk = new JButton("Ok");
         add(btnOk, BorderLayout.SOUTH);
+        getRootPane().setDefaultButton(btnOk);
         //Button Listener
         btnOk.addActionListener(new ActionListener() {
             @Override
