@@ -837,6 +837,22 @@ def getPerceptsWarTurret():
 			__turr.append(percept)
 	return __turr;
 
+def getPerceptsWarLight():
+	__percept = WA.getPercepts()
+	__light = []
+	for percept in __percept:
+		if (percept.getType().equals(WarAgentType.WarLight)):
+			__light.append(percept)
+	return __light;
+
+def getPerceptsWarHeavy():
+	__percept = WA.getPercepts()
+	__heavy = []
+	for percept in __percept:
+		if (percept.getType().equals(WarAgentType.WarHeavy)):
+			__heavy.append(percept)
+	return __heavy;
+
 
 def getPerceptsAlliesWarBase():
 	return getPerceptsAlliesByType(WarAgentType.WarBase);
@@ -856,6 +872,12 @@ def getPerceptsAlliesWarRocketLauncher():
 def getPerceptsAlliesWarTurret():
 	return getPerceptsAlliesByType(WarAgentType.WarTurret);
 
+def getPerceptsAlliesWarLight():
+    return getPerceptsAlliesByType(WarAgentType.WarLight);
+
+def getPerceptsAlliesWarHeavy():
+    return getPerceptsAlliesByType(WarAgentType.WarHeavy);
+
 def getPerceptsEnemiesWarBase():
 	return getPerceptsEnemiesByType(WarAgentType.WarBase);
 
@@ -873,6 +895,12 @@ def getPerceptsEnemiesWarRocketLauncher():
 
 def getPerceptsEnemiesWarTurret():
 	return getPerceptsEnemiesByType(WarAgentType.WarTurret);
+
+def getPerceptsEnemiesWarLight():
+    return getPerceptsEnemiesByType(WarAgentType.WarLight);
+
+def getPerceptsEnemiesWarHeavy():
+    return getPerceptsEnemiesByType(WarAgentType.WarHeavy);
 
 def followTarget(percept):
 	setHeading(percept.getAngle());
@@ -908,6 +936,12 @@ def isRocketLauncher(percept):
 
 def isTurret(percept):
 	return percept.getType().equals(WarAgentType.WarTurret);
+
+def isLight(percept):
+	return percept.getType().equals(WarAgentType.WarLight);
+
+def isHeavy(percept):
+	return percept.getType().equals(WarAgentType.WarHeavy);
 
 def isFood(percept):
 	return percept.getType().equals(WarAgentType.WarFood);
@@ -947,6 +981,12 @@ def isMessageOfWarRocketLauncher(message):
 def isMessageOfWarTurret(message):
 	return message.getSenderType() == WarAgentType.WarTurret;
 
+def isMessageOfWarLight(message):
+	return message.getSenderType() == WarAgentType.WarLight;
+
+def isMessageOfWarHeavy(message):
+	return message.getSenderType() == WarAgentType.WarHeavy;
+
 def sendMessageToBases(message, content):
 	return broadcastMessageToAgentType(WarAgentType.WarBase, message, content);
 
@@ -961,6 +1001,12 @@ def sendMessageToKamikazes(message, content):
 
 def sendMessageToRocketLaunchers(message, content):
 	return broadcastMessageToAgentType(WarAgentType.WarRocketLauncher, message, content);
+
+def sendMessageToLights(message, content):
+	return broadcastMessageToAgentType(WarAgentType.WarLight, message, content);
+
+def sendMessageToHeavies(message, content):
+	return broadcastMessageToAgentType(WarAgentType.WarHeavy, message, content);
 
 def sendMessageToTurrets(message, content):
 	return broadcastMessageToAgentType(WarAgentType.WarTurret, message, content);
@@ -990,6 +1036,14 @@ def createRocketLauncher():
 
 def createTurret():
 	setNextAgentToCreate(WarAgentType.WarTurret)
+	return WA.create()
+
+def createLight():
+	setNextAgentToCreate(WarAgentType.WarLight)
+	return WA.create()
+
+def createHeavy():
+	setNextAgentToCreate(WarAgentType.WarHeavy)
 	return WA.create()
 
 def createWall():
