@@ -50,7 +50,7 @@ WarAgents:
     Worker:
         WarExplorer:
             AngleOfView: 180.0
-            DistanceOfView: 60.0
+            DistanceOfView: 50.0
             Cost: 200
             MaxHealth: 200
             BagSize: 4
